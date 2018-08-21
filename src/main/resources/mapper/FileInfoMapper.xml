@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nxd.ftt.dao.FileInfoDao">
+    <resultMap id="BaseResultMap" type="com.nxd.ftt.entity.FileInfo">
+        <result column="ID" property="id"/>
+        <result column="LINK_ID" property="linkId"/>
+        <result column="FILE_NAME" property="fileName"/>
+        <result column="FILE_SIZE" property="fileSize"/>
+        <result column="FILE_PATH" property="filePath"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="CREATEOR" property="createor"/>
+        <result column="UPDATEOR" property="updateor"/>
+        <result column="ETX" property="etx"/>
+        <result column="REMARK" property="remark"/>
+        <result column="VALID" property="valid"/>
+    </resultMap>
+    <select id="select" parameterType="com.nxd.ftt.entity.FileInfo" resultMap="BaseResultMap">
+        select
+        <trim suffixOverrides=",">
+            ID,
+            LINK_ID,
+            FILE_NAME,
+            FILE_SIZE,
+            FILE_PATH,
+            CREATE_TIME,
+            UPDATE_TIME,
+            CREATEOR,
+            UPDATEOR,
+            ETX,
+            REMARK,
+            VALID,
+        </trim>
+        from a_file
+        <where>
+            <if test="id != null and id !=''">
+                and ID = #{id}
+            </if>
+            <if test="linkId != null and linkId !=''">
+                and LINK_ID = #{linkId}
+            </if>
+            <if test="fileName != null and fileName !=''">
+                and FILE_NAME = #{fileName}
+            </if>
+            <if test="fileSize != null and fileSize !=''">
+                and FILE_SIZE = #{fileSize}
+            </if>
+            <if test="filePath != null and filePath !=''">
+                and FILE_PATH = #{filePath}
+            </if>
+            <if test="createTime != null and createTime !=''">
+                and CREATE_TIME = #{createTime}
+            </if>
+            <if test="updateTime != null and updateTime !=''">
+                and UPDATE_TIME = #{updateTime}
+            </if>
+            <if test="createor != null and createor !=''">
+                and CREATEOR = #{createor}
+            </if>
+            <if test="updateor != null and updateor !=''">
+                and UPDATEOR = #{updateor}
+            </if>
+            <if test="etx != null and etx !=''">
+                and ETX = #{etx}
+            </if>
+            <if test="remark != null and remark !=''">
+                and REMARK = #{remark}
+            </if>
+            <if test="valid != null and valid !=''">
+                and VALID = #{valid}
+            </if>
+        </where>
+    </select>
+    <select id="selectById" parameterType="com.nxd.ftt.entity.FileInfo" resultMap="BaseResultMap">
+        select
+        <trim suffixOverrides=",">
+            ID,
+            LINK_ID,
+            FILE_NAME,
+            FILE_SIZE,
+            FILE_PATH,
+            CREATE_TIME,
+            UPDATE_TIME,
+            CREATEOR,
+            UPDATEOR,
+            ETX,
+            REMARK,
+            VALID,
+        </trim>
+        from a_file
+        where ID = #{id}
+    </select>
+    <delete id="batchDelete" parameterType="java.lang.String">
+        delete from a_file
+        where ID in
+        <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+        #{item}
+        </foreach>
+    </delete>
+    <insert id="insert" parameterType="com.nxd.ftt.entity.FileInfo">
+        insert into a_file
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and id !=''">
+                ID,
+            </if>
+            <if test="linkId != null and linkId !=''">
+                LINK_ID,
+            </if>
+            <if test="fileName != null and fileName !=''">
+                FILE_NAME,
+            </if>
+            <if test="fileSize != null and fileSize !=''">
+                FILE_SIZE,
+            </if>
+            <if test="filePath != null and filePath !=''">
+                FILE_PATH,
+            </if>
+            <if test="createor != null and createor !=''">
+                CREATEOR,
+            </if>
+            <if test="updateor != null and updateor !=''">
+                UPDATEOR,
+            </if>
+            <if test="etx != null and etx !=''">
+                ETX,
+            </if>
+            <if test="remark != null and remark !=''">
+                REMARK,
+            </if>
+            <if test="valid != null and valid !=''">
+                VALID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and id !=''">
+                #{id},
+            </if>
+            <if test="linkId != null and linkId !=''">
+                #{linkId},
+            </if>
+            <if test="fileName != null and fileName !=''">
+                #{fileName},
+            </if>
+            <if test="fileSize != null and fileSize !=''">
+                #{fileSize},
+            </if>
+            <if test="filePath != null and filePath !=''">
+                #{filePath},
+            </if>
+            <if test="createor != null and createor !=''">
+                #{createor},
+            </if>
+            <if test="updateor != null and updateor !=''">
+                #{updateor},
+            </if>
+            <if test="etx != null and etx !=''">
+                #{etx},
+            </if>
+            <if test="remark != null and remark !=''">
+                #{remark},
+            </if>
+            <if test="valid != null and valid !=''">
+                #{valid},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.nxd.ftt.entity.FileInfo">
+        update a_file
+        set
+        <trim suffixOverrides=",">
+            <if test="id != null and id !=''">
+                ID = #{id},
+            </if>
+            <if test="linkId != null and linkId !=''">
+                LINK_ID = #{linkId},
+            </if>
+            <if test="fileName != null and fileName !=''">
+                FILE_NAME = #{fileName},
+            </if>
+            <if test="fileSize != null and fileSize !=''">
+                FILE_SIZE = #{fileSize},
+            </if>
+            <if test="filePath != null and filePath !=''">
+                FILE_PATH = #{filePath},
+            </if>
+            <if test="createor != null and createor !=''">
+                CREATEOR = #{createor},
+            </if>
+            <if test="updateor != null and updateor !=''">
+                UPDATEOR = #{updateor},
+            </if>
+            <if test="etx != null and etx !=''">
+                ETX = #{etx},
+            </if>
+            <if test="remark != null and remark !=''">
+                REMARK = #{remark},
+            </if>
+            <if test="valid != null and valid !=''">
+                VALID = #{valid},
+            </if>
+        </trim>
+        where ID = #{id}
+    </update>
+    <delete id="delete" parameterType="com.nxd.ftt.entity.FileInfo">
+        delete from a_file
+        where ID = #{id}
+    </delete>
+</mapper>

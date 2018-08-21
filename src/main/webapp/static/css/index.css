@@ -1,0 +1,6 @@
+/*左上角logo*/
+.main-header .logo .logo-lg.logo-img {
+    vertical-align: middle;
+    max-width: 80px;
+    display: inline-block
+}

@@ -1,0 +1,811 @@
+/*通用*/
+a.iconfont, li.iconfont, i.iconfont {
+    font-size: 14px;
+    padding: 5px;
+}
+
+* {
+    font-size: 14px;
+    font-family: Microsoft Yahei, Arial, sans-serif;
+    font-weight: normal;
+}
+
+.leftBox {
+    position: fixed;
+}
+
+.topBox {
+    top: 0;
+    right: 0;
+    left: 0;
+    position: fixed;
+}
+
+/*内容标题*/
+.content-box-bg .content-wrapper .content-header {
+    background-color: #000;
+    padding-bottom: 10px;
+}
+
+/*内容*/
+.content .box-body {
+    background-color: #FFFFFF;
+    border: 1px solid #D0D3D7;
+}
+
+/*去边框*/
+.no-outline {
+    outline: hidden;
+}
+
+.nxd-shadow {
+    -webkit-box-shadow: 0px 0px 50px #888888;
+    -moz-box-shadow: 0px 0px 50px #888888;
+    box-shadow: 0px 0px 50px #888888;
+}
+
+.content .box-primary {
+    border-top-width: 0px;
+}
+
+/*内容中的表格*/
+.content .table, .content .table tr th, .content .table tr td {
+    border-color: #D0D3D7;
+    color: #333;
+    text-align: center;
+}
+
+.content .table tr th {
+    background-color: #D0D3D7;
+}
+
+/*复选框*/
+
+.nxd-checkbox input[type='checkbox'] {
+    display: none;
+}
+
+.nxd-long {
+    width: 100px;
+}
+
+.nxd-checkbox input[type='checkbox'] + label {
+    width: 14px;
+    height: 14px;
+    line-height: 14px;
+    border: 1px solid #333;
+    display: inline-block;
+    border-radius: 2px;
+    position: relative;
+    /*bottom: 5px;*/
+}
+
+.nxd-checkbox input[type='checkbox']:checked + label:after {
+    color: #333;
+    content: "\2714";
+}
+
+/*输入框和选择框*/
+.nxd-input, input.nxd-input.form-control {
+    outline: none;
+    background-color: #FFF;
+    border: 1px solid #D0D3D7;
+    color: #333;
+    border-radius: 4px;
+    height: 30px;
+    padding: 5px 10px;
+    /*font-size: 12px;*/
+    line-height: 1.5;
+    margin: 0px;
+}
+
+.nxd-textarea {
+    outline: none;
+    background-color: #606060;
+    border: 1px solid #606060;
+    color: #dbdbdb;
+    border-radius: 2px;
+    padding: 5px 10px;
+}
+
+/*分隔线*/
+.nxd-split {
+    border-bottom: 1px solid #333333
+}
+
+/*模块*/
+.nxd-section {
+    background-color: #151515;
+    margin: 10px 30px 0 30px;
+}
+
+/*模块内span字体颜色*/
+.nxd-section span {
+    color: #dbdbdb;
+}
+
+.nxd-font {
+    color: #dbdbdb;
+}
+
+/*重写下拉框*/
+.nxd-select select {
+    border: solid 1px #606060;
+    background-color: #606060;
+    padding: 2px 12px;
+    height: 30px;
+    color: #dbdbdb;
+    border-radius: 4px;
+    outline: none;
+}
+
+.nxd-select select > option {
+    outline: none;
+    width: 153px;
+    background-color: inherit;
+    border: inherit;
+    color: inherit;
+    border-radius: 4px;
+    height: 30px;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/*nxd背景颜色*/
+a:hover, a:active, a:focus, .btn:hover, .btn:active, .btn:focus {
+    color: #FFFFFF;
+}
+
+.nxd-bg-black-1 {
+    background-color: #151515;
+}
+
+.nxd-bg-black-2 {
+    background-color: #232323;
+}
+
+.nxd-bg-black-3 {
+    background-color: #606060;
+}
+
+.nxd-bg-black-4 {
+    background-color: #989898;
+}
+
+.nxd-light-blue, .btn-info {
+    background-color: #2890E0;
+    border-color: #2890E0;
+    border-radius: 3px;
+    color: #FFF;
+}
+
+.nxd-light-blue-color {
+    color: #2890E0;
+}
+
+.nxd-light-blue:hover {
+    color: #FFF;
+}
+
+.nxd-blue {
+    background-color: #006ABC;
+    border-color: #006ABC;
+    border-radius: 3px;
+    color: #FFF;
+}
+
+.nxd-blue-color {
+    color: #006ABC;
+}
+
+.nxd-blue:hover {
+    color: #FFF;
+}
+
+.nxd-black {
+    background-color: #353535;
+    border-color: #353535;
+    border-radius: 3px;
+    color: #FFF;
+}
+
+.nxd-grey {
+    background-color: #606060;
+    border-color: #606060;
+    border-radius: 3px;
+    color: #FFF;
+}
+
+.nxd-black-color {
+    color: #353535;
+}
+
+.nxd-black:hover {
+    color: #FFF;
+}
+
+.nxd-red, btn-danger {
+    background-color: #EA4D23;
+    border-color: #EA4D23;
+    border-radius: 3px;
+    color: #FFF;
+}
+
+.nxd-red-color {
+    color: #EA4D23;
+}
+
+.nxd-red:hover {
+    color: #FFF;
+}
+
+.nxd-yellow, btn-warning {
+    background-color: #F2B011;
+    border-color: #F2B011;
+    border-radius: 3px;
+    color: #FFF;
+}
+
+.nxd-yellow-color {
+    color: #F2B011;
+}
+
+.nxd-yellow:hover {
+    color: #FFF;
+}
+
+.nxd-pink {
+    background-color: #D837A7;
+    border-color: #D837A7;
+    border-radius: 3px;
+    color: #FFF;
+}
+
+.nxd-pink-color {
+    color: #D837A7;
+}
+
+.nxd-pink:hover {
+    color: #FFF;
+}
+
+.nxd-purple {
+    background-color: #6744DF;
+    border-color: #6744DF;
+    border-radius: 3px;
+    color: #FFF;
+}
+
+.nxd-purple-color {
+    color: #6744DF;
+}
+
+.nxd-purple:hover {
+    color: #FFF;
+}
+
+.nxd-green, btn-success {
+    background-color: #85B322;
+    border-color: #85B322;
+    border-radius: 3px;
+    color: #FFF;
+}
+
+.nxd-light-green {
+    background-color: #079DA6;
+    border-color: #079DA6;
+    border-radius: 3px;
+    color: #dbdbdb;
+}
+
+.nxd-green-color {
+    color: #85B322;
+}
+
+.nxd-green:hover {
+    color: #FFF;
+}
+
+/*悬浮显示小手图标*/
+.nxd-cursor {
+    cursor: pointer;
+}
+
+/*.dropdown-menu, .dropdown-menu li a {*/
+/*!*background-color: #232323;*!*/
+/*}*/
+/*div.datetimepicker table.table-condensed tr th {*/
+/*text-align: center;*/
+/*}*/
+
+/*表格垂直居中*/
+.table > tbody > tr > td {
+    vertical-align: middle;
+}
+
+.btn {
+    padding: 2px 12px;
+}
+
+.input-group-btn:first-child > .btn, .input-group-btn:first-child > .btn-group, .input-group-btn > .btn {
+    height: 30px;
+}
+
+.bootstrap-switch.bootstrap-switch-mini .bootstrap-switch-handle-on, .bootstrap-switch.bootstrap-switch-mini .bootstrap-switch-handle-off, .bootstrap-switch.bootstrap-switch-mini .bootstrap-switch-label {
+    border-radius: 0px;
+}
+
+/*控制样式*/
+label.checkbox {
+    color: #dbdbdb;
+}
+
+form > div > label, div.form-group lable {
+    color: #232323;
+}
+
+form > div > input {
+    color: #333333;
+}
+
+#modalBody form div input.btn {
+    color: #dbdbdb;
+}
+
+.shutter-section {
+    width: 120px;
+    height: 150px;
+    margin: 20px 0px 0px 8%;
+}
+
+.form-group {
+    text-align: left;
+}
+
+/*条件查询时间框*/
+.condition-datetimepicker {
+
+}
+
+.condition-datetimepicker * {
+    height: 30px;
+}
+
+.condition-datetimepicker > input.form-control {
+    width: 105px;
+    color: #dbdbdb;
+}
+
+.condition-datetimepicker > input.form-control, .condition-datetimepicker > span.input-group-addon {
+    background-color: #606060;
+    border-width: 0px;
+}
+
+.condition-datetimepicker > span.input-group-addon > span {
+    /*background-color: #dbdbdb;*/
+    border-width: 0px;
+    color: #dbdbdb;
+}
+
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #909090;
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #909090;
+}
+
+input:-ms-input-placeholder {
+    color: #909090;
+}
+
+input::-webkit-input-placeholder {
+    color: #909090;
+}
+
+.tag {
+    padding: 1px 9px;
+}
+
+input[type='checkbox'] + label, input[type='radio'] + label {
+    cursor: pointer;
+}
+
+/*开关按钮*/
+/*=======================开关样式开始======================================*/
+.ftt-switch {
+    position: relative;
+    width: 76px;
+    text-align: center;
+    display: inline-block;
+}
+
+.ftt-switch input[type='checkbox'] {
+    display: none;
+}
+
+.ftt-switch input[type='checkbox']:checked + label {
+    left: 40px;
+    background-color: #F2B011;
+    border-color: #F2B011;
+}
+
+.ftt-switch input[type='checkbox'] + label {
+    width: 21px;
+    height: 21px;
+    background-color: #dbdbdb;
+    border-color: #dbdbdb;
+    border-radius: 20px;
+    color: #dbdbdb;
+    position: absolute;
+    line-height: 0px;
+    /*top: -1px;*/
+    left: 13px;
+    -webkit-box-shadow: 0px 2px 20px #000000;
+    -moz-box-shadow: 0px 2px 20px #000000;
+    box-shadow: 0px 2px 20px #000000;
+    /*transition: all .5s ease;*/
+    -o-transition: all .5s ease; /* Opera */
+    transition: all .5s ease;
+    -moz-transition: all .5s ease; /* Firefox 4 */
+    -webkit-transition: all .5s ease; /* Safari 和 Chrome */
+    -o-transition: all .5s ease; /* Opera */
+}
+
+.ftt-switch input[type='checkbox'] + label + i {
+    width: 44px;
+    line-height: 21px;
+    display: inline-block;
+    background-color: #606060;
+    border-radius: 20px;
+    font-style: normal;
+    color: #858585;
+    text-align: right;
+    padding-right: 6px;
+}
+
+.ftt-switch input[type='checkbox'] + label + i span {
+    font-size: 12px;
+}
+
+.ftt-switch input[type='checkbox'] + label + i span:first-child {
+    display: none;
+}
+
+.ftt-switch input[type='checkbox'] + label + i span:last-child {
+    display: inherit;
+}
+
+.ftt-switch input[type='checkbox']:checked + label + i {
+    color: #F2B011;
+    background-color: #FEE5A7;
+    text-align: left;
+    padding-left: 5px;
+}
+
+.ftt-switch input[type='checkbox']:checked + label + i span:last-child {
+    display: none;
+}
+
+.ftt-switch input[type='checkbox']:checked + label + i span:first-child {
+    display: inherit;
+}
+
+/*=======================开关样式结束======================================*/
+/*=======================右键菜单样式开始======================================*/
+.nxd-contextmenu {
+    width: 120px;
+    background-color: #cccccc;
+    color: #606060;
+    text-align: center;
+    border-radius: 4px;
+    position: absolute;
+    padding: 4px 0px;
+
+}
+
+.nxd-contextmenu > div > div {
+    text-align: center;
+    line-height: 38px;
+}
+
+.nxd-contextmenu > div {
+    padding: 0px 10px 0px 10px;
+}
+
+.nxd-contextmenu > div:hover {
+    background-color: #2890E0;
+    color: #dbdbdb;
+}
+
+.nxd-contextmenu > div:last-child > div {
+    border-bottom: 0px solid #979797;
+}
+
+/*=======================右键菜单样式结束======================================*/
+.nxd-line {
+    border-bottom: 1px solid #979797;
+}
+
+form div.form-group input.form-control {
+    border-color: #dbdbdb;
+}
+
+form div.form-group > div {
+    display: inline-block;
+}
+
+/*===================分页样式开始========================================================*/
+ul.pagination > li > a, ul.pagination > li.disabled > a {
+    border-width: 0px;
+    color: #dbdbdb;
+    background-color: #606060;
+}
+
+ul.pagination > li > a {
+    border-radius: 5px;
+    margin-left: 5px;
+    list-style: none;
+}
+
+ul.pagination > li > select {
+    background-color: #606060;
+    border-width: 0px;
+    height: 32px;
+    border-radius: 5px;
+    margin-left: 5px;
+}
+
+ul.pagination > li > input {
+    border-radius: 5px;
+    margin-left: 5px;
+    text-align: center;
+}
+
+ul.pagination > li > a, ul.pagination > li > a:hover, ul.pagination > li > a:visited, ul.pagination > li > a:link, ul.pagination > li.disabled > a, ul.pagination > li.disabled > a:hover, ul.pagination > li.disabled > a:visited, ul.pagination > li.disabled > a:link {
+    color: inherit;
+    background-color: #606060;
+}
+
+ul.pagination > li.active > a, ul.pagination > li.active > a:hover, ul.pagination > li.active > a:visited, ul.pagination > li.active > a:link {
+    background-color: #85B322;
+    color: inherit;
+}
+
+/*===================分页结束========================================================*/
+/*日期*/
+.nxd-date {
+    position: relative;
+}
+
+.nxd-date div.date > span {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+}
+
+.content .table tr * {
+    font-size: 12px;
+}
+
+a.nxd-a, a.nxd-a:hover, a.nxd-a:link, a.nxd-a:visited {
+    list-style: none;
+    text-decoration: none;
+    color: inherit;
+}
+
+.nxd-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/*==================input 自定义单/多选框  开始======================================*/
+.ftt-checkbox {
+    display: inline-block;
+    position: relative;
+}
+
+.ftt-checkbox > label {
+    cursor: pointer;
+}
+
+.ftt-checkbox > label > input:disabled + label {
+    cursor: not-allowed;
+}
+
+.ftt-checkbox > label > input {
+    cursor: pointer;
+    margin-right: 10px;
+    visibility: hidden;
+    position: absolute;
+}
+
+.ftt-checkbox > label > input + i:before {
+    content: "\e601";
+}
+
+.ftt-checkbox > label > input:checked + i:before {
+    content: "\e7cc";
+}
+
+.ftt-checkbox > label > input + i.iconfont:before {
+    /*content: "\e609";*/
+}
+
+.ftt-checkbox > label > input:checked + i.iconfont:before {
+    /*content: "\e600";*/
+}
+
+.ftt-checkbox > label > input:checked + i {
+    color: #59B5E5;
+}
+
+.ftt-checkbox > label i, .ftt-checkbox > label i.fa {
+    width: 15px;
+    font-size: 16px;
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    /*font-size: inherit;*/
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.ftt-checkbox > label i {
+    font-family: "icon" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/*==================input 自定义单/多选框  结束======================================*/
+/*==================图片查看开始======================================*/
+div.view-img {
+    display: inline-block;
+}
+
+div.view-img > img {
+    cursor: pointer;
+}
+
+.bigImgModal .modal-body {
+    text-align: center;
+}
+
+.bigImgModal .modal-content > i:hover {
+    /*background-color: #888888;*/
+    /*box-shadow: 0 0 1px #888888;*/
+}
+
+.bigImgModal .modal-content > i {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 9999;
+    font-size: 24px;
+    width: 40px;
+    line-height: 38px;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 100px;
+}
+
+.bigImgModal .modal-content > i:hover {
+    background-color: #939393;
+    color: #fff;
+}
+
+.bigImgModal .modal-content > i {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 9999;
+    font-size: 24px;
+    width: 40px;
+    line-height: 38px;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 100px;
+}
+
+.bigImgModal .modal-content > i.left {
+    margin-left: 10px;
+    padding: 2px 3px 0 0;
+}
+
+.bigImgModal .modal-content > i.right {
+    right: 0;
+    margin-right: 10px;
+    padding: 2px 0 0 3px;
+}
+
+.bigImgModal .modal-content > i.right:before {
+    content: "\e682";
+}
+
+.bigImgModal .modal-body > img {
+    max-width: 85%;
+    max-height: 98%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    cursor: zoom-in;
+    transform: translateY(-50%) translateX(-50%);
+    background-position: 0px 0px, 10px 10px;
+    background-size: 20px 20px;
+    background-image: linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee 100%), linear-gradient(45deg, #eee 25%, white 25%, white 75%, #eee 75%, #eee 100%);
+}
+
+.bigImgModal .modal-dialog {
+    width: 40%;
+    min-width: 560px;
+}
+
+.bigImgModal .modal-dialog, .bigImgModal .modal-body {
+    height: 100%;
+}
+
+.bigImgModal .modal-content {
+    height: 80%;
+}
+
+/*==================图片查看结束======================================*/
+/*扩展名*/
+.icon-PDF {
+    color: #E1513E;
+}
+
+.icon-PPT {
+    color: #C35132;
+}
+
+.icon-word {
+    color: #305B9A;
+}
+
+.icon-excel {
+    color: #01723E;
+}
+
+/*按钮*/
+.ftt-btn {
+    padding: 10px;
+    min-width: 100px;
+    border-width: 0;
+    text-align: center;
+    cursor: pointer
+}
+
+/*input*/
+input.fh-input, select.fh-select {
+    border: 1px solid #979797;
+    border-radius: 4px !important;
+    width: 160px;
+    height: 30px;
+}
+
+/*other*/
+.fh-hide {
+    display: none;
+}
+
+button:disabled, input:read-only, textarea:read-only, input:disabled {
+    cursor: not-allowed !important;
+}
+/*图标*/
+.fa-angle-left:before {
+    content: "\e682";
+}
+
+[class^="icon"] {
+    font-family: "icon" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}

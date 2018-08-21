@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context-4.1.xsd
+            http://www.springframework.org/schema/mvc
+            http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+            http://www.springframework.org/schema/aop
+		    http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+    <!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
+    <mvc:annotation-driven/>
+    <mvc:default-servlet-handler/>
+    <context:component-scan base-package="com.nxd.ftt.controller"/>
+
+    <!--避免IE执行AJAX时，返回JSON出现下载文件 -->
+    <!--<bean-->
+    <!--class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">-->
+    <!--<property name="messageConverters">-->
+    <!--<list>-->
+    <!--<ref bean="mappingJacksonHttpMessageConverter" />-->
+    <!--</list>-->
+    <!--</property>-->
+    <!--</bean>-->
+    <!--<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">-->
+    <!--<property name="supportedMediaTypes">-->
+    <!--<list>-->
+    <!--<value>text/html;charset=UTF-8</value>-->
+    <!--</list>-->
+    <!--</property>-->
+    <!--</bean>-->
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+    <!-- 允许对静态资源文件的访问 -->
+    <!--<mvc:default-servlet-handler />-->
+    <!-- 对静态资源的访问 -->
+    <!--<mvc:resources mapping="/admin/**" location="/admin/" />-->
+    <mvc:resources mapping="/static/**" location="/static/"/>
+    <mvc:resources mapping="/plugins/**" location="/plugins/"/>
+    <!--<mvc:resources mapping="/uploadFiles/**" location="/uploadFiles/" />-->
+    <mvc:resources mapping="/pages/**" location="/pages/"/>
+
+
+    <!-- 访问拦截  -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**/**"/>
+            <bean class="com.nxd.ftt.interceptor.LoginHandlerInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+    <!-- pjax视图拦截  -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**/**.view"/>
+            <mvc:mapping path="/**/**.modal"/>
+            <bean class="com.nxd.ftt.interceptor.PjaxHandlerInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+    <!-- 注解控测器-->
+    <!--<context:component-scan base-package="com.cyh.*">-->
+    <!--<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>-->
+    <!--</context:component-scan>-->
+
+
+    <!-- 国际化资源配置 -->
+    <!--<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">-->
+    <!--&lt;!&ndash; 国际化信息所在的文件名 &ndash;&gt;-->
+    <!--<property name="basename" value="messages/message"/>-->
+    <!--&lt;!&ndash; 如果在国际化资源文件中找不到对应代码的信息，就用这个代码作为名称  &ndash;&gt;-->
+    <!--<property name="useCodeAsDefaultMessage" value="true" />-->
+    <!--</bean>-->
+
+
+    <!-- 定义跳转的文件的前后缀 ，视图模式配置 -->
+    <bean
+            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- 这里的配置我的理解是自动给后面action的方法return的字符串加上前缀和后缀，变成一个 可用的url地址 -->
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    <!-- annotation默认的方法映射适配器 -->
+    <!--<bean id="handlerMapping" class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>-->
+    <!--<bean id="handlerAdapter" class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />-->
+    <!--配置SessionLocaleResolver-->
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"></bean>
+    <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
+
+    <!--&lt;!&ndash; 支持上传文件 &ndash;&gt;-->
+    <!--<bean id="multipartResolver" class="CustomMultipartResolver"/>-->
+
+
+    <!-- 配置文件上传，如果没有使用文件上传可以不用配置，当然如果不配，那么配置文件中也不必引入上传组件包 -->
+    <bean id="multipartResolver"
+          class="com.nxd.ftt.util.upload.CustomMultipartResolver">
+        <!-- 默认编码 -->
+        <property name="defaultEncoding" value="UTF-8"/>
+        <!-- 文件大小最大值 -->
+        <property name="maxUploadSize" value="10485760000"/>
+        <!-- 内存中的最大值 -->
+        <property name="maxInMemorySize" value="40960"/>
+    </bean>
+
+
+</beans>

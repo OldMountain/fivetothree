@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nxd.ftt.dao.ClientDao">
+    <resultMap id="BaseResultMap" type="com.nxd.ftt.entity.Client">
+        <result column="ID" property="id"/>
+        <result column="NAME" property="name"/>
+        <result column="SIZE" property="size"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="VERSION" property="version"/>
+        <result column="LINK" property="link"/>
+        <result column="LINK1" property="link1"/>
+        <result column="LINK2" property="link2"/>
+        <result column="LINK3" property="link3"/>
+    </resultMap>
+    <select id="select" parameterType="com.nxd.ftt.entity.Client" resultMap="BaseResultMap">
+        select
+        <trim suffixOverrides=",">
+            ID,
+            NAME,
+            SIZE,
+            UPDATE_TIME,
+            VERSION,
+            LINK,
+            LINK1,
+            LINK2,
+            LINK3,
+        </trim>
+        from a_client
+        <where>
+            <if test="id != null and id !=''">
+                and ID = #{id}
+            </if>
+            <if test="name != null and name !=''">
+                and NAME = #{name}
+            </if>
+            <if test="size != null and size !=''">
+                and SIZE = #{size}
+            </if>
+            <if test="updateTime != null and updateTime !=''">
+                and UPDATE_TIME = #{updateTime}
+            </if>
+            <if test="version != null and version !=''">
+                and VERSION = #{version}
+            </if>
+            <if test="link != null and link !=''">
+                and LINK = #{link}
+            </if>
+            <if test="link1 != null and link1 !=''">
+                and LINK1 = #{link1}
+            </if>
+            <if test="link2 != null and link2 !=''">
+                and LINK2 = #{link2}
+            </if>
+            <if test="link3 != null and link3 !=''">
+                and LINK3 = #{link3}
+            </if>
+        </where>
+    </select>
+    <select id="selectById" parameterType="com.nxd.ftt.entity.Client" resultMap="BaseResultMap">
+        select
+        <trim suffixOverrides=",">
+            ID,
+            NAME,
+            SIZE,
+            UPDATE_TIME,
+            VERSION,
+            LINK,
+            LINK1,
+            LINK2,
+            LINK3,
+        </trim>
+        from a_client
+        where ID = #{id}
+    </select>
+    <delete id="batchDelete" parameterType="java.lang.String">
+        delete from a_client
+        where ID in
+        <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+        #{item}
+        </foreach>
+    </delete>
+    <insert id="insert" parameterType="com.nxd.ftt.entity.Client">
+        insert into a_client
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and id !=''">
+                ID,
+            </if>
+            <if test="name != null and name !=''">
+                NAME,
+            </if>
+            <if test="size != null and size !=''">
+                SIZE,
+            </if>
+            <if test="updateTime != null and updateTime !=''">
+                UPDATE_TIME,
+            </if>
+            <if test="version != null and version !=''">
+                VERSION,
+            </if>
+            <if test="link != null and link !=''">
+                LINK,
+            </if>
+            <if test="link1 != null and link1 !=''">
+                LINK1,
+            </if>
+            <if test="link2 != null and link2 !=''">
+                LINK2,
+            </if>
+            <if test="link3 != null and link3 !=''">
+                LINK3,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and id !=''">
+                #{id},
+            </if>
+            <if test="name != null and name !=''">
+                #{name},
+            </if>
+            <if test="size != null and size !=''">
+                #{size},
+            </if>
+            <if test="updateTime != null and updateTime !=''">
+                #{updateTime},
+            </if>
+            <if test="version != null and version !=''">
+                #{version},
+            </if>
+            <if test="link != null and link !=''">
+                #{link},
+            </if>
+            <if test="link1 != null and link1 !=''">
+                #{link1},
+            </if>
+            <if test="link2 != null and link2 !=''">
+                #{link2},
+            </if>
+            <if test="link3 != null and link3 !=''">
+                #{link3},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.nxd.ftt.entity.Client">
+        update a_client
+        set
+        <trim suffixOverrides=",">
+            <if test="id != null and id !=''">
+                ID = #{id},
+            </if>
+            <if test="name != null and name !=''">
+                NAME = #{name},
+            </if>
+            <if test="size != null and size !=''">
+                SIZE = #{size},
+            </if>
+            <if test="updateTime != null and updateTime !=''">
+                UPDATE_TIME = #{updateTime},
+            </if>
+            <if test="version != null and version !=''">
+                VERSION = #{version},
+            </if>
+            <if test="link != null and link !=''">
+                LINK = #{link},
+            </if>
+            <if test="link1 != null and link1 !=''">
+                LINK1 = #{link1},
+            </if>
+            <if test="link2 != null and link2 !=''">
+                LINK2 = #{link2},
+            </if>
+            <if test="link3 != null and link3 !=''">
+                LINK3 = #{link3},
+            </if>
+        </trim>
+        where ID = #{id}
+    </update>
+    <delete id="delete" parameterType="com.nxd.ftt.entity.Client">
+        delete from a_client
+        where ID = #{id}
+    </delete>
+</mapper>

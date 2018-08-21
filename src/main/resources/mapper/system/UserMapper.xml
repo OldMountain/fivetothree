@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nxd.ftt.dao.UserDao">
+  <resultMap id="BaseResultMap" type="com.nxd.ftt.entity.User">
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="RIGHTS" jdbcType="VARCHAR" property="rights" />
+    <result column="ROLE_ID" jdbcType="VARCHAR" property="roleId" />
+    <result column="LAST_LOGIN" jdbcType="VARCHAR" property="lastLogin" />
+    <result column="IP" jdbcType="VARCHAR" property="ip" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="BZ" jdbcType="VARCHAR" property="bz" />
+    <result column="SKIN" jdbcType="VARCHAR" property="skin" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="NUMBER" jdbcType="VARCHAR" property="number" />
+    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+  </resultMap>
+  <select id="select" parameterType="com.nxd.ftt.entity.User" resultMap="BaseResultMap">
+        select
+       <trim  suffixOverrides=",">
+            USER_ID,
+            USER_NAME,
+            PASSWORD,
+            NAME,
+            RIGHTS,
+            ROLE_ID,
+            LAST_LOGIN,
+            IP,
+            STATUS,
+            BZ,
+            SKIN,
+            EMAIL,
+            NUMBER,
+            PHONE,
+       </trim>
+       from a_sys_user
+       <where>
+            <if test="userId != null and userId !=''">
+                 and USER_ID = #{userId}
+            </if>
+            <if test="userName != null and userName !=''">
+                 and USER_NAME = #{userName}
+            </if>
+            <if test="password != null and password !=''">
+                 and PASSWORD = #{password}
+            </if>
+            <if test="name != null and name !=''">
+                 and NAME = #{name}
+            </if>
+            <if test="rights != null and rights !=''">
+                 and RIGHTS = #{rights}
+            </if>
+            <if test="roleId != null and roleId !=''">
+                 and ROLE_ID = #{roleId}
+            </if>
+            <if test="lastLogin != null and lastLogin !=''">
+                 and LAST_LOGIN = #{lastLogin}
+            </if>
+            <if test="ip != null and ip !=''">
+                 and IP = #{ip}
+            </if>
+            <if test="status != null and status !=''">
+                 and STATUS = #{status}
+            </if>
+            <if test="bz != null and bz !=''">
+                 and BZ = #{bz}
+            </if>
+            <if test="skin != null and skin !=''">
+                 and SKIN = #{skin}
+            </if>
+            <if test="email != null and email !=''">
+                 and EMAIL = #{email}
+            </if>
+            <if test="number != null and number !=''">
+                 and NUMBER = #{number}
+            </if>
+            <if test="phone != null and phone !=''">
+                 and PHONE = #{phone}
+            </if>
+       </where>
+  </select>
+  <select id="selectAll" parameterType="com.nxd.ftt.util.PageData" resultType="com.nxd.ftt.util.PageData">
+        select
+       <trim  suffixOverrides=",">
+            a.USER_ID userId,
+            a.USER_NAME userName,
+            a.PASSWORD password,
+            a.NAME name,
+            a.RIGHTS rights,
+            a.ROLE_ID roleId,
+            a.LAST_LOGIN lastLogin,
+            a.IP ip,
+            a.STATUS status,
+            a.BZ bz,
+            a.SKIN skin,
+            a.EMAIL email,
+            a.NUMBER number,
+            a.PHONE phone,
+            b.ROLE_NAME roleName
+       </trim>
+       from a_sys_user a left join a_sys_role b on a.ROLE_ID = b.ROLE_ID
+       <where>
+            <if test="userId != null and userId !=''">
+                 and a.USER_ID = #{user.userId}
+            </if>
+            <if test="userName != null and userName !=''">
+                 and a.USER_NAME = #{user.userName}
+            </if>
+            <if test="password != null and password !=''">
+                 and a.PASSWORD = #{user.password}
+            </if>
+            <if test="name != null and name !=''">
+                 and a.NAME = #{user.name}
+            </if>
+            <if test="rights != null and rights !=''">
+                 and a.RIGHTS = #{user.rights}
+            </if>
+            <if test="roleId != null and roleId !=''">
+                 and a.ROLE_ID = #{user.roleId}
+            </if>
+            <if test="lastLogin != null and lastLogin !=''">
+                 and a.LAST_LOGIN = #{user.lastLogin}
+            </if>
+            <if test="ip != null and ip !=''">
+                 and a.IP = #{user.ip}
+            </if>
+            <if test="status != null and status !=''">
+                 and a.STATUS = #{user.status}
+            </if>
+            <if test="bz != null and bz !=''">
+                 and a.BZ = #{user.bz}
+            </if>
+            <if test="skin != null and skin !=''">
+                 and a.SKIN = #{user.skin}
+            </if>
+            <if test="email != null and email !=''">
+                 and a.EMAIL = #{user.email}
+            </if>
+            <if test="number != null and number !=''">
+                 and a.NUMBER = #{user.number}
+            </if>
+            <if test="phone != null and phone !=''">
+                 and a.PHONE = #{user.phone}
+            </if>
+       </where>
+  </select>
+  <delete id="batchDelete" parameterType="java.lang.String">
+    delete from a_sys_user
+    where USER_ID in
+    <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+       #{item}
+    </foreach>
+  </delete>
+  <insert id="insert" parameterType="com.nxd.ftt.entity.User">
+          insert into a_sys_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null and userId !=''">
+                USER_ID ,
+            </if>
+            <if test="userName != null and userName !=''">
+                USER_NAME ,
+            </if>
+            <if test="password != null and password !=''">
+                PASSWORD ,
+            </if>
+            <if test="name != null and name !=''">
+                NAME ,
+            </if>
+            <if test="rights != null and rights !=''">
+                RIGHTS ,
+            </if>
+            <if test="roleId != null and roleId !=''">
+                ROLE_ID ,
+            </if>
+            <if test="lastLogin != null and lastLogin !=''">
+                LAST_LOGIN ,
+            </if>
+            <if test="ip != null and ip !=''">
+                IP ,
+            </if>
+            <if test="status != null and status !=''">
+                STATUS ,
+            </if>
+            <if test="bz != null and bz !=''">
+                BZ ,
+            </if>
+            <if test="skin != null and skin !=''">
+                SKIN ,
+            </if>
+            <if test="email != null and email !=''">
+                EMAIL ,
+            </if>
+            <if test="number != null and number !=''">
+                NUMBER ,
+            </if>
+            <if test="phone != null and phone !=''">
+                PHONE ,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null and userId !=''">
+                #{userId} ,
+            </if>
+            <if test="userName != null and userName !=''">
+                #{userName} ,
+            </if>
+            <if test="password != null and password !=''">
+                #{password} ,
+            </if>
+            <if test="name != null and name !=''">
+                #{name} ,
+            </if>
+            <if test="rights != null and rights !=''">
+                #{rights} ,
+            </if>
+            <if test="roleId != null and roleId !=''">
+                #{roleId} ,
+            </if>
+            <if test="lastLogin != null and lastLogin !=''">
+                #{lastLogin} ,
+            </if>
+            <if test="ip != null and ip !=''">
+                #{ip} ,
+            </if>
+            <if test="status != null and status !=''">
+                #{status} ,
+            </if>
+            <if test="bz != null and bz !=''">
+                #{bz} ,
+            </if>
+            <if test="skin != null and skin !=''">
+                #{skin} ,
+            </if>
+            <if test="email != null and email !=''">
+                #{email} ,
+            </if>
+            <if test="number != null and number !=''">
+                #{number} ,
+            </if>
+            <if test="phone != null and phone !=''">
+                #{phone} ,
+            </if>
+        </trim>
+  </insert>
+  <update id="update" parameterType="java.lang.String">
+          update a_sys_user
+          set
+        <trim suffixOverrides=",">
+            <if test="userId != null and userId !=''">
+                USER_ID = #{userId} ,
+            </if>
+            <if test="userName != null and userName !=''">
+                USER_NAME = #{userName} ,
+            </if>
+            <if test="password != null and password !=''">
+                PASSWORD = #{password} ,
+            </if>
+            <if test="name != null and name !=''">
+                NAME = #{name} ,
+            </if>
+            <if test="rights != null and rights !=''">
+                RIGHTS = #{rights} ,
+            </if>
+            <if test="roleId != null and roleId !=''">
+                ROLE_ID = #{roleId} ,
+            </if>
+            <if test="lastLogin != null and lastLogin !=''">
+                LAST_LOGIN = #{lastLogin} ,
+            </if>
+            <if test="ip != null and ip !=''">
+                IP = #{ip} ,
+            </if>
+            <if test="status != null and status !=''">
+                STATUS = #{status} ,
+            </if>
+            <if test="bz != null and bz !=''">
+                BZ = #{bz} ,
+            </if>
+            <if test="skin != null and skin !=''">
+                SKIN = #{skin} ,
+            </if>
+            <if test="email != null and email !=''">
+                EMAIL = #{email} ,
+            </if>
+            <if test="number != null and number !=''">
+                NUMBER = #{number} ,
+            </if>
+            <if test="phone != null and phone !=''">
+                PHONE = #{phone} ,
+            </if>
+        </trim>
+        where USER_ID = #{userId}
+  </update>
+  <delete id="delete" parameterType="com.nxd.ftt.entity.User">
+    delete from a_sys_user
+    where USER_ID = #{userId}
+  </delete>
+</mapper>

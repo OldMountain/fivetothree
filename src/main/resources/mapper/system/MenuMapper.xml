@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nxd.ftt.dao.MenuDao">
+  <resultMap id="BaseResultMap" type="com.nxd.ftt.entity.Menu">
+    <result column="MENU_ID" jdbcType="INTEGER" property="menuId" />
+    <result column="MENU_NAME" jdbcType="VARCHAR" property="menuName" />
+    <result column="MENU_URL" jdbcType="VARCHAR" property="menuUrl" />
+    <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId" />
+    <result column="MENU_ORDER" jdbcType="VARCHAR" property="menuOrder" />
+    <result column="MENU_ICON" jdbcType="VARCHAR" property="menuIcon" />
+    <result column="MENU_TYPE" jdbcType="VARCHAR" property="menuType" />
+  </resultMap>
+  <select id="select" parameterType="com.nxd.ftt.entity.Menu" resultMap="BaseResultMap">
+        select
+       <trim  suffixOverrides=",">
+            MENU_ID,
+            MENU_NAME,
+            MENU_URL,
+            PARENT_ID,
+            MENU_ORDER,
+            MENU_ICON,
+            MENU_TYPE,
+       </trim>
+       from a_sys_menu
+       <where>
+            <if test="menuId != null and menuId !=''">
+                 and MENU_ID = #{menuId}  
+            </if>
+            <if test="menuName != null and menuName !=''">
+                 and MENU_NAME = #{menuName}  
+            </if>
+            <if test="menuUrl != null and menuUrl !=''">
+                 and MENU_URL = #{menuUrl}  
+            </if>
+            <if test="parentId != null and parentId !=''">
+                 and PARENT_ID = #{parentId}  
+            </if>
+            <if test="menuOrder != null and menuOrder !=''">
+                 and MENU_ORDER = #{menuOrder}  
+            </if>
+            <if test="menuIcon != null and menuIcon !=''">
+                 and MENU_ICON = #{menuIcon}  
+            </if>
+            <if test="menuType != null and menuType !=''">
+                 and MENU_TYPE = #{menuType}  
+            </if>
+       </where>
+      order by MENU_ORDER asc
+  </select>
+  <delete id="batchDelete" parameterType="java.lang.String">
+    delete from a_sys_menu
+    where MENU_ID in  
+    <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+       #{item}
+    </foreach> 
+  </delete>
+  <insert id="insert" parameterType="com.nxd.ftt.entity.Menu">
+          insert into a_sys_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="menuId != null and menuId !=''">
+                MENU_ID , 
+            </if>
+            <if test="menuName != null and menuName !=''">
+                MENU_NAME , 
+            </if>
+            <if test="menuUrl != null and menuUrl !=''">
+                MENU_URL , 
+            </if>
+            <if test="parentId != null and parentId !=''">
+                PARENT_ID , 
+            </if>
+            <if test="menuOrder != null and menuOrder !=''">
+                MENU_ORDER , 
+            </if>
+            <if test="menuIcon != null and menuIcon !=''">
+                MENU_ICON , 
+            </if>
+            <if test="menuType != null and menuType !=''">
+                MENU_TYPE , 
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="menuId != null and menuId !=''">
+                #{menuId} , 
+            </if>
+            <if test="menuName != null and menuName !=''">
+                #{menuName} , 
+            </if>
+            <if test="menuUrl != null and menuUrl !=''">
+                #{menuUrl} , 
+            </if>
+            <if test="parentId != null and parentId !=''">
+                #{parentId} , 
+            </if>
+            <if test="menuOrder != null and menuOrder !=''">
+                #{menuOrder} , 
+            </if>
+            <if test="menuIcon != null and menuIcon !=''">
+                #{menuIcon} , 
+            </if>
+            <if test="menuType != null and menuType !=''">
+                #{menuType} , 
+            </if>
+        </trim>
+  </insert>
+  <update id="update" parameterType="java.lang.String">
+          update a_sys_menu
+          set
+        <trim suffixOverrides=",">
+            <if test="menuId != null and menuId !=''">
+                MENU_ID = #{menuId} ,
+            </if>
+            <if test="menuName != null and menuName !=''">
+                MENU_NAME = #{menuName} ,
+            </if>
+            <if test="menuUrl != null and menuUrl !=''">
+                MENU_URL = #{menuUrl} ,
+            </if>
+            <if test="parentId != null and parentId !=''">
+                PARENT_ID = #{parentId} ,
+            </if>
+            <if test="menuOrder != null and menuOrder !=''">
+                MENU_ORDER = #{menuOrder} ,
+            </if>
+            <if test="menuIcon != null and menuIcon !=''">
+                MENU_ICON = #{menuIcon} ,
+            </if>
+            <if test="menuType != null and menuType !=''">
+                MENU_TYPE = #{menuType} ,
+            </if>
+        </trim>
+        where MENU_ID = #{menuId}
+  </update>
+  <delete id="delete" parameterType="com.nxd.ftt.entity.Menu">
+    delete from a_sys_menu
+    where MENU_ID = #{menuId}
+  </delete>
+</mapper>

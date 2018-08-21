@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nxd.ftt.dao.GoodDao">
+    <resultMap id="BaseResultMap" type="com.nxd.ftt.entity.Good">
+        <result column="ID" property="id"/>
+        <result column="TITLE" property="title"/>
+        <result column="PRICE" property="price"/>
+        <result column="ORIGINAL_PRICE" property="originalPrice"/>
+        <result column="DETAIL" property="detail"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="MODIFY_TIME" property="modifyTime"/>
+        <result column="REMARK" property="remark"/>
+        <result column="CREATE_USER" property="createUser"/>
+        <result column="MODIFY_USER" property="modifyUser"/>
+        <result column="UNIT" property="unit"/>
+    </resultMap>
+    <select id="select" parameterType="com.nxd.ftt.entity.Good" resultMap="BaseResultMap">
+        select
+        <trim suffixOverrides=",">
+            ID,
+            TITLE,
+            PRICE,
+            ORIGINAL_PRICE,
+            DETAIL,
+            CREATE_TIME,
+            MODIFY_TIME,
+            REMARK,
+            CREATE_USER,
+            MODIFY_USER,
+            UNIT,
+        </trim>
+        from a_goods
+        <where>
+            <if test="id != null and id !=''">
+                and ID = #{id}
+            </if>
+            <if test="title != null and title !=''">
+                and TITLE = #{title}
+            </if>
+            <if test="price != null and price !=''">
+                and PRICE = #{price}
+            </if>
+            <if test="originalPrice != null and originalPrice !=''">
+                and ORIGINAL_PRICE = #{originalPrice}
+            </if>
+            <if test="detail != null and detail !=''">
+                and DETAIL = #{detail}
+            </if>
+            <if test="createTime != null and createTime !=''">
+                and CREATE_TIME = #{createTime}
+            </if>
+            <if test="modifyTime != null and modifyTime !=''">
+                and MODIFY_TIME = #{modifyTime}
+            </if>
+            <if test="remark != null and remark !=''">
+                and REMARK = #{remark}
+            </if>
+            <if test="createUser != null and createUser !=''">
+                and CREATE_USER = #{createUser}
+            </if>
+            <if test="modifyUser != null and modifyUser !=''">
+                and MODIFY_USER = #{modifyUser}
+            </if>
+            <if test="unit != null and unit !=''">
+                and UNIT = #{unit}
+            </if>
+        </where>
+    </select>
+    <select id="selectById" parameterType="com.nxd.ftt.entity.Good" resultMap="BaseResultMap">
+        select
+        <trim suffixOverrides=",">
+            ID,
+            TITLE,
+            PRICE,
+            ORIGINAL_PRICE,
+            DETAIL,
+            CREATE_TIME,
+            MODIFY_TIME,
+            REMARK,
+            CREATE_USER,
+            MODIFY_USER,
+            UNIT,
+        </trim>
+        from a_goods
+        where ID = #{id}
+    </select>
+    <delete id="batchDelete" parameterType="java.lang.String">
+        delete from a_goods
+        where ID in
+        <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+        #{item}
+        </foreach>
+    </delete>
+    <insert id="insert" parameterType="com.nxd.ftt.entity.Good">
+        insert into a_goods
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and id !=''">
+                ID,
+            </if>
+            <if test="title != null and title !=''">
+                TITLE,
+            </if>
+            <if test="price != null and price !=''">
+                PRICE,
+            </if>
+            <if test="originalPrice != null and originalPrice !=''">
+                ORIGINAL_PRICE,
+            </if>
+            <if test="detail != null and detail !=''">
+                DETAIL,
+            </if>
+            <if test="createTime != null and createTime !=''">
+                CREATE_TIME,
+            </if>
+            <if test="modifyTime != null and modifyTime !=''">
+                MODIFY_TIME,
+            </if>
+            <if test="remark != null and remark !=''">
+                REMARK,
+            </if>
+            <if test="createUser != null and createUser !=''">
+                CREATE_USER,
+            </if>
+            <if test="modifyUser != null and modifyUser !=''">
+                MODIFY_USER,
+            </if>
+            <if test="unit != null and unit !=''">
+                UNIT,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and id !=''">
+                #{id},
+            </if>
+            <if test="title != null and title !=''">
+                #{title},
+            </if>
+            <if test="price != null and price !=''">
+                #{price},
+            </if>
+            <if test="originalPrice != null and originalPrice !=''">
+                #{originalPrice},
+            </if>
+            <if test="detail != null and detail !=''">
+                #{detail},
+            </if>
+            <if test="createTime != null and createTime !=''">
+                #{createTime},
+            </if>
+            <if test="modifyTime != null and modifyTime !=''">
+                #{modifyTime},
+            </if>
+            <if test="remark != null and remark !=''">
+                #{remark},
+            </if>
+            <if test="createUser != null and createUser !=''">
+                #{createUser},
+            </if>
+            <if test="modifyUser != null and modifyUser !=''">
+                #{modifyUser},
+            </if>
+            <if test="unit != null and unit !=''">
+                #{unit},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.nxd.ftt.entity.Good">
+        update a_goods
+        set
+        <trim suffixOverrides=",">
+            <if test="id != null and id !=''">
+                ID = #{id},
+            </if>
+            <if test="title != null and title !=''">
+                TITLE = #{title},
+            </if>
+            <if test="price != null and price !=''">
+                PRICE = #{price},
+            </if>
+            <if test="originalPrice != null and originalPrice !=''">
+                ORIGINAL_PRICE = #{originalPrice},
+            </if>
+            <if test="detail != null and detail !=''">
+                DETAIL = #{detail},
+            </if>
+            <if test="createTime != null and createTime !=''">
+                CREATE_TIME = #{createTime},
+            </if>
+            <if test="modifyTime != null and modifyTime !=''">
+                MODIFY_TIME = #{modifyTime},
+            </if>
+            <if test="remark != null and remark !=''">
+                REMARK = #{remark},
+            </if>
+            <if test="createUser != null and createUser !=''">
+                CREATE_USER = #{createUser},
+            </if>
+            <if test="modifyUser != null and modifyUser !=''">
+                MODIFY_USER = #{modifyUser},
+            </if>
+            <if test="unit != null and unit !=''">
+                UNIT = #{unit},
+            </if>
+        </trim>
+        where ID = #{id}
+    </update>
+    <delete id="delete" parameterType="com.nxd.ftt.entity.Good">
+        delete from a_goods
+        where ID = #{id}
+    </delete>
+</mapper>
