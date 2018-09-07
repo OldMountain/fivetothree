@@ -92,6 +92,10 @@ public class LoginController extends BaseController {
                     //shiro加入身份验证
                     UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(), user.getPassword());
                     currentUser.login(token);
+                }else {
+                    result.setStatus(Const.FALSE);
+                    result.setMessage("请输入正确的账号密码");
+                    return result;
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
