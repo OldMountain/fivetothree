@@ -52,7 +52,7 @@ public class PropertiesUtils {
         {
             if(prop.isEmpty()){
 //                String savePath = PropertiesUtils.class.getResource("/config.properties").getPath();
-                String savePath = FTools.getClassPath("/config.properties");
+                String savePath = FTools.getClassPath("config.properties");
                 in = new BufferedInputStream(new FileInputStream(savePath));
                 prop.load(in);
             }

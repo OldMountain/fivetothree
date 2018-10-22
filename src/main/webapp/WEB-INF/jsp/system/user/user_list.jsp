@@ -98,6 +98,9 @@
 </script>
 <jsp:include page="../admin/modal.jsp" />
 <script>
+    $(function () {
+        initImg();
+    })
     //新增用户
     function addUser() {
         $.OpenModal({
