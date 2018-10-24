@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nxd.ftt.dao.DictionaryDao">
+    <resultMap id="BaseResultMap" type="com.nxd.ftt.entity.Dictionary">
+        <result column="ID" property="id"/>
+        <result column="VALUE" property="value"/>
+        <result column="TEXT" property="text"/>
+        <result column="PARENT" property="parent"/>
+        <result column="STATUS" property="status"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="CREATEOR" property="createor"/>
+        <result column="UPDATEOR" property="updateor"/>
+    </resultMap>
+    <select id="list" parameterType="com.nxd.ftt.entity.Dictionary" resultMap="BaseResultMap">
+        select
+        <trim suffixOverrides=",">
+            ID,
+            VALUE,
+            TEXT,
+            PARENT,
+            STATUS,
+            CREATE_TIME,
+            UPDATE_TIME,
+            CREATEOR,
+            UPDATEOR,
+        </trim>
+        from a_dictionary
+        <where>
+            <if test="id != null and id !=''">
+                and ID = #{id}
+            </if>
+            <if test="value != null and value !=''">
+                and VALUE = #{value}
+            </if>
+            <if test="text != null and text !=''">
+                and TEXT = #{text}
+            </if>
+            <if test="parent != null and parent !=''">
+                and PARENT = #{parent}
+            </if>
+            <if test="status != null and status !=''">
+                and STATUS = #{status}
+            </if>
+            <if test="createTime != null and createTime !=''">
+                and CREATE_TIME = #{createTime}
+            </if>
+            <if test="updateTime != null and updateTime !=''">
+                and UPDATE_TIME = #{updateTime}
+            </if>
+            <if test="createor != null and createor !=''">
+                and CREATEOR = #{createor}
+            </if>
+            <if test="updateor != null and updateor !=''">
+                and UPDATEOR = #{updateor}
+            </if>
+        </where>
+    </select>
+    <select id="findById" parameterType="com.nxd.ftt.entity.Dictionary" resultMap="BaseResultMap">
+        select
+        <trim suffixOverrides=",">
+            ID,
+            VALUE,
+            TEXT,
+            PARENT,
+            STATUS,
+            CREATE_TIME,
+            UPDATE_TIME,
+            CREATEOR,
+            UPDATEOR,
+        </trim>
+        from a_dictionary
+        where ID = #{id}
+    </select>
+    <delete id="batchDelete" parameterType="java.lang.String">
+        delete from a_dictionary
+        where ID in
+        <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+        #{item}
+        </foreach>
+    </delete>
+    <insert id="insert" parameterType="com.nxd.ftt.entity.Dictionary">
+        insert into a_dictionary
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and id !=''">
+                ID,
+            </if>
+            <if test="value != null and value !=''">
+                VALUE,
+            </if>
+            <if test="text != null and text !=''">
+                TEXT,
+            </if>
+            <if test="parent != null and parent !=''">
+                PARENT,
+            </if>
+            <if test="status != null and status !=''">
+                STATUS,
+            </if>
+            <if test="createor != null and createor !=''">
+                CREATEOR,
+            </if>
+            <if test="updateor != null and updateor !=''">
+                UPDATEOR,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and id !=''">
+                #{id},
+            </if>
+            <if test="value != null and value !=''">
+                #{value},
+            </if>
+            <if test="text != null and text !=''">
+                #{text},
+            </if>
+            <if test="parent != null and parent !=''">
+                #{parent},
+            </if>
+            <if test="status != null and status !=''">
+                #{status},
+            </if>
+            <if test="createor != null and createor !=''">
+                #{createor},
+            </if>
+            <if test="updateor != null and updateor !=''">
+                #{updateor},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.nxd.ftt.entity.Dictionary">
+        update a_dictionary
+        set
+        <trim suffixOverrides=",">
+            <if test="id != null and id !=''">
+                ID = #{id},
+            </if>
+            <if test="value != null and value !=''">
+                VALUE = #{value},
+            </if>
+            <if test="text != null and text !=''">
+                TEXT = #{text},
+            </if>
+            <if test="parent != null and parent !=''">
+                PARENT = #{parent},
+            </if>
+            <if test="status != null and status !=''">
+                STATUS = #{status},
+            </if>
+            <if test="createor != null and createor !=''">
+                CREATEOR = #{createor},
+            </if>
+            <if test="updateor != null and updateor !=''">
+                UPDATEOR = #{updateor},
+            </if>
+        </trim>
+        where ID = #{id}
+    </update>
+    <delete id="delete" parameterType="com.nxd.ftt.entity.Dictionary">
+        delete from a_dictionary
+        where ID = #{id}
+    </delete>
+</mapper>

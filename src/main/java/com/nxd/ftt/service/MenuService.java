@@ -16,14 +16,14 @@ import java.util.List;
 @Repository
 public interface MenuService {
 
-    List<Menu> listAllMenu() throws SQLException;
+    List<Menu> listAllMenu();
 
     /**
      * 查询所有父级菜单
      * @return
      * @throws SQLException
      */
-    List<Menu> listParentAll() throws SQLException;
+    List<Menu> listParentAll();
 
     /**
      * 查询所有子菜单
@@ -31,7 +31,7 @@ public interface MenuService {
      * @return
      * @throws SQLException
      */
-    List<Menu> selectSubMenuByParentId(String menuId) throws SQLException;
+    List<Menu> selectSubMenuByParentId(String menuId);
 
-    String listTreeMenu(Role role, int type) throws SQLException;
+    String listTreeMenu(Role role, int type);
 }

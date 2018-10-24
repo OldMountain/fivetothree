@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nxd.ftt.dao.AboutDao">
+    <resultMap id="BaseResultMap" type="com.nxd.ftt.entity.About">
+        <result column="ID" property="id"/>
+        <result column="VERSION" property="version"/>
+        <result column="FRAME" property="frame"/>
+        <result column="NAME" property="name"/>
+        <result column="REMARK" property="remark"/>
+        <result column="URL" property="url"/>
+        <result column="TAKE_PART_IN" property="takePartIn"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="CREATEOR" property="createor"/>
+        <result column="UPDATEOR" property="updateor"/>
+    </resultMap>
+    <select id="list" parameterType="com.nxd.ftt.entity.About" resultMap="BaseResultMap">
+        select
+        <trim suffixOverrides=",">
+            ID,
+            VERSION,
+            FRAME,
+            NAME,
+            REMARK,
+            URL,
+            TAKE_PART_IN,
+            CREATE_TIME,
+            UPDATE_TIME,
+            CREATEOR,
+            UPDATEOR,
+        </trim>
+        from a_about
+        <where>
+            <if test="id != null and id !=''">
+                and ID = #{id}
+            </if>
+            <if test="version != null and version !=''">
+                and VERSION = #{version}
+            </if>
+            <if test="frame != null and frame !=''">
+                and FRAME = #{frame}
+            </if>
+            <if test="name != null and name !=''">
+                and NAME = #{name}
+            </if>
+            <if test="remark != null and remark !=''">
+                and REMARK = #{remark}
+            </if>
+            <if test="url != null and url !=''">
+                and URL = #{url}
+            </if>
+            <if test="takePartIn != null and takePartIn !=''">
+                and TAKE_PART_IN = #{takePartIn}
+            </if>
+            <if test="createTime != null and createTime !=''">
+                and CREATE_TIME = #{createTime}
+            </if>
+            <if test="updateTime != null and updateTime !=''">
+                and UPDATE_TIME = #{updateTime}
+            </if>
+            <if test="createor != null and createor !=''">
+                and CREATEOR = #{createor}
+            </if>
+            <if test="updateor != null and updateor !=''">
+                and UPDATEOR = #{updateor}
+            </if>
+        </where>
+    </select>
+    <select id="findById" parameterType="com.nxd.ftt.entity.About" resultMap="BaseResultMap">
+        select
+        <trim suffixOverrides=",">
+            ID,
+            VERSION,
+            FRAME,
+            NAME,
+            REMARK,
+            URL,
+            TAKE_PART_IN,
+            CREATE_TIME,
+            UPDATE_TIME,
+            CREATEOR,
+            UPDATEOR,
+        </trim>
+        from a_about
+        where ID = #{id}
+    </select>
+    <delete id="batchDelete" parameterType="java.lang.String">
+        delete from a_about
+        where ID in
+        <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+        #{item}
+        </foreach>
+    </delete>
+    <insert id="insert" parameterType="com.nxd.ftt.entity.About">
+        insert into a_about
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and id !=''">
+                ID,
+            </if>
+            <if test="version != null and version !=''">
+                VERSION,
+            </if>
+            <if test="frame != null and frame !=''">
+                FRAME,
+            </if>
+            <if test="name != null and name !=''">
+                NAME,
+            </if>
+            <if test="remark != null and remark !=''">
+                REMARK,
+            </if>
+            <if test="url != null and url !=''">
+                URL,
+            </if>
+            <if test="takePartIn != null and takePartIn !=''">
+                TAKE_PART_IN,
+            </if>
+            <if test="createor != null and createor !=''">
+                CREATEOR,
+            </if>
+            <if test="updateor != null and updateor !=''">
+                UPDATEOR,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and id !=''">
+                #{id},
+            </if>
+            <if test="version != null and version !=''">
+                #{version},
+            </if>
+            <if test="frame != null and frame !=''">
+                #{frame},
+            </if>
+            <if test="name != null and name !=''">
+                #{name},
+            </if>
+            <if test="remark != null and remark !=''">
+                #{remark},
+            </if>
+            <if test="url != null and url !=''">
+                #{url},
+            </if>
+            <if test="takePartIn != null and takePartIn !=''">
+                #{takePartIn},
+            </if>
+            <if test="createor != null and createor !=''">
+                #{createor},
+            </if>
+            <if test="updateor != null and updateor !=''">
+                #{updateor},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.nxd.ftt.entity.About">
+        update a_about
+        set
+        <trim suffixOverrides=",">
+            <if test="id != null and id !=''">
+                ID = #{id},
+            </if>
+            <if test="version != null and version !=''">
+                VERSION = #{version},
+            </if>
+            <if test="frame != null and frame !=''">
+                FRAME = #{frame},
+            </if>
+            <if test="name != null and name !=''">
+                NAME = #{name},
+            </if>
+            <if test="remark != null and remark !=''">
+                REMARK = #{remark},
+            </if>
+            <if test="url != null and url !=''">
+                URL = #{url},
+            </if>
+            <if test="takePartIn != null and takePartIn !=''">
+                TAKE_PART_IN = #{takePartIn},
+            </if>
+            <if test="createor != null and createor !=''">
+                CREATEOR = #{createor},
+            </if>
+            <if test="updateor != null and updateor !=''">
+                UPDATEOR = #{updateor},
+            </if>
+        </trim>
+        where ID = #{id}
+    </update>
+    <delete id="delete" parameterType="com.nxd.ftt.entity.About">
+        delete from a_about
+        where ID = #{id}
+    </delete>
+</mapper>

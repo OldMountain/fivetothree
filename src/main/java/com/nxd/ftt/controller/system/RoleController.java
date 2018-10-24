@@ -232,13 +232,7 @@ public class RoleController extends BaseController {
     @ResponseBody
     public Result remove(Role role){
         Result result = new Result();
-        try {
-            roleService.remove(role);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            result.setStatus(Const.FAIL);
-            result.setMessage("删除异常");
-        }
+        roleService.remove(role);
         return result;
     }
 }

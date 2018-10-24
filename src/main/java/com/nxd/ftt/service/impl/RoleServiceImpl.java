@@ -22,7 +22,7 @@ public class RoleServiceImpl implements RoleService {
     private RoleDao roleDao;
 
     @Override
-    public Role getRoleById(Role role) throws SQLException {
+    public Role getRoleById(Role role) {
         Role role1 = new Role();
         role1.setRoleId(role.getRoleId());
         List<Role> list = roleDao.select(role1);
@@ -34,32 +34,32 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public List<Role> listAll() throws SQLException {
+    public List<Role> listAll() {
         return roleDao.select(new Role());
     }
 
     @Override
-    public List<Role> list(Role role) throws SQLException {
+    public List<Role> list(Role role) {
         return roleDao.select(role);
     }
 
     @Override
-    public List<Role> getRoleListByParentId(Role role) throws SQLException {
+    public List<Role> getRoleListByParentId(Role role) {
         return roleDao.select(new Role(role.getParentId()));
     }
 
     @Override
-    public int modify(Role role) throws SQLException {
+    public int modify(Role role) {
         return roleDao.update(role);
     }
 
     @Override
-    public int save(Role role) throws SQLException {
+    public int save(Role role) {
         return roleDao.insert(role);
     }
 
     @Override
-    public int remove(Role role) throws SQLException {
+    public int remove(Role role) {
         return roleDao.delete(role.getRoleId());
     }
 

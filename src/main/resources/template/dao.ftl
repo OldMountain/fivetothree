@@ -11,7 +11,6 @@ import java.util.List;
  * @author ${author}
  * @date ${date}
  */
-@Repository
 public interface ${className} {
 
     /**
@@ -19,14 +18,14 @@ public interface ${className} {
      * @param ${entity?uncap_first}
      * @return
      */
-    List<${entity}> select(${entity} ${entity?uncap_first});
+    List<${entity}> list(${entity} ${entity?uncap_first});
 
     /**
      * 查询
      * @param ${primaryKey.filedName}
      * @return
      */
-    ${entity} selectById(${primaryKey.dataType} ${primaryKey.filedName});
+    ${entity} findById(${primaryKey.dataType} ${primaryKey.filedName});
 
     /**
     * 批量删除

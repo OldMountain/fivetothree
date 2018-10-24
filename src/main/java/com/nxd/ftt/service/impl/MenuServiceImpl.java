@@ -30,7 +30,7 @@ public class MenuServiceImpl implements MenuService {
     private RoleService roleService;
 
     @Override
-    public List<Menu> listAllMenu() throws SQLException {
+    public List<Menu> listAllMenu() {
         List<Menu> rl;
         Menu menu = new Menu();
         menu.setParentId("0");
@@ -44,21 +44,21 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public List<Menu> listParentAll() throws SQLException {
+    public List<Menu> listParentAll() {
         Menu menu = new Menu();
         menu.setParentId("0");
         return menuDao.select(menu);
     }
 
     @Override
-    public List<Menu> selectSubMenuByParentId(String menuId) throws SQLException {
+    public List<Menu> selectSubMenuByParentId(String menuId) {
         Menu menu = new Menu();
         menu.setParentId(menuId);
         return menuDao.select(menu);
     }
 
     @Override
-    public String listTreeMenu(Role role, int type) throws SQLException {
+    public String listTreeMenu(Role role, int type) {
         List<Menu> rl = null;
         List<JSONObject> treeNodeHasSub = new ArrayList<>();
         List<JSONObject> treeNode = new ArrayList<>();

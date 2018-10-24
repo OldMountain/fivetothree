@@ -11,11 +11,9 @@ import com.google.gson.Gson;
 public class ${className} {
 <#list table as row>
 
-    <#if row.remarks?length != 0>
     /**
-     * ${(row.remarks)}
+     * ${row.remarks}
      */
-    </#if>
     private ${row.dataType} ${row.filedName};
 </#list>
 

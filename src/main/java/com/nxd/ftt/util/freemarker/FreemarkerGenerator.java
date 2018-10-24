@@ -14,7 +14,7 @@ import java.sql.SQLException;
  */
 public class FreemarkerGenerator {
 
-    private static String propPath = "template.properties";
+    private static String propPath = "template/template.properties";
 
 
     public static void main(String[] args) {

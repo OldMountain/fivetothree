@@ -32,6 +32,11 @@ public class Const {
     public static final String WEIXIN = "admin/config/WEIXIN.txt";    //微信配置路径
     public static final String FILEPATHIMG = "uploadFiles/uploadImgs/";    //图片上传路径
 
+    /**
+     * 项目路径
+     */
+    public static final String CONTEXT_PATH = "ctx";
+
 
     /**
      * 常用常量

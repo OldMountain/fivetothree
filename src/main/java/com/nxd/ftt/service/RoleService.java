@@ -15,19 +15,19 @@ import java.util.List;
 @Repository
 public interface RoleService {
 
-    Role getRoleById(Role role) throws SQLException;
+    Role getRoleById(Role role);
 
-    List<Role> listAll() throws SQLException;
+    List<Role> listAll();
 
-    List<Role> list(Role role) throws SQLException;
+    List<Role> list(Role role);
 
-    List<Role> getRoleListByParentId(Role role) throws SQLException;
+    List<Role> getRoleListByParentId(Role role);
 
-    int modify(Role role) throws SQLException;
+    int modify(Role role);
 
-    int save(Role role) throws SQLException;
+    int save(Role role);
 
-    int remove(Role role) throws SQLException;
+    int remove(Role role);
 
 
 }

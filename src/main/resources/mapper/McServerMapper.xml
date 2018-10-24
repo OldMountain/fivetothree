@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nxd.ftt.dao.McServerDao">
+    <resultMap id="BaseResultMap" type="com.nxd.ftt.entity.McServer">
+        <result column="ID" property="id"/>
+        <result column="ONLINE" property="online"/>
+        <result column="MAX" property="max"/>
+        <result column="ADDRESS" property="address"/>
+        <result column="PORT" property="port"/>
+        <result column="NAME" property="name"/>
+        <result column="VERSION" property="version"/>
+        <result column="REMARK" property="remark"/>
+        <result column="NOTICE" property="notice"/>
+        <result column="STATUS" property="status"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="CREATEOR" property="createor"/>
+        <result column="UPDATEOR" property="updateor"/>
+    </resultMap>
+    <select id="list" parameterType="com.nxd.ftt.entity.McServer" resultMap="BaseResultMap">
+        select
+        <trim suffixOverrides=",">
+            ID,
+            ONLINE,
+            MAX,
+            ADDRESS,
+            PORT,
+            NAME,
+            VERSION,
+            REMARK,
+            NOTICE,
+            STATUS,
+            CREATE_TIME,
+            UPDATE_TIME,
+            CREATEOR,
+            UPDATEOR,
+        </trim>
+        from mc_server
+        <where>
+            <if test="id != null and id !=''">
+                and ID = #{id}
+            </if>
+            <if test="online != null and online !=''">
+                and ONLINE = #{online}
+            </if>
+            <if test="max != null and max !=''">
+                and MAX = #{max}
+            </if>
+            <if test="address != null and address !=''">
+                and ADDRESS = #{address}
+            </if>
+            <if test="port != null and port !=''">
+                and PORT = #{port}
+            </if>
+            <if test="name != null and name !=''">
+                and NAME = #{name}
+            </if>
+            <if test="version != null and version !=''">
+                and VERSION = #{version}
+            </if>
+            <if test="remark != null and remark !=''">
+                and REMARK = #{remark}
+            </if>
+            <if test="notice != null and notice !=''">
+                and NOTICE = #{notice}
+            </if>
+            <if test="status != null and status !=''">
+                and STATUS = #{status}
+            </if>
+            <if test="createTime != null and createTime !=''">
+                and CREATE_TIME = #{createTime}
+            </if>
+            <if test="updateTime != null and updateTime !=''">
+                and UPDATE_TIME = #{updateTime}
+            </if>
+            <if test="createor != null and createor !=''">
+                and CREATEOR = #{createor}
+            </if>
+            <if test="updateor != null and updateor !=''">
+                and UPDATEOR = #{updateor}
+            </if>
+        </where>
+    </select>
+    <select id="findById" parameterType="com.nxd.ftt.entity.McServer" resultMap="BaseResultMap">
+        select
+        <trim suffixOverrides=",">
+            ID,
+            ONLINE,
+            MAX,
+            ADDRESS,
+            PORT,
+            NAME,
+            VERSION,
+            REMARK,
+            NOTICE,
+            STATUS,
+            CREATE_TIME,
+            UPDATE_TIME,
+            CREATEOR,
+            UPDATEOR,
+        </trim>
+        from mc_server
+        where ID = #{id}
+    </select>
+    <delete id="batchDelete" parameterType="java.lang.String">
+        delete from mc_server
+        where ID in
+        <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+        #{item}
+        </foreach>
+    </delete>
+    <insert id="insert" parameterType="com.nxd.ftt.entity.McServer">
+        insert into mc_server
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and id !=''">
+                ID,
+            </if>
+            <if test="online != null and online !=''">
+                ONLINE,
+            </if>
+            <if test="max != null and max !=''">
+                MAX,
+            </if>
+            <if test="address != null and address !=''">
+                ADDRESS,
+            </if>
+            <if test="port != null and port !=''">
+                PORT,
+            </if>
+            <if test="name != null and name !=''">
+                NAME,
+            </if>
+            <if test="version != null and version !=''">
+                VERSION,
+            </if>
+            <if test="remark != null and remark !=''">
+                REMARK,
+            </if>
+            <if test="notice != null and notice !=''">
+                NOTICE,
+            </if>
+            <if test="status != null and status !=''">
+                STATUS,
+            </if>
+            <if test="createor != null and createor !=''">
+                CREATEOR,
+            </if>
+            <if test="updateor != null and updateor !=''">
+                UPDATEOR,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and id !=''">
+                #{id},
+            </if>
+            <if test="online != null and online !=''">
+                #{online},
+            </if>
+            <if test="max != null and max !=''">
+                #{max},
+            </if>
+            <if test="address != null and address !=''">
+                #{address},
+            </if>
+            <if test="port != null and port !=''">
+                #{port},
+            </if>
+            <if test="name != null and name !=''">
+                #{name},
+            </if>
+            <if test="version != null and version !=''">
+                #{version},
+            </if>
+            <if test="remark != null and remark !=''">
+                #{remark},
+            </if>
+            <if test="notice != null and notice !=''">
+                #{notice},
+            </if>
+            <if test="status != null and status !=''">
+                #{status},
+            </if>
+            <if test="createor != null and createor !=''">
+                #{createor},
+            </if>
+            <if test="updateor != null and updateor !=''">
+                #{updateor},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.nxd.ftt.entity.McServer">
+        update mc_server
+        set
+        <trim suffixOverrides=",">
+            <if test="id != null and id !=''">
+                ID = #{id},
+            </if>
+            <if test="online != null and online !=''">
+                ONLINE = #{online},
+            </if>
+            <if test="max != null and max !=''">
+                MAX = #{max},
+            </if>
+            <if test="address != null and address !=''">
+                ADDRESS = #{address},
+            </if>
+            <if test="port != null and port !=''">
+                PORT = #{port},
+            </if>
+            <if test="name != null and name !=''">
+                NAME = #{name},
+            </if>
+            <if test="version != null and version !=''">
+                VERSION = #{version},
+            </if>
+            <if test="remark != null and remark !=''">
+                REMARK = #{remark},
+            </if>
+            <if test="notice != null and notice !=''">
+                NOTICE = #{notice},
+            </if>
+            <if test="status != null and status !=''">
+                STATUS = #{status},
+            </if>
+            <if test="createor != null and createor !=''">
+                CREATEOR = #{createor},
+            </if>
+            <if test="updateor != null and updateor !=''">
+                UPDATEOR = #{updateor},
+            </if>
+        </trim>
+        where ID = #{id}
+    </update>
+    <delete id="delete" parameterType="com.nxd.ftt.entity.McServer">
+        delete from mc_server
+        where ID = #{id}
+    </delete>
+</mapper>

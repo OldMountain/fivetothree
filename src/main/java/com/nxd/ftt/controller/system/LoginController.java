@@ -3,10 +3,7 @@ package com.nxd.ftt.controller.system;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import com.nxd.ftt.controller.base.BaseController;
-import com.nxd.ftt.entity.Menu;
-import com.nxd.ftt.entity.Result;
-import com.nxd.ftt.entity.Role;
-import com.nxd.ftt.entity.User;
+import com.nxd.ftt.entity.*;
 import com.nxd.ftt.service.MenuService;
 import com.nxd.ftt.service.RoleService;
 import com.nxd.ftt.service.UserService;
@@ -25,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -68,7 +66,7 @@ public class LoginController extends BaseController {
      */
     @RequestMapping(value = "/login")
     @ResponseBody
-    public Result login(String userName, String password, String code) {
+    public Result login(String userName, String password, String code, HttpServletRequest request) {
         Result result = new Result();
         Subject currentUser = SecurityUtils.getSubject();
         Session session = currentUser.getSession();
@@ -92,7 +90,10 @@ public class LoginController extends BaseController {
                     //shiro加入身份验证
                     UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(), user.getPassword());
                     currentUser.login(token);
-                }else {
+                    String path = request.getContextPath();
+                    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+                    session.setAttribute(Const.CONTEXT_PATH,basePath);
+                } else {
                     result.setStatus(Const.FALSE);
                     result.setMessage("请输入正确的账号密码");
                     return result;
@@ -109,7 +110,7 @@ public class LoginController extends BaseController {
     }
 
 
-    @RequestMapping("/toIndex")
+    @RequestMapping(value = {"/toIndex","/static/lay/admin/pro/dist/toIndex"})
     public ModelAndView index(PageInfo pi) {
         logBefore(logger, "进入首页");
         ModelAndView mv = this.getModelAndView();
@@ -165,9 +166,9 @@ public class LoginController extends BaseController {
                     session.setAttribute(Const.SESSION_QX, this.getUQX(session));
                 }
                 mv.addObject("menuList", list);
-                mv.setViewName("system/admin/index");
+                mv.setViewName("index");
             } else {
-                mv.setViewName("system/admin/login1");
+                mv.setViewName("index");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -212,4 +213,6 @@ public class LoginController extends BaseController {
         mv.setViewName("system/admin/login");
         return mv;
     }
+
+
 }

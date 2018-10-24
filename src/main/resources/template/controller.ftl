@@ -1,8 +1,7 @@
 package ${controllerPackage};
 
 import ${entityPackage}.${entity};
-import com.nxd.ftt.entity.result.Response;
-import com.nxd.ftt.entity.result.ResultKit;
+import com.nxd.ftt.entity.Result;
 import ${servicePackage}.${service};
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +19,7 @@ import java.util.List;
  * @date ${date}
  */
 @Controller
-@RequestMapping("/${objectName?uncap_first}")
+@RequestMapping("/${objectName}")
 public class ${className} {
 
     @Autowired
@@ -30,14 +29,14 @@ public class ${className} {
     @RequestMapping("/list")
     public ModelAndView list() {
         ModelAndView mv = new ModelAndView();
-        List<${entity}> ${objectName?uncap_first}List = null;
+        List<${entity}> ${objectName}List = null;
         try {
-            ${objectName?uncap_first}List = ${service?uncap_first}.listAll();
+            ${objectName}List = ${service?uncap_first}.listAll();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        mv.addObject("${objectName?uncap_first}List", ${objectName?uncap_first}List);
-        mv.setViewName("${listPackage?default("")}${list?default("")}");
+        mv.addObject("${objectName}List", ${objectName}List);
+        mv.setViewName("<#if listPackage??>${listPackage}</#if>${list}");
         return mv;
     }
 
@@ -50,7 +49,7 @@ public class ${className} {
     public ModelAndView goAdd() {
         ModelAndView mv = new ModelAndView();
         mv.addObject("msg", "save");
-        mv.setViewName("${editPackage?default("")}${edit?default("")}");
+        mv.setViewName("<#if editPackage??>${editPackage}</#if>${edit}");
         return mv;
     }
 
@@ -70,7 +69,7 @@ public class ${className} {
         }
         mv.addObject("msg", "edit");
         mv.addObject("${entity?uncap_first}", ${entity?uncap_first});
-        mv.setViewName("${editPackage?default("")}${edit?default("")}");
+        mv.setViewName("<#if editPackage??>${editPackage}</#if>${edit}");
         return mv;
     }
 
@@ -81,14 +80,15 @@ public class ${className} {
      */
     @RequestMapping("/save")
     @ResponseBody
-    public Response save(${entity} ${entity?uncap_first}) {
+    public Result save(${entity} ${entity?uncap_first}) {
+        Result result = new Result();
         try {
             ${service?uncap_first}.save(${entity?uncap_first});
         } catch (SQLException e) {
             e.printStackTrace();
-            ResultKit.error();
+            result.setStatus(Const.FAIL);
         }
-        return ResultKit.success();
+        return result;
     }
 
     /**
@@ -98,14 +98,15 @@ public class ${className} {
      */
     @RequestMapping("/edit")
     @ResponseBody
-    public Response edit(${entity} ${entity?uncap_first}) {
+    public Result edit(${entity} ${entity?uncap_first}) {
+        Result result = new Result();
         try {
             ${service?uncap_first}.modify(${entity?uncap_first});
         } catch (SQLException e) {
             e.printStackTrace();
-            ResultKit.error();
+            result.setStatus(Const.FAIL);
         }
-        return ResultKit.success();
+        return result;
     }
 
 }
