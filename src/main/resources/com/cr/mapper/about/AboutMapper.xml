@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cr.mapper.about.AboutMapper">
+    <resultMap id="BaseResultMap" type="com.cr.entity.about.About">
+        <result column="VERSION" property="version"/>
+        <result column="FRAME" property="frame"/>
+        <result column="NAME" property="name"/>
+        <result column="REMARK" property="remark"/>
+        <result column="URL" property="url"/>
+        <result column="TAKE_PART_IN" property="takePartIn"/>
+    </resultMap>
+    <select id="select" parameterType="com.cr.entity.about.About" resultMap="BaseResultMap">
+        select
+        <trim suffixOverrides=",">
+            VERSION,
+            FRAME,
+            NAME,
+            REMARK,
+            URL,
+            TAKE_PART_IN,
+        </trim>
+        from a_about
+        <where>
+            <if test="version != null and version !=''">
+                and VERSION = #{version}
+            </if>
+            <if test="frame != null and frame !=''">
+                and FRAME = #{frame}
+            </if>
+            <if test="name != null and name !=''">
+                and NAME = #{name}
+            </if>
+            <if test="remark != null and remark !=''">
+                and REMARK = #{remark}
+            </if>
+            <if test="url != null and url !=''">
+                and URL = #{url}
+            </if>
+            <if test="takePartIn != null and takePartIn !=''">
+                and TAKE_PART_IN = #{takePartIn}
+            </if>
+        </where>
+    </select>
+    <select id="selectById" parameterType="com.cr.entity.about.About" resultMap="BaseResultMap">
+        select
+        <trim suffixOverrides=",">
+            VERSION,
+            FRAME,
+            NAME,
+            REMARK,
+            URL,
+            TAKE_PART_IN,
+        </trim>
+        from a_about
+        where FreeMarker template error (DEBUG mode; use RETHROW in production!):
+The following has evaluated to null or missing:
+==> primaryKey  [in template "mapper.ftl" at line 33, column 17]
+
+----
+Tip: If the failing expression is known to legally refer to something that's sometimes null or missing, either specify a default value like myOptionalVar!myDefault, or use <#if myOptionalVar??>when-present<#else>when-missing</#if>. (These only cover the last step of the expression; to cover the whole expression, use parenthesis: (myOptionalVar.foo)!myDefault, (myOptionalVar.foo)??
+----
+
+----
+FTL stack trace ("~" means nesting-related):
+	- Failed at: ${primaryKey.columnName}  [in template "mapper.ftl" at line 33, column 15]
+----
+
+Java stack trace (for programmers):
+----
+freemarker.core.InvalidReferenceException: [... Exception message was already printed; see it above ...]
+	at freemarker.core.InvalidReferenceException.getInstance(InvalidReferenceException.java:134)
+	at freemarker.core.UnexpectedTypeException.newDesciptionBuilder(UnexpectedTypeException.java:85)
+	at freemarker.core.UnexpectedTypeException.<init>(UnexpectedTypeException.java:48)
+	at freemarker.core.NonHashException.<init>(NonHashException.java:49)
+	at freemarker.core.Dot._eval(Dot.java:48)
+	at freemarker.core.Expression.eval(Expression.java:83)
+	at freemarker.core.DollarVariable.calculateInterpolatedStringOrMarkup(DollarVariable.java:96)
+	at freemarker.core.DollarVariable.accept(DollarVariable.java:59)
+	at freemarker.core.Environment.visit(Environment.java:325)
+	at freemarker.core.Environment.visit(Environment.java:331)
+	at freemarker.core.Environment.process(Environment.java:304)
+	at freemarker.template.Template.process(Template.java:382)
+	at com.nxd.ftt.common.freemarker.Freemarker.create(Freemarker.java:260)
+	at com.nxd.ftt.common.freemarker.Freemarker.createMapper(Freemarker.java:164)
+	at com.nxd.ftt.common.freemarker.Freemarker.generator(Freemarker.java:117)
+	at com.nxd.ftt.util.freemarker.FreemarkerGenerator.main(FreemarkerGenerator.java:22)
