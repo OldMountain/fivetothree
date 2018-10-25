@@ -12,7 +12,6 @@ import java.util.List;
  * @author ${author}
  * @date ${date}
  */
-@Repository
 public interface ${className} {
 
 

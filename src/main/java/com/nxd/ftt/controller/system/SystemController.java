@@ -1,9 +1,8 @@
 package com.nxd.ftt.controller.system;
 
 import com.nxd.ftt.entity.About;
-import com.nxd.ftt.entity.result.Response;
-import com.nxd.ftt.entity.result.ResultKit;
 import com.nxd.ftt.service.AboutService;
+import com.nxd.ftt.service.McServerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,34 +11,39 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 /**
- * Setting
+ * 系统参数
  *
  * @author luhangqi
  * @date 2018/10/23
  */
 @Controller
 @RequestMapping("/system")
-public class System {
+public class SystemController {
 
     @Autowired
     private AboutService aboutService;
 
+    @Autowired
+    private McServerService mcServerService;
+
     @RequestMapping(value = "/about")
     public ModelAndView about() {
         ModelAndView mv = new ModelAndView("system/about");
+        About about = null;
         List<About> list = aboutService.listAll();
         if (list != null && list.size() > 0) {
             //返回第一条数据，通常情况只有一条数据
-            mv.addObject("about",list.get(0));
+            about = list.get(0);
         }
-        mv.addObject("about",null);
+        mv.addObject("about", about);
         return mv;
     }
 
 
     @RequestMapping("/console")
-    public String console() {
-        return "view/console";
+    public ModelAndView console() {
+        ModelAndView mv = new ModelAndView("view/console");
+        return mv;
     }
 
     /**

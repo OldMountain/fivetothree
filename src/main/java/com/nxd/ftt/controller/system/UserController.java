@@ -39,7 +39,7 @@ public class UserController extends BaseController {
         List<PageData> userList = null;
         PageData pd = this.getPageData();
         try {
-            userList = userService.getList(pd);
+//            userList = userService.getList(pd);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -91,7 +91,7 @@ public class UserController extends BaseController {
     public ModelAndView toEdit(User user) {
         ModelAndView mv = this.getModelAndView();
         try {
-            user = userService.find(user);
+            user = userService.findById(user.getUserId());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -131,7 +131,7 @@ public class UserController extends BaseController {
     public Result removeUser(User user) {
         Result resultModel = new Result();
         try {
-            userService.remove(user);
+            userService.remove(user.getUserId());
         } catch (Exception e) {
             logBefore(logger, "异常" + e);
             e.printStackTrace();
@@ -158,7 +158,7 @@ public class UserController extends BaseController {
     public boolean hasUserName(User userModel) {
         String userId = userModel.getUserId();
         try {
-            userModel = userService.find(userModel);
+            userModel = userService.findById(userModel.getUserId());
             if (userModel != null) {
                 if (userId.equals(userModel.getUserId())) {
                     return true; //名字未被占用

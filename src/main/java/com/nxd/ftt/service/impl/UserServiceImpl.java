@@ -13,8 +13,8 @@ import java.util.List;
 /**
  * UserServiceImpl
  *
- * @author OldMountain
- * @date 2017/12/4
+ * @author luhangqi
+ * @date 2018/10/25
  */
 @Service
 public class UserServiceImpl implements UserService {
@@ -23,56 +23,85 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public List<User> listAll() throws SQLException {
-        return userDao.select(new User());
+    public List<PageData> getList(PageData pd) {
+        return null;
     }
 
+    /**
+     * 查询列表
+     * @return
+     */
     @Override
-    public List<User> list(User user) throws SQLException {
-        return userDao.select(user);
+    public List<User> listAll() {
+       return userDao.list(new User());
     }
 
+    /**
+     * 根据条件查询列表
+     * @param user
+     * @return
+     */
     @Override
-    public List<PageData> getList(PageData pd) throws SQLException {
-        return userDao.selectAll(pd);
+    public List<User> list(User user) {
+       return userDao.list(user);
     }
 
+    /**
+     * 根据userId查询
+     * @param userId
+     * @return
+     */
     @Override
-    public User find(User user) throws SQLException {
-        List<User> list = userDao.select(user);
-        if(list != null && list.size() == 1){
-            return userDao.select(user).get(0);
-        }else{
-            return null;
-        }
+    public User findById(String userId) {
+       return userDao.findById(userId);
     }
 
+    /**
+     * 根据条件修改
+     * @param user
+     * @return
+     */
     @Override
     public int modify(User user) {
-        return userDao.update(user);
+       return userDao.update(user);
     }
 
+    /**
+     * 保存
+     * @param user
+     * @return
+     */
     @Override
     public int save(User user) {
-        return userDao.insert(user);
+       return userDao.insert(user);
+    }
+
+    /**
+     * 根据userId删除
+     * @param userId
+     * @return
+     */
+    @Override
+    public int remove(String userId) {
+       return userDao.delete(userId);
+    }
+
+    /**
+     * 批量删除
+     * @param userIds
+     * @return
+     */
+    @Override
+    public int batchRemove(String[] userIds) {
+       return userDao.batchDelete(userIds);
     }
 
     @Override
-    public int remove(User user) {
-        return userDao.delete(user.getUserId());
-    }
-
-    @Override
-    public int batchRemove(String[] userIds) throws SQLException {
-        return userDao.batchDelete(userIds);
-    }
-
-    @Override
-    public User login(String userName, String password) throws SQLException {
+    public User login(String userName, String password) {
         User user = new User();
         user.setUserName(userName);
         user.setPassword(password);
-        List<User> list = userDao.select(user);
+        List<User> list = userDao.list(user);
         if(list != null && list.size() == 1){
             return list.get(0);
         }else{

@@ -3,7 +3,10 @@ package com.nxd.ftt.controller.system;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import com.nxd.ftt.controller.base.BaseController;
-import com.nxd.ftt.entity.*;
+import com.nxd.ftt.entity.Menu;
+import com.nxd.ftt.entity.Result;
+import com.nxd.ftt.entity.Role;
+import com.nxd.ftt.entity.User;
 import com.nxd.ftt.service.MenuService;
 import com.nxd.ftt.service.RoleService;
 import com.nxd.ftt.service.UserService;
@@ -23,7 +26,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -82,24 +84,20 @@ public class LoginController extends BaseController {
             //密码加密
             password = new SimpleHash("SHA-1", userName, password).toString();
             //验证用户名密码
-            try {
-                User user = userService.login(userName, password);
-                //验证成功
-                if (user != null) {
-                    session.setAttribute(Const.SESSION_USER, user);
-                    //shiro加入身份验证
-                    UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(), user.getPassword());
-                    currentUser.login(token);
-                    String path = request.getContextPath();
-                    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-                    session.setAttribute(Const.CONTEXT_PATH,basePath);
-                } else {
-                    result.setStatus(Const.FALSE);
-                    result.setMessage("请输入正确的账号密码");
-                    return result;
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
+            User user = userService.login(userName, password);
+            //验证成功
+            if (user != null) {
+                session.setAttribute(Const.SESSION_USER, user);
+                //shiro加入身份验证
+                UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(), user.getPassword());
+                currentUser.login(token);
+                String path = request.getContextPath();
+                String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+                session.setAttribute(Const.CONTEXT_PATH, basePath);
+            } else {
+                result.setStatus(Const.FALSE);
+                result.setMessage("请输入正确的账号密码");
+                return result;
             }
             result.setStatus(Const.SUCCESS);
         } else {
@@ -110,7 +108,7 @@ public class LoginController extends BaseController {
     }
 
 
-    @RequestMapping(value = {"/toIndex","/static/lay/admin/pro/dist/toIndex"})
+    @RequestMapping(value = {"/toIndex", "/static/lay/admin/pro/dist/toIndex"})
     public ModelAndView index(PageInfo pi) {
         logBefore(logger, "进入首页");
         ModelAndView mv = this.getModelAndView();

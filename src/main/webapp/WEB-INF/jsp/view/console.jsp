@@ -7,10 +7,11 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>layuiAdmin 控制台主页一</title>
+    <title>ftt 控制台主页</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="stylesheet" href="<%=basePath %>static/lay/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="<%=basePath %>static/lay/style/admin.css" media="all">
 </head>
@@ -136,36 +137,49 @@
                 </div>
                 <div class="layui-col-md6">
                     <div class="layui-card">
-                        <div class="layui-card-header">待办事项</div>
+                        <div class="layui-card-header">我的世界服务器</div>
                         <div class="layui-card-body">
 
                             <div class="layui-carousel layadmin-carousel layadmin-backlog">
                                 <div carousel-item>
-                                    <ul class="layui-row layui-col-space10">
-                                        <li class="layui-col-xs6">
-                                            <a lay-href="app/content/comment.html" class="layadmin-backlog-body">
-                                                <h3>待审评论</h3>
-                                                <p><cite>66</cite></p>
-                                            </a>
-                                        </li>
-                                        <li class="layui-col-xs6">
-                                            <a lay-href="app/forum/list.html" class="layadmin-backlog-body">
-                                                <h3>待审帖子</h3>
-                                                <p><cite>12</cite></p>
-                                            </a>
-                                        </li>
-                                        <li class="layui-col-xs6">
-                                            <a lay-href="template/goodslist.html" class="layadmin-backlog-body">
-                                                <h3>待审商品</h3>
-                                                <p><cite>99</cite></p>
-                                            </a>
-                                        </li>
-                                        <li class="layui-col-xs6">
-                                            <a href="javascript:;" onclick="layer.tips('不跳转', this, {tips: 3});" class="layadmin-backlog-body">
-                                                <h3>待发货</h3>
-                                                <p><cite>20</cite></p>
-                                            </a>
-                                        </li>
+                                    <ul id="serverInfo" class="layui-row layui-col-space10">
+                                        <div id="server-load" style="text-align: center;position: relative;height: 100%">
+                                            <img src="${ctx}static/lay/layui/css/modules/layer/default/loading-2.gif" style="position: absolute;top: 30%">
+                                        </div>
+                                        <script id="serverInfoTemp" type="text/html">
+                                            <li class="layui-col-xs6">
+                                                <a lay-href="app/content/comment.html" class="layadmin-backlog-body">
+                                                    <h3>motd</h3>
+                                                    <p id="description" style="font-style: normal;font-size: 15px;font-weight: 300;color: #009688;width: 98%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
+                                                        {{ d.data.description }}
+                                                    </p>
+                                                </a>
+                                            </li>
+                                            <li class="layui-col-xs6">
+                                                <a lay-href="app/content/comment.html" class="layadmin-backlog-body">
+                                                    <h3>图标</h3>
+                                                    <p><cite>
+                                                        <img width="30" src="{{ d.data.favicon }}">
+                                                    </cite></p>
+                                                </a>
+                                            </li>
+                                            <li class="layui-col-xs6">
+                                                <a lay-href="app/content/comment.html" class="layadmin-backlog-body">
+                                                    <h3>在线人数</h3>
+                                                    <p><cite>
+                                                        {{ d.data.players.online }}
+                                                    </cite></p>
+                                                </a>
+                                            </li>
+                                            <li class="layui-col-xs6">
+                                                <a lay-href="app/content/comment.html" class="layadmin-backlog-body">
+                                                    <h3>最大人数</h3>
+                                                    <p><cite>
+                                                        {{ d.data.players.max }}
+                                                    </cite></p>
+                                                </a>
+                                            </li>
+                                        </script>
                                     </ul>
                                     <ul class="layui-row layui-col-space10">
                                         <li class="layui-col-xs6">
@@ -185,7 +199,8 @@
                         <div class="layui-card-header">数据概览</div>
                         <div class="layui-card-body">
 
-                            <div class="layui-carousel layadmin-carousel layadmin-dataview" data-anim="fade" lay-filter="LAY-index-dataview">
+                            <div class="layui-carousel layadmin-carousel layadmin-dataview" data-anim="fade"
+                                 lay-filter="LAY-index-dataview">
                                 <div carousel-item id="LAY-index-dataview">
                                     <div><i class="layui-icon layui-icon-loading1 layadmin-loading"></i></div>
                                     <div></div>
@@ -250,8 +265,10 @@
                             <td>获取渠道</td>
                             <td style="padding-bottom: 0;">
                                 <div class="layui-btn-container">
-                                    <a href="http://www.layui.com/admin/" target="_blank" class="layui-btn layui-btn-danger">获取授权</a>
-                                    <a href="http://fly.layui.com/download/layuiAdmin/" target="_blank" class="layui-btn">立即下载</a>
+                                    <a href="http://www.layui.com/admin/" target="_blank"
+                                       class="layui-btn layui-btn-danger">获取授权</a>
+                                    <a href="http://fly.layui.com/download/layuiAdmin/" target="_blank"
+                                       class="layui-btn">立即下载</a>
                                 </div>
                             </td>
                         </tr>
@@ -264,11 +281,13 @@
                 <div class="layui-card-header">效果报告</div>
                 <div class="layui-card-body layadmin-takerates">
                     <div class="layui-progress" lay-showPercent="yes">
-                        <h3>转化率（日同比 28% <span class="layui-edge layui-edge-top" lay-tips="增长" lay-offset="-15"></span>）</h3>
+                        <h3>转化率（日同比 28% <span class="layui-edge layui-edge-top" lay-tips="增长" lay-offset="-15"></span>）
+                        </h3>
                         <div class="layui-progress-bar" lay-percent="65%"></div>
                     </div>
                     <div class="layui-progress" lay-showPercent="yes">
-                        <h3>签到率（日同比 11% <span class="layui-edge layui-edge-bottom" lay-tips="下降" lay-offset="-15"></span>）</h3>
+                        <h3>签到率（日同比 11% <span class="layui-edge layui-edge-bottom" lay-tips="下降"
+                                              lay-offset="-15"></span>）</h3>
                         <div class="layui-progress-bar" lay-percent="32%"></div>
                     </div>
                 </div>
@@ -291,11 +310,15 @@
             <div class="layui-card">
                 <div class="layui-card-header">产品动态</div>
                 <div class="layui-card-body">
-                    <div class="layui-carousel layadmin-carousel layadmin-news" data-autoplay="true" data-anim="fade" lay-filter="news">
+                    <div class="layui-carousel layadmin-carousel layadmin-news" data-autoplay="true" data-anim="fade"
+                         lay-filter="news">
                         <div carousel-item>
-                            <div><a href="http://fly.layui.com/docs/2/" target="_blank" class="layui-bg-red">layuiAdmin 快速上手文档</a></div>
-                            <div><a href="http://fly.layui.com/vipclub/list/layuiadmin/" target="_blank" class="layui-bg-green">layuiAdmin 会员讨论专区</a></div>
-                            <div><a href="http://www.layui.com/admin/#get" target="_blank" class="layui-bg-blue">获得 layui 官方后台模板系统</a></div>
+                            <div><a href="http://fly.layui.com/docs/2/" target="_blank" class="layui-bg-red">layuiAdmin
+                                快速上手文档</a></div>
+                            <div><a href="http://fly.layui.com/vipclub/list/layuiadmin/" target="_blank"
+                                    class="layui-bg-green">layuiAdmin 会员讨论专区</a></div>
+                            <div><a href="http://www.layui.com/admin/#get" target="_blank" class="layui-bg-blue">获得
+                                layui 官方后台模板系统</a></div>
                         </div>
                     </div>
                 </div>
@@ -307,9 +330,11 @@
                     <i class="layui-icon layui-icon-tips" lay-tips="要支持的噢" lay-offset="5"></i>
                 </div>
                 <div class="layui-card-body layui-text layadmin-text">
-                    <p>一直以来，layui 秉承无偿开源的初心，虔诚致力于服务各层次前后端 Web 开发者，在商业横飞的当今时代，这一信念从未动摇。即便身单力薄，仍然重拾决心，埋头造轮，以尽可能地填补产品本身的缺口。</p>
+                    <p>一直以来，layui 秉承无偿开源的初心，虔诚致力于服务各层次前后端 Web
+                        开发者，在商业横飞的当今时代，这一信念从未动摇。即便身单力薄，仍然重拾决心，埋头造轮，以尽可能地填补产品本身的缺口。</p>
                     <p>在过去的一段的时间，我一直在寻求持久之道，已维持你眼前所见的一切。而 layuiAdmin 是我们尝试解决的手段之一。我相信真正有爱于 layui 生态的你，定然不会错过这一拥抱吧。</p>
-                    <p>子曰：君子不用防，小人防不住。请务必通过官网正规渠道，获得 <a href="http://www.layui.com/admin/" target="_blank">layuiAdmin</a>！</p>
+                    <p>子曰：君子不用防，小人防不住。请务必通过官网正规渠道，获得 <a href="http://www.layui.com/admin/"
+                                                        target="_blank">layuiAdmin</a>！</p>
                     <p>—— 贤心（<a href="http://www.layui.com/" target="_blank">layui.com</a>）</p>
                 </div>
             </div>
@@ -318,13 +343,37 @@
     </div>
 </div>
 
-<script src="<%=basePath %>static/lay/layui/layui.js"></script>
+<jsp:include page="../view/foot.jsp"></jsp:include>
 <script>
-    layui.config({
-        base: '<%=basePath %>static/lay/' //静态资源所在路径
-    }).extend({
-        index: 'lib/index' //主入口模块
-    }).use(['index', 'console']);
+    layui.use(['index', 'console', 'laytpl'], function () {
+        var laytpl = layui.laytpl;
+        getMcServerInfo(laytpl,layer);
+    });
+
+    function getMcServerInfo(laytpl,layer) {
+        var params = {};
+        $.ajax({
+            url: '${ctx}api/mc/getServerInfo',
+            type: 'post',
+            data: params,
+            dataType: 'json',
+            success: function (result) {
+                laytpl(serverInfoTemp.innerHTML).render(result, function (html) {
+                    $("#serverInfo").html(html);
+                    $("#server-load").hide();
+                    $("#description").mouseover(function () {
+                        var _this = this;
+                        layer.tips($(this).html(), this,{tips:3,time :0,success:function (layero, index) {
+                                $(_this).mouseleave(function () {
+                                    layer.close(index)
+                                })
+                            }});
+                    })
+
+                })
+            }
+        })
+    }
 </script>
 </body>
 </html>

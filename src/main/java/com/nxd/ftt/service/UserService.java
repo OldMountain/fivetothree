@@ -4,34 +4,79 @@ import com.nxd.ftt.entity.User;
 import com.nxd.ftt.util.PageData;
 import org.springframework.stereotype.Repository;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
  * UserService
  *
- * @author OldMountain
- * @date 2017/12/4
+ * @author luhangqi
+ * @date 2018/10/25
  */
-@Repository
 public interface UserService {
 
-    List<User> listAll() throws SQLException;
+    List<PageData> getList(PageData pd);
 
-    List<User> list(User user) throws SQLException;
+    /**
+     * 查询列表
+     *
+     * @return
+     */
+    List<User> listAll();
 
-    List<PageData> getList(PageData pd) throws SQLException;
+    /**
+     * 根据条件查询列表
+     *
+     * @param user
+     * @return
+     */
+    List<User> list(User user);
 
-    User find(User user) throws Exception;
+    /**
+     * 根据userId查询
+     *
+     * @param userId
+     * @return
+     */
+    User findById(String userId);
 
-    int modify(User user) throws SQLException;
+    /**
+     * 根据条件修改
+     *
+     * @param user
+     * @return
+     */
+    int modify(User user);
 
-    int save(User user) throws SQLException;
+    /**
+     * 保存
+     *
+     * @param user
+     * @return
+     */
+    int save(User user);
 
-    int remove(User user) throws SQLException;
+    /**
+     * 根据userId删除
+     *
+     * @param userId
+     * @return
+     */
+    int remove(String userId);
 
-    int batchRemove(String[] userIds) throws SQLException;
+    /**
+     * 批量删除
+     *
+     * @param userIds
+     * @return
+     */
+    int batchRemove(String[] userIds);
 
-    User login(String userName, String password) throws SQLException;
-
+    /**
+     * 登录
+     *
+     * @param userName
+     * @param password
+     * @return
+     */
+    User login(String userName, String password);
 }

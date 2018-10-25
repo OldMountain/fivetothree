@@ -6,47 +6,54 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+/**
+ * UserDao
+ *
+ * @author luhangqi
+ * @date 2018/10/25
+ */
 public interface UserDao {
-    /**
-     * 查询
-     *
-     * @param user
-     * @return int
-     */
-    List<User> select(User user);
 
     /**
-     * 批量删除
-     *
-     * @param userId
-     * @return int
+     * 查询
+     * @param user
+     * @return
      */
+    List<User> list(User user);
+
+    /**
+     * 查询
+     * @param userId
+     * @return
+     */
+    User findById(String userId);
+
+    /**
+    * 批量删除
+    * @param userId
+    * @return
+    */
     int batchDelete(String[] userId);
 
     /**
-     * 根据userId插入
-     *
-     * @param user
-     * @return int
-     */
+    * 插入
+    * @param user
+    * @return
+    */
     int insert(User user);
 
     /**
-     * 根据userId更新
-     *
-     * @param user
-     * @return int
-     */
+    * 更新
+    * @param user
+    * @return
+    */
     int update(User user);
 
     /**
-     * 根据userId删除
-     *
-     * @param userId
-     * @return int
-     */
+    * 根据userId删除
+    * @param userId
+    * @return
+    */
     int delete(String userId);
 
-    List<PageData> selectAll(PageData pd);
 }
