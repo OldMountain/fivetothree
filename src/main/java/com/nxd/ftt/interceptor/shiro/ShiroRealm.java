@@ -6,8 +6,11 @@ import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+
+import java.util.List;
 
 
 /**
@@ -42,8 +45,14 @@ public class ShiroRealm extends AuthorizingRealm {
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection pc) {
 
 		System.out.println("========2");
-		
-		return null;
+		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+//		Long userId = WebUtil.getCurrentUserId();
+//		List<String> list = userService.queryPermissionByUserId(userId);
+//        for (String permission : list) {
+//            info.addStringPermission(permission);
+//        }
+		info.addStringPermissions(null);
+		return info;
 	}
 
 }

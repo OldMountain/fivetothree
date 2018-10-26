@@ -1,6 +1,9 @@
 package com.nxd.ftt.controller.system;
 
+import com.nxd.ftt.common.entity.AddressCode;
+import com.nxd.ftt.common.util.AddressUtil;
 import com.nxd.ftt.entity.About;
+import com.nxd.ftt.mchelper.util.MCHelper;
 import com.nxd.ftt.service.AboutService;
 import com.nxd.ftt.service.McServerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,5 +67,16 @@ public class SystemController {
     @RequestMapping("/error")
     public String error() {
         return "view/error";
+    }
+
+    public static void main(String[] args) {
+        AddressUtil addressUtil = new AddressUtil() {
+            @Override
+            public void process(AddressCode addressCode) {
+                
+            }
+        };
+        List<AddressCode> list = addressUtil.getContent(AddressUtil.getURL(), 0, 5, "", 0);
+        System.out.println(list.size());
     }
 }

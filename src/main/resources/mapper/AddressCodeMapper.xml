@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nxd.ftt.dao.AddressCodeDao">
+    <resultMap id="BaseResultMap" type="com.nxd.ftt.entity.AddressCode">
+        <result column="ID" property="id"/>
+        <result column="CODE" property="code"/>
+        <result column="NAME" property="name"/>
+        <result column="TYPE" property="type"/>
+        <result column="LEVEL" property="level"/>
+        <result column="PARENT_ID" property="parentId"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="CREATEOR" property="createor"/>
+        <result column="UPDATEOR" property="updateor"/>
+    </resultMap>
+    <select id="list" parameterType="com.nxd.ftt.entity.AddressCode" resultMap="BaseResultMap">
+        select
+        <trim suffixOverrides=",">
+            ID,
+            CODE,
+            NAME,
+            TYPE,
+            LEVEL,
+            PARENT_ID,
+            CREATE_TIME,
+            UPDATE_TIME,
+            CREATEOR,
+            UPDATEOR,
+        </trim>
+        from a_address_code
+        <where>
+            <if test="id != null and id !=''">
+                and ID = #{id}
+            </if>
+            <if test="code != null and code !=''">
+                and CODE = #{code}
+            </if>
+            <if test="name != null and name !=''">
+                and NAME = #{name}
+            </if>
+            <if test="type != null and type !=''">
+                and TYPE = #{type}
+            </if>
+            <if test="level != null and level !=''">
+                and LEVEL = #{level}
+            </if>
+            <if test="parentId != null and parentId !=''">
+                and PARENT_ID = #{parentId}
+            </if>
+            <if test="createTime != null and createTime !=''">
+                and CREATE_TIME = #{createTime}
+            </if>
+            <if test="updateTime != null and updateTime !=''">
+                and UPDATE_TIME = #{updateTime}
+            </if>
+            <if test="createor != null and createor !=''">
+                and CREATEOR = #{createor}
+            </if>
+            <if test="updateor != null and updateor !=''">
+                and UPDATEOR = #{updateor}
+            </if>
+        </where>
+    </select>
+    <select id="findById" parameterType="com.nxd.ftt.entity.AddressCode" resultMap="BaseResultMap">
+        select
+        <trim suffixOverrides=",">
+            ID,
+            CODE,
+            NAME,
+            TYPE,
+            LEVEL,
+            PARENT_ID,
+            CREATE_TIME,
+            UPDATE_TIME,
+            CREATEOR,
+            UPDATEOR,
+        </trim>
+        from a_address_code
+        where ID = #{id}
+    </select>
+    <delete id="batchDelete" parameterType="java.lang.String">
+        delete from a_address_code
+        where ID in
+        <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+        #{item}
+        </foreach>
+    </delete>
+    <insert id="insert" parameterType="com.nxd.ftt.entity.AddressCode">
+        insert into a_address_code
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and id !=''">
+                ID,
+            </if>
+            <if test="code != null and code !=''">
+                CODE,
+            </if>
+            <if test="name != null and name !=''">
+                NAME,
+            </if>
+            <if test="type != null and type !=''">
+                TYPE,
+            </if>
+            <if test="level != null and level !=''">
+                LEVEL,
+            </if>
+            <if test="parentId != null and parentId !=''">
+                PARENT_ID,
+            </if>
+            <if test="createor != null and createor !=''">
+                CREATEOR,
+            </if>
+            <if test="updateor != null and updateor !=''">
+                UPDATEOR,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and id !=''">
+                #{id},
+            </if>
+            <if test="code != null and code !=''">
+                #{code},
+            </if>
+            <if test="name != null and name !=''">
+                #{name},
+            </if>
+            <if test="type != null and type !=''">
+                #{type},
+            </if>
+            <if test="level != null and level !=''">
+                #{level},
+            </if>
+            <if test="parentId != null and parentId !=''">
+                #{parentId},
+            </if>
+            <if test="createor != null and createor !=''">
+                #{createor},
+            </if>
+            <if test="updateor != null and updateor !=''">
+                #{updateor},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.nxd.ftt.entity.AddressCode">
+        update a_address_code
+        set
+        <trim suffixOverrides=",">
+            <if test="id != null and id !=''">
+                ID = #{id},
+            </if>
+            <if test="code != null and code !=''">
+                CODE = #{code},
+            </if>
+            <if test="name != null and name !=''">
+                NAME = #{name},
+            </if>
+            <if test="type != null and type !=''">
+                TYPE = #{type},
+            </if>
+            <if test="level != null and level !=''">
+                LEVEL = #{level},
+            </if>
+            <if test="parentId != null and parentId !=''">
+                PARENT_ID = #{parentId},
+            </if>
+            <if test="createor != null and createor !=''">
+                CREATEOR = #{createor},
+            </if>
+            <if test="updateor != null and updateor !=''">
+                UPDATEOR = #{updateor},
+            </if>
+        </trim>
+        where ID = #{id}
+    </update>
+    <delete id="delete" parameterType="com.nxd.ftt.entity.AddressCode">
+        delete from a_address_code
+        where ID = #{id}
+    </delete>
+</mapper>
