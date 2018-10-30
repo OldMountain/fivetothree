@@ -2,7 +2,7 @@ package com.nxd.ftt.service.impl;
 
 import com.nxd.ftt.dao.McServerDao;
 import com.nxd.ftt.entity.McServer;
-import com.nxd.ftt.mchelper.entity.server.ServerInfo;
+import com.nxd.ftt.mchelper.entity.server.McServerInfo;
 import com.nxd.ftt.mchelper.util.MCHelper;
 import com.nxd.ftt.service.McServerService;
 import com.nxd.ftt.util.Const;
@@ -104,12 +104,12 @@ public class McServerServiceImpl implements McServerService {
     }
 
     @Override
-    public ServerInfo getInfo() {
-        ServerInfo serverInfo = null;
+    public McServerInfo getInfo() {
+        McServerInfo serverInfo = null;
         try {
             Object data = serverCacheUtil.getData(Const.SERVER_INFO_CACHE);
             if (data != null) {
-                serverInfo = ((ServerInfo) data);
+                serverInfo = (McServerInfo) data;
             } else {
                 serverInfo = MCHelper.getServerInfo();
                 serverCacheUtil.putCache(Const.SERVER_INFO_CACHE, serverInfo, 5 * 1000 * 60);

@@ -1,7 +1,7 @@
 package com.nxd.ftt.service;
 
 import com.nxd.ftt.entity.McServer;
-import com.nxd.ftt.mchelper.entity.server.ServerInfo;
+import com.nxd.ftt.mchelper.entity.server.McServerInfo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -76,5 +76,5 @@ public interface McServerService {
      *
      * @return
      */
-    ServerInfo getInfo();
+    McServerInfo getInfo();
 }
