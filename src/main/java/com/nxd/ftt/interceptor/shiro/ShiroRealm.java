@@ -19,15 +19,17 @@ import java.util.List;
  */
 public class ShiroRealm extends AuthorizingRealm {
 
-	/*
+	/**
 	 * 登录信息和用户验证信息验证(non-Javadoc)
 	 * @see org.apache.shiro.realm.AuthenticatingRealm#doGetAuthenticationInfo(org.apache.shiro.authc.AuthenticationToken)
 	 */
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 
-		 String username = (String)token.getPrincipal();			//得到用户名
-	     String password = new String((char[])token.getCredentials()); 	//得到密码
+		 //得到用户名
+		 String username = (String)token.getPrincipal();
+	     //得到密码
+	     String password = new String((char[])token.getCredentials());
 		
 	     if(null != username && null != password){
 	    	 return new SimpleAuthenticationInfo(username, password, getName());
@@ -37,21 +39,16 @@ public class ShiroRealm extends AuthorizingRealm {
 	     
 	}
 	
-	/*
+	/**
 	 * 授权查询回调函数, 进行鉴权但缓存中无用户的授权信息时调用,负责在应用程序中决定用户的访问控制的方法(non-Javadoc)
 	 * @see org.apache.shiro.realm.AuthorizingRealm#doGetAuthorizationInfo(org.apache.shiro.subject.PrincipalCollection)
 	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection pc) {
 
-		System.out.println("========2");
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-//		Long userId = WebUtil.getCurrentUserId();
-//		List<String> list = userService.queryPermissionByUserId(userId);
-//        for (String permission : list) {
-//            info.addStringPermission(permission);
-//        }
-		info.addStringPermissions(null);
+
+//		info.addStringPermissions(null);
 		return info;
 	}
 
