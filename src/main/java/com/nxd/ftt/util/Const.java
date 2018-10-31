@@ -76,7 +76,10 @@ public class Const {
     public static final String PROJECT_AUTH_TOKEN = PropertiesUtils.findPropertiesKey("project.auth.Token");
 
 
-    //系统管理员
+    /**
+     * 系统管理员
+     */
+    public static final String ADMIN_ROLE_ID = "-1";
     public static final String ADMIN = "admin";
 
     //分页
