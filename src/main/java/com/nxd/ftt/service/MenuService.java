@@ -16,7 +16,17 @@ import java.util.List;
 @Repository
 public interface MenuService {
 
+    /**
+     * 获取所有菜单
+     * @return
+     */
     List<Menu> listAllMenu();
+
+    /**
+     * 获取当前用户菜单
+     * @return
+     */
+    List<Menu> getCurrentUserMenu();
 
     /**
      * 查询所有父级菜单

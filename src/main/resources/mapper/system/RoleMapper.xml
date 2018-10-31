@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nxd.ftt.dao.RoleDao">
-  <resultMap id="BaseResultMap" type="com.nxd.ftt.entity.Role">
-    <result column="ROLE_ID" jdbcType="VARCHAR" property="roleId" />
-    <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName" />
-    <result column="RIGHTS" jdbcType="VARCHAR" property="rights" />
-    <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId" />
-    <result column="ADD_QX" jdbcType="VARCHAR" property="addQx" />
-    <result column="DEL_QX" jdbcType="VARCHAR" property="delQx" />
-    <result column="EDIT_QX" jdbcType="VARCHAR" property="editQx" />
-    <result column="CHA_QX" jdbcType="VARCHAR" property="chaQx" />
-    <result column="QX_ID" jdbcType="VARCHAR" property="qxId" />
-  </resultMap>
-  <select id="select" parameterType="com.nxd.ftt.entity.Role" resultMap="BaseResultMap">
+    <resultMap id="BaseResultMap" type="com.nxd.ftt.entity.Role">
+        <result column="ROLE_ID" jdbcType="VARCHAR" property="roleId"/>
+        <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName"/>
+        <result column="RIGHTS" jdbcType="VARCHAR" property="rights"/>
+        <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId"/>
+        <result column="ADD_QX" jdbcType="VARCHAR" property="addQx"/>
+        <result column="DEL_QX" jdbcType="VARCHAR" property="delQx"/>
+        <result column="EDIT_QX" jdbcType="VARCHAR" property="editQx"/>
+        <result column="CHA_QX" jdbcType="VARCHAR" property="chaQx"/>
+        <result column="QX_ID" jdbcType="VARCHAR" property="qxId"/>
+    </resultMap>
+    <select id="select" parameterType="com.nxd.ftt.entity.Role" resultMap="BaseResultMap">
         select
-       <trim  suffixOverrides=",">
+        <trim suffixOverrides=",">
             ROLE_ID,
             ROLE_NAME,
             RIGHTS,
@@ -24,109 +24,109 @@
             EDIT_QX,
             CHA_QX,
             QX_ID,
-       </trim>
-       from a_sys_role
-       <where>
+        </trim>
+        from a_sys_role
+        <where>
             <if test="roleId != null and roleId !=''">
-                 and ROLE_ID = #{roleId}  
+                and ROLE_ID = #{roleId}
             </if>
             <if test="roleName != null and roleName !=''">
-                 and ROLE_NAME = #{roleName}  
+                and ROLE_NAME = #{roleName}
             </if>
             <if test="rights != null and rights !=''">
-                 and RIGHTS = #{rights}  
+                and RIGHTS = #{rights}
             </if>
             <if test="parentId != null and parentId !=''">
-                 and PARENT_ID = #{parentId}  
+                and PARENT_ID = #{parentId}
             </if>
             <if test="addQx != null and addQx !=''">
-                 and ADD_QX = #{addQx}  
+                and ADD_QX = #{addQx}
             </if>
             <if test="delQx != null and delQx !=''">
-                 and DEL_QX = #{delQx}  
+                and DEL_QX = #{delQx}
             </if>
             <if test="editQx != null and editQx !=''">
-                 and EDIT_QX = #{editQx}  
+                and EDIT_QX = #{editQx}
             </if>
             <if test="chaQx != null and chaQx !=''">
-                 and CHA_QX = #{chaQx}  
+                and CHA_QX = #{chaQx}
             </if>
             <if test="qxId != null and qxId !=''">
-                 and QX_ID = #{qxId}  
+                and QX_ID = #{qxId}
             </if>
-       </where>
-  </select>
-  <delete id="batchDelete" parameterType="java.lang.String">
-    delete from a_sys_role
-    where ROLE_ID in  
-    <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
-       #{item}
-    </foreach> 
-  </delete>
-  <insert id="insert" parameterType="com.nxd.ftt.entity.Role">
-          insert into a_sys_role
+        </where>
+    </select>
+    <delete id="batchDelete" parameterType="java.lang.String">
+        delete from a_sys_role
+        where ROLE_ID in
+        <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+    <insert id="insert" parameterType="com.nxd.ftt.entity.Role">
+        insert into a_sys_role
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="roleId != null and roleId !=''">
-                ROLE_ID , 
+                ROLE_ID ,
             </if>
             <if test="roleName != null and roleName !=''">
-                ROLE_NAME , 
+                ROLE_NAME ,
             </if>
             <if test="rights != null and rights !=''">
-                RIGHTS , 
+                RIGHTS ,
             </if>
             <if test="parentId != null and parentId !=''">
-                PARENT_ID , 
+                PARENT_ID ,
             </if>
             <if test="addQx != null and addQx !=''">
-                ADD_QX , 
+                ADD_QX ,
             </if>
             <if test="delQx != null and delQx !=''">
-                DEL_QX , 
+                DEL_QX ,
             </if>
             <if test="editQx != null and editQx !=''">
-                EDIT_QX , 
+                EDIT_QX ,
             </if>
             <if test="chaQx != null and chaQx !=''">
-                CHA_QX , 
+                CHA_QX ,
             </if>
             <if test="qxId != null and qxId !=''">
-                QX_ID , 
+                QX_ID ,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="roleId != null and roleId !=''">
-                #{roleId} , 
+                #{roleId} ,
             </if>
             <if test="roleName != null and roleName !=''">
-                #{roleName} , 
+                #{roleName} ,
             </if>
             <if test="rights != null and rights !=''">
-                #{rights} , 
+                #{rights} ,
             </if>
             <if test="parentId != null and parentId !=''">
-                #{parentId} , 
+                #{parentId} ,
             </if>
             <if test="addQx != null and addQx !=''">
-                #{addQx} , 
+                #{addQx} ,
             </if>
             <if test="delQx != null and delQx !=''">
-                #{delQx} , 
+                #{delQx} ,
             </if>
             <if test="editQx != null and editQx !=''">
-                #{editQx} , 
+                #{editQx} ,
             </if>
             <if test="chaQx != null and chaQx !=''">
-                #{chaQx} , 
+                #{chaQx} ,
             </if>
             <if test="qxId != null and qxId !=''">
-                #{qxId} , 
+                #{qxId} ,
             </if>
         </trim>
-  </insert>
-  <update id="update" parameterType="java.lang.String">
-          update a_sys_role
-          set
+    </insert>
+    <update id="update" parameterType="java.lang.String">
+        update a_sys_role
+        set
         <trim suffixOverrides=",">
             <if test="roleId != null and roleId !=''">
                 ROLE_ID = #{roleId} ,
@@ -157,9 +157,21 @@
             </if>
         </trim>
         where ROLE_ID = #{roleId}
-  </update>
-  <delete id="delete" parameterType="com.nxd.ftt.entity.Role">
-    delete from a_sys_role
-    where ROLE_ID = #{roleId}
-  </delete>
+    </update>
+    <delete id="delete" parameterType="com.nxd.ftt.entity.Role">
+        delete from a_sys_role
+        where ROLE_ID = #{roleId}
+    </delete>
+
+    <select id="findRoleByUser" resultMap="BaseResultMap">
+        select
+        <trim suffixOverrides=",">
+            b.ROLE_ID,
+            b.ROLE_NAME,
+            b.RIGHTS,
+        </trim>
+        from a_sys_user_role a
+        left join a_sys_role b on a.ROLE_ID = b.ROLE_ID
+        where a.USER_ID = #{userId}
+    </select>
 </mapper>

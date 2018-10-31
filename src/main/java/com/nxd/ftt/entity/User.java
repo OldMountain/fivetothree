@@ -1,6 +1,7 @@
 package com.nxd.ftt.entity;
 import com.google.gson.Gson;
 import java.util.Date;
+import java.util.List;
 
 /**
  * User
@@ -169,6 +170,11 @@ public class User {
      * 个性签名
      */
     private String sign;
+
+    /**
+     * 角色
+     */
+    private List<Role> roles;
 
 
     /** 用户ID
@@ -655,5 +661,13 @@ public class User {
     @Override
     public String toString() {
         return new Gson().toJson(this);
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }

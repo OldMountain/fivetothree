@@ -28,8 +28,6 @@ public class ServerController {
     @RequestMapping(value = "/getInfo")
     public ModelAndView getInfo() {
         ModelAndView mv = new ModelAndView("mc/server_list");
-        ServerInfo serverInfo = mcServerService.getInfo();
-        mv.addObject("serverInfo", serverInfo);
         return mv;
     }
 

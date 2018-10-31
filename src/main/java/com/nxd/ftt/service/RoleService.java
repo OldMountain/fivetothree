@@ -29,5 +29,11 @@ public interface RoleService {
 
     int remove(Role role);
 
+    /**
+     * 根据userId查询角色
+     * @param userId
+     * @return java.util.List<com.nxd.ftt.entity.Role>
+     */
+    List<Role> findRoleByUser(String userId);
 
 }

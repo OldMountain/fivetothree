@@ -4,9 +4,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.nxd.ftt.dao.MenuDao;
 import com.nxd.ftt.entity.Menu;
 import com.nxd.ftt.entity.Role;
+import com.nxd.ftt.entity.User;
 import com.nxd.ftt.service.MenuService;
 import com.nxd.ftt.service.RoleService;
+import com.nxd.ftt.util.Const;
 import com.nxd.ftt.util.RightsHelper;
+import com.nxd.ftt.util.SystemUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +40,23 @@ public class MenuServiceImpl implements MenuService {
         rl = menuDao.select(menu);
         for (Menu m : rl) {
             menu.setParentId(String.valueOf(m.getMenuId()));
+            List<Menu> subList = menuDao.select(menu);
+            m.setSubMenu(subList);
+        }
+        return rl;
+    }
+
+    @Override
+    public List<Menu> getCurrentUserMenu() {
+        User user = SystemUtil.getCurrentUser();
+        List<Menu> rl;
+        Menu menu = new Menu();
+        menu.setParentId("0");
+        rl = menuDao.select(menu);
+        for (Menu m : rl) {
+            menu.setParentId(String.valueOf(m.getMenuId()));
+            //权限检测
+
             List<Menu> subList = menuDao.select(menu);
             m.setSubMenu(subList);
         }
