@@ -4,7 +4,6 @@ import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.concurrent.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,7 +18,8 @@ public class Tools {
      */
     public static int getRandomNum() {
         Random r = new Random();
-        return r.nextInt(900000) + 100000;//(Math.random()*(999999-100000)+100000)
+        //(Math.random()*(999999-100000)+100000)
+        return r.nextInt(900000) + 100000;
     }
 
     /**
@@ -133,7 +133,6 @@ public class Tools {
             long sec = (times / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
 
             StringBuffer sb = new StringBuffer();
-            //sb.append("发表于：");
             if (hour > 0) {
                 sb.append(hour + "小时前");
             } else if (min > 0) {
@@ -157,7 +156,8 @@ public class Tools {
      * @param content 写入的内容
      */
     public static void writeFile(String fileP, String content) {
-        String filePath = String.valueOf(Thread.currentThread().getContextClassLoader().getResource("")) + "../../";    //项目路径
+        //项目路径
+        String filePath = String.valueOf(Thread.currentThread().getContextClassLoader().getResource("")) + "../../";
         filePath = (filePath.trim() + fileP.trim()).substring(6).trim();
         if (filePath.indexOf(":") != 1) {
             filePath = File.separator + filePath;
@@ -220,7 +220,8 @@ public class Tools {
     public static String readTxtFile(String fileP) {
         try {
 
-            String filePath = String.valueOf(Thread.currentThread().getContextClassLoader().getResource("")) + "../../";    //项目路径
+            //项目路径
+            String filePath = String.valueOf(Thread.currentThread().getContextClassLoader().getResource("")) + "../../";
             filePath = filePath.replaceAll("file:/", "");
             filePath = filePath.replaceAll("%20", " ");
             filePath = filePath.trim() + fileP.trim();
@@ -229,9 +230,11 @@ public class Tools {
             }
             String encoding = "utf-8";
             File file = new File(filePath);
-            if (file.isFile() && file.exists()) {        // 判断文件是否存在
+            // 判断文件是否存在
+            if (file.isFile() && file.exists()) {
                 InputStreamReader read = new InputStreamReader(
-                        new FileInputStream(file), encoding);    // 考虑到编码格式
+                        // 考虑到编码格式
+                        new FileInputStream(file), encoding);
                 BufferedReader bufferedReader = new BufferedReader(read);
                 String lineTxt = null;
                 while ((lineTxt = bufferedReader.readLine()) != null) {
@@ -246,44 +249,5 @@ public class Tools {
         }
         return "";
     }
-
-    public static void main(String[] args) {
-        Map<String, String> map = new HashMap<>();
-        map.put("key1", "value1");
-        map.put("key2", "value2");
-        map.put("key3", "value3");
-        Iterator<Map.Entry<String, String>> it = map.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry<String, String> i = it.next();
-            System.out.println(i.getKey());
-            System.out.println(i.getValue());
-        }
-        System.out.println("===========================");
-        map.forEach((key, value) -> {
-            System.out.println(key + "-------" + value);
-        });
-        ExecutorService executorService = new ThreadPoolExecutor(5, 10, 30, TimeUnit.MINUTES,
-                new LinkedBlockingQueue<>(), new ThreadFactory() {
-            @Override
-            public Thread newThread(Runnable r) {
-                Thread thread = new Thread(r);
-                return thread;
-            }
-        });
-        executorService.execute(new Tools().new DemoThread());
-
-
-    }
-
-    public class DemoThread implements Runnable {
-
-        @Override
-        public void run() {
-            System.out.println("thread1");
-        }
-    }
-
-
-//    ExecutorService executorService1 =
 
 }
