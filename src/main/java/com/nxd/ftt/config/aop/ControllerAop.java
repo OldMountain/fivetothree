@@ -29,20 +29,24 @@ public class ControllerAop {
         MethodSignature joinPointObject = (MethodSignature) joinPoint.getSignature();
         Method method = joinPointObject.getMethod();
         LogAndPermission methodAnnotation = method.getAnnotation(LogAndPermission.class);
-        methodAnnotation.value();
-        methodAnnotation.permissions();
-        Class<?> aClass = joinPointObject.getDeclaringType();
-        RequestMapping classAnnotation = method.getAnnotation(RequestMapping.class);
-        classAnnotation.value();
+        if (methodAnnotation != null) {
+            methodAnnotation.value();
+            methodAnnotation.permissions();
+            Class<?> aClass = joinPointObject.getDeclaringType();
+            if (aClass != null) {
+                RequestMapping classAnnotation = aClass.getAnnotation(RequestMapping.class);
+                classAnnotation.value();
+            }
+        }
         System.out.println("AOP Before Advice...");
     }
 
-    @After("pointCut()")
+//    @After("pointCut()")
     public void doAfter(JoinPoint joinPoint) {
         System.out.println("AOP After Advice...");
     }
 
-    @AfterReturning(pointcut = "pointCut()", returning = "returnVal")
+//    @AfterReturning(pointcut = "pointCut()", returning = "returnVal")
     public void afterReturn(JoinPoint joinPoint, Object returnVal) {
         System.out.println("AOP AfterReturning Advice:" + returnVal);
     }
@@ -53,7 +57,7 @@ public class ControllerAop {
         System.out.println("AfterThrowing...");
     }
 
-    @Around("pointCut()")
+//    @Around("pointCut()")
     public void around(ProceedingJoinPoint pjp) {
         System.out.println("AOP Aronud before...");
         try {

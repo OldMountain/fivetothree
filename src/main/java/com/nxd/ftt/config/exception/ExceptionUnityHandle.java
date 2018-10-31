@@ -18,8 +18,8 @@ public class ExceptionUnityHandle {
 //    @ResponseBody
     public ModelAndView handleException(Exception e){
         e.printStackTrace();
-        ModelAndView mv = new ModelAndView();
-        mv.addObject("exception", ResultKit.error());
+        ModelAndView mv = new ModelAndView("view/error");
+        mv.addObject(ResultKit.error());
         return mv;
     }
 }

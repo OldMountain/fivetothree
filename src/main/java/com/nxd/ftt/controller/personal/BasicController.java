@@ -1,5 +1,6 @@
 package com.nxd.ftt.controller.personal;
 
+import com.nxd.ftt.config.annotation.LogAndPermission;
 import com.nxd.ftt.entity.User;
 import com.nxd.ftt.service.UserService;
 import com.nxd.ftt.util.SystemUtil;
@@ -21,7 +22,7 @@ public class BasicController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/basic")
+    @LogAndPermission(value = "/basic")
     public ModelAndView list() {
         ModelAndView mv = new ModelAndView("personal/basic");
         User user = SystemUtil.getCurrentUser();
