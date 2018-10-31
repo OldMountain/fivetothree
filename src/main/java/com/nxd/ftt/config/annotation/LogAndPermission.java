@@ -1,4 +1,4 @@
-package com.nxd.ftt.annotation;
+package com.nxd.ftt.config.annotation;
 
 import org.springframework.core.annotation.AliasFor;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +19,8 @@ import java.lang.annotation.*;
 public @interface LogAndPermission {
 
     String[] permissions() default {};
+
+    String operation() default "";
 
     @AliasFor(
             annotation = RequestMapping.class,
