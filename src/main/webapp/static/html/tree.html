@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../plugins/ztree/zTreeStyle.css" type="text/css">
+</head>
+<body>
+<div>
+    <div>
+        <ul id="treeDemo" class="ztree"></ul>
+    </div>
+</div>
+
+<script src="../../static/js/jquery-3.2.1.min.js" type="application/javascript"></script>
+<script src="../../plugins/ztree/jquery.ztree.all.min.js" type="application/javascript"></script>
+<script>
+    var zTree;
+    $(document).ready(function () {
+
+        var setting = {
+            view: {
+                dblClickExpand: false
+            },
+            check: {
+                enable: true,
+                chkStyle: "radio",
+                radioType: "all"
+            },
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            callback: {
+                onClick: onClick
+            }
+        };
+        var zTreeNodes = [
+            {id: 1, pId: 0, name: "根 Root", open: true},
+            {id: 11, pId: 1, name: "父节点 1-1", open: true},
+            {id: 111, pId: 11, name: "叶子节点 1-1-1"},
+            {id: 112, pId: 11, name: "叶子节点 1-1-2"},
+            {id: 113, pId: 11, name: "叶子节点 1-1-3"},
+            {id: 114, pId: 11, name: "叶子节点 1-1-4"},
+            {id: 12, pId: 1, name: "父节点 1-2", open: true},
+            {id: 121, pId: 12, name: "叶子节点 1-2-1"},
+            {id: 122, pId: 12, name: "叶子节点 1-2-2"},
+            {id: 123, pId: 12, name: "叶子节点 1-2-3"},
+            {id: 124, pId: 12, name: "叶子节点 1-2-4"},
+            {id: 13, pId: 1, name: "父节点 1-3", open: true},
+            {id: 131, pId: 13, name: "叶子节点 1-3-1"},
+            {id: 132, pId: 13, name: "叶子节点 1-3-2"},
+            {id: 133, pId: 13, name: "叶子节点 1-3-3"},
+            {id: 134, pId: 13, name: "叶子节点 1-3-4"}
+        ];
+        // var zTreeNodes = eval(zn);
+        zTree = $.fn.zTree.init($("#treeDemo"), setting, zTreeNodes);
+    });
+
+    function onClick(e, treeId, treeNode) {
+        var zTree = $.fn.zTree.getZTreeObj(treeId);
+        zTree.expandNode(treeNode);
+        zTree.checkNode(treeNode);
+        console.info("treeNode.id - > " + treeNode.id)
+        console.info("treeNode.name - > " + treeNode.name)
+        console.info("treeNode.pId - > " + treeNode.pId)
+    }
+</script>
+</body>
+</html>
