@@ -24,6 +24,12 @@ public @interface LogAndPermission {
 
     @AliasFor(
             annotation = RequestMapping.class,
+            attribute = "name"
+    )
+    String name() default "";
+
+    @AliasFor(
+            annotation = RequestMapping.class,
             attribute = "value"
     )
     String[] value() default {};
