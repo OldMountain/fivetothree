@@ -3,6 +3,8 @@
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+    String currentPath = request.getServletPath();
+    request.getSession().setAttribute("jspPath",currentPath.substring(0,currentPath.lastIndexOf("/")));
 %>
 <!DOCTYPE html>
 <html>
@@ -31,7 +33,8 @@
                     </a>
                 </li>
                 <li class="layui-nav-item layui-hide-xs" lay-unselect>
-                    <a href="http://www.layui.com/admin/" target="_blank" title="前台">
+                    <%--<a href="http://www.layui.com/admin/" target="_blank" title="前台">--%>
+                    <a href="${ctx}address/initRegionCode" title="前台">
                         <i class="layui-icon layui-icon-website"></i>
                     </a>
                 </li>

@@ -19,6 +19,11 @@ public class ResultKit {
         return response;
     }
 
+    public static <T> Response table(T data) {
+        Response<T> response = new Response(ResultEnum.SUCCESS_TABLE.getCode(), ResultEnum.SUCCESS.getDesc(), data);
+        return response;
+    }
+
     public static Response fail() {
         return new Response<>(ResultEnum.ERROR.getCode(), ResultEnum.ERROR.getDesc());
     }

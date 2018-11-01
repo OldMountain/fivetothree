@@ -5,8 +5,22 @@ import com.nxd.ftt.util.Const;
 
 public class Page {
 
+    /**
+     * 当前页
+     */
     private int pageNum;
+    /**
+     * 当前页
+     */
+    private int page;
+    /**
+     * 每页显示数量
+     */
     private int pageSize;
+    /**
+     * 每页显示数量
+     */
+    private int limit;
     private int startRow;
     private int endRow;
     private long total;
@@ -23,8 +37,8 @@ public class Page {
         this.pageNum = 1;
     }
     public Page(int pageNum,int pageSize) {
-        this.pageSize = Const.PAGE_SIZE;
-        this.pageNum = 1;
+        this.pageSize = pageSize;
+        this.pageNum = pageNum;
     }
 
     public int getPageNum() {
@@ -121,6 +135,22 @@ public class Page {
 
     public void setOrderByOnly(boolean orderByOnly) {
         this.orderByOnly = orderByOnly;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getLimit() {
+        return limit;
+    }
+
+    public void setLimit(int limit) {
+        this.limit = limit;
     }
 }
 

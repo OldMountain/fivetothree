@@ -5,7 +5,9 @@ import com.nxd.ftt.common.util.AddressUtil;
 import com.nxd.ftt.entity.About;
 import com.nxd.ftt.mchelper.util.MCHelper;
 import com.nxd.ftt.service.AboutService;
+import com.nxd.ftt.service.AddressCodeService;
 import com.nxd.ftt.service.McServerService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +30,9 @@ public class SystemController {
 
     @Autowired
     private McServerService mcServerService;
+
+    @Autowired
+    private AddressCodeService addressCodeService;
 
     @RequestMapping(value = "/about")
     public ModelAndView about() {
@@ -56,6 +61,14 @@ public class SystemController {
      */
     @RequestMapping("/notFound")
     public String notFound() {
+        AddressUtil addressUtil = new AddressUtil() {
+            @Override
+            public void process(AddressCode addressCode) {
+                addressCodeService.save(addressCode);
+            }
+        };
+        List<AddressCode> list = addressUtil.getContent(AddressUtil.getURL(), 0, 5, "", 0);
+        System.out.println(list.size());
         return "view/404";
     }
 
@@ -70,13 +83,6 @@ public class SystemController {
     }
 
     public static void main(String[] args) {
-        AddressUtil addressUtil = new AddressUtil() {
-            @Override
-            public void process(AddressCode addressCode) {
-                
-            }
-        };
-        List<AddressCode> list = addressUtil.getContent(AddressUtil.getURL(), 0, 5, "", 0);
-        System.out.println(list.size());
+
     }
 }

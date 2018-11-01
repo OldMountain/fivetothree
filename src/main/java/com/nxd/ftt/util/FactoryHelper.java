@@ -12,7 +12,7 @@ public class FactoryHelper {
         return Const.WEB_APP_CONTEXT.getBean(name);
     }
 
-    public static Object getBean(Class c) {
+    public static <T> T getBean(Class<T> c) {
         return Const.WEB_APP_CONTEXT.getBean(c);
     }
 }

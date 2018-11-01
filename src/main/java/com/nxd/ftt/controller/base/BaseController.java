@@ -300,6 +300,9 @@ public class BaseController {
     protected void startPage(Page page) {
         PageHelper.startPage(page.getPageNum(), page.getPageSize());
     }
+    protected void startPageTable(Page page) {
+        PageHelper.startPage(page.getPage(), page.getLimit());
+    }
 
     protected Map<String, Object> setSuccess() {
         return setResult(true, null, null);

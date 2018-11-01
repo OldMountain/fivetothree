@@ -1,9 +1,11 @@
 package com.nxd.ftt.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.google.gson.Gson;
 import com.nxd.ftt.dao.MenuDao;
 import com.nxd.ftt.entity.Menu;
 import com.nxd.ftt.entity.Role;
+import com.nxd.ftt.entity.Tree;
 import com.nxd.ftt.entity.User;
 import com.nxd.ftt.service.MenuService;
 import com.nxd.ftt.service.RoleService;
@@ -80,8 +82,15 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public String listTreeMenu(Role role, int type) {
         List<Menu> rl = null;
-        List<JSONObject> treeNodeHasSub = new ArrayList<>();
-        List<JSONObject> treeNode = new ArrayList<>();
+        List<Tree> treeNodeHasSub = new ArrayList<>();
+        Tree rootTree = new Tree();
+        rootTree.setChecked(false);
+        rootTree.setpId("-1");
+        rootTree.setName("全部菜单");
+        rootTree.setId("0");
+        rootTree.setOpen(true);
+        treeNodeHasSub.add(rootTree);
+        List<Tree> treeNode = new ArrayList<>();
         role = roleService.getRoleById(role);
         String rights = "";
         switch (type) {
@@ -115,30 +124,30 @@ public class MenuServiceImpl implements MenuService {
             if (subList != null && subList.size() > 0) {
                 for (Menu subMenu : subList) {
                     subMenu.setHasMenu(RightsHelper.testRights(rights, subMenu.getMenuId()));
-                    JSONObject jsonObject = new JSONObject();
-                    jsonObject.put("pId", menu.getMenuId());
-                    jsonObject.put("id", subMenu.getMenuId());
-                    jsonObject.put("name", subMenu.getMenuName());
-                    jsonObject.put("checked", subMenu.isHasMenu());
-                    treeNodeHasSub.add(jsonObject);
+                    Tree tree = new Tree();
+                    tree.setpId(String.valueOf(menu.getMenuId()));
+                    tree.setId(String.valueOf(subMenu.getMenuId()));
+                    tree.setName(subMenu.getMenuName());
+                    tree.setChecked(subMenu.isHasMenu());
+                    treeNodeHasSub.add(tree);
                 }
-                JSONObject parentTree = new JSONObject();
-                parentTree.put("pId", 0);
-                parentTree.put("id", menu.getMenuId());
-                parentTree.put("name", menu.getMenuName());
-                parentTree.put("checked", menu.isHasMenu());
+                Tree parentTree = new Tree();
+                parentTree.setpId("0");
+                parentTree.setId(String.valueOf(menu.getMenuId()));
+                parentTree.setName(menu.getMenuName());
+                parentTree.setChecked(menu.isHasMenu());
                 treeNodeHasSub.add(parentTree);
             } else {
-                JSONObject parentTree = new JSONObject();
-                parentTree.put("pId", 0);
-                parentTree.put("id", menu.getMenuId());
-                parentTree.put("name", menu.getMenuName());
-                parentTree.put("checked", menu.isHasMenu());
+                Tree parentTree = new Tree();
+                parentTree.setpId("0");
+                parentTree.setId(String.valueOf(menu.getMenuId()));
+                parentTree.setName(menu.getMenuName());
+                parentTree.setChecked(menu.isHasMenu());
                 treeNode.add(parentTree);
             }
         }
         treeNodeHasSub.addAll(treeNode);
-        return treeNodeHasSub.toString();
+        return new Gson().toJson(treeNodeHasSub);
     }
 
 

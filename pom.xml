@@ -5,7 +5,7 @@
     <artifactId>fivetothree</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>fivetothree Maven Webapp</name>
+    <name>fivetothree</name>
     <url>http://maven.apache.org</url>
     <properties>
         <java.version>1.8</java.version>
@@ -196,6 +196,17 @@
             <groupId>net.oschina.zcx7878</groupId>
             <artifactId>fastdfs-client-java</artifactId>
             <version>1.27.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.8.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-compress -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-compress</artifactId>
+            <version>1.18</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet.jsp</groupId>

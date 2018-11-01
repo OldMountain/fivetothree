@@ -3,7 +3,10 @@ package com.nxd.ftt.config.aop;
 import com.nxd.ftt.config.annotation.LogAndPermission;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,8 +34,8 @@ public class ControllerAop {
         LogAndPermission methodAnnotation = method.getAnnotation(LogAndPermission.class);
         if (methodAnnotation != null) {
             methodAnnotation.value();
-            methodAnnotation.permissions();
-            Class<?> aClass = joinPointObject.getDeclaringType();
+            String[] perms = methodAnnotation.permissions();
+            Class<?> aClass = joinPoint.getTarget().getClass();
             if (aClass != null) {
                 RequestMapping classAnnotation = aClass.getAnnotation(RequestMapping.class);
                 classAnnotation.value();
@@ -41,12 +44,12 @@ public class ControllerAop {
         System.out.println("AOP Before Advice...");
     }
 
-//    @After("pointCut()")
+    //    @After("pointCut()")
     public void doAfter(JoinPoint joinPoint) {
         System.out.println("AOP After Advice...");
     }
 
-//    @AfterReturning(pointcut = "pointCut()", returning = "returnVal")
+    //    @AfterReturning(pointcut = "pointCut()", returning = "returnVal")
     public void afterReturn(JoinPoint joinPoint, Object returnVal) {
         System.out.println("AOP AfterReturning Advice:" + returnVal);
     }
@@ -57,7 +60,7 @@ public class ControllerAop {
         System.out.println("AfterThrowing...");
     }
 
-//    @Around("pointCut()")
+    //    @Around("pointCut()")
     public void around(ProceedingJoinPoint pjp) {
         System.out.println("AOP Aronud before...");
         try {

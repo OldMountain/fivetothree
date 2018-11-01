@@ -44,7 +44,9 @@
 <jsp:include page="../../changyan/comment.jsp"></jsp:include>
 </body>
 <script>
-
+    if (top !== self) {
+        top.location.href = location.href;
+    }
     $(function () {
         $("#codeImg").attr("src", "code.do?t=" + new Date().getTime());
         $("#codeImg").click(function () {

@@ -27,7 +27,7 @@ public class BasicController {
      *
      * @return
      */
-    @LogAndPermission(value = "/basic", name = "基础信息")
+    @LogAndPermission(value = "/basic", name = "基础信息",permissions = "basic:add")
     public ModelAndView list() {
         ModelAndView mv = new ModelAndView("personal/basic");
         User user = SystemUtil.getCurrentUser();

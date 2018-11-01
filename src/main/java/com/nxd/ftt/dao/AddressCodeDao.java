@@ -1,7 +1,6 @@
 package com.nxd.ftt.dao;
 
-import com.nxd.ftt.entity.AddressCode;
-import org.springframework.stereotype.Repository;
+import com.nxd.ftt.common.entity.AddressCode;
 
 import java.util.List;
 
@@ -15,6 +14,7 @@ public interface AddressCodeDao {
 
     /**
      * 查询
+     *
      * @param addressCode
      * @return
      */
@@ -22,36 +22,41 @@ public interface AddressCodeDao {
 
     /**
      * 查询
+     *
      * @param id
      * @return
      */
     AddressCode findById(Integer id);
 
     /**
-    * 批量删除
-    * @param id
-    * @return
-    */
+     * 批量删除
+     *
+     * @param id
+     * @return
+     */
     int batchDelete(Integer[] id);
 
     /**
-    * 插入
-    * @param addressCode
-    * @return
-    */
+     * 插入
+     *
+     * @param addressCode
+     * @return
+     */
     int insert(AddressCode addressCode);
 
     /**
-    * 更新
-    * @param addressCode
-    * @return
-    */
+     * 更新
+     *
+     * @param addressCode
+     * @return
+     */
     int update(AddressCode addressCode);
 
     /**
-    * 根据id删除
-    * @param id
-    * @return
-    */
+     * 根据id删除
+     *
+     * @param id
+     * @return
+     */
     int delete(Integer id);
 }

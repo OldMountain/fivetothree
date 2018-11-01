@@ -4,6 +4,7 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:aop="http://www.springframework.org/schema/aop" xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                         http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
                         http://www.springframework.org/schema/context
@@ -11,7 +12,7 @@
                         http://www.springframework.org/schema/tx
                         http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
                         http://www.springframework.org/schema/aop
-                        http://www.springframework.org/schema/aop/spring-aop-4.1.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+                        http://www.springframework.org/schema/aop/spring-aop-4.1.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
     <!-- 启用注解 -->
     <!--<context:annotation-config/>-->
@@ -148,10 +149,21 @@
     </bean>
 
     <!-- 項目自定义的Realm -->
-    <bean id="ShiroRealm" class="com.nxd.ftt.interceptor.shiro.ShiroRealm"></bean>
+    <bean id="ShiroRealm" class="com.nxd.ftt.interceptor.shiro.ShiroRealm">
+
+    </bean>
+
+    <!--<bean id="permission" class="com.nxd.ftt.interceptor.shiro.PermissionFilter">-->
+
+    <!--</bean>-->
 
     <!-- Shiro Filter -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <!--<property name="filters">-->
+            <!--<util:map>-->
+                <!--<entry key="permission" value-ref="permission"></entry>-->
+            <!--</util:map>-->
+        <!--</property>-->
         <property name="securityManager" ref="securityManager"/>
 
         <property name="loginUrl" value="/"/>

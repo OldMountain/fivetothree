@@ -85,7 +85,7 @@
         #{item}
         </foreach>
     </delete>
-    <insert id="insert" parameterType="com.nxd.ftt.entity.AddressCode">
+    <insert id="insert" useGeneratedKeys="true" keyColumn="ID" keyProperty="id" parameterType="com.nxd.ftt.entity.AddressCode">
         insert into a_address_code
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null and id !=''">

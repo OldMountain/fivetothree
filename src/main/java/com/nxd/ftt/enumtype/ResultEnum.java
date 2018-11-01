@@ -12,6 +12,10 @@ public enum ResultEnum {
      * 200：成功
      */
     SUCCESS(200, "成功"),
+    /**
+     * 200：成功
+     */
+    SUCCESS_TABLE(0, "成功"),
 
     /**
      * ：未知错误

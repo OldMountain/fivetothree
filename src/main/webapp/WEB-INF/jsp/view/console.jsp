@@ -143,15 +143,18 @@
                             <div class="layui-carousel layadmin-carousel layadmin-backlog">
                                 <div carousel-item>
                                     <ul id="serverInfo" class="layui-row layui-col-space10">
-                                        <div id="server-load" style="text-align: center;position: relative;height: 100%">
-                                            <img src="${ctx}static/lay/layui/css/modules/layer/default/loading-2.gif" style="position: absolute;top: 30%">
+                                        <div id="server-load"
+                                             style="text-align: center;position: relative;height: 100%">
+                                            <img src="${ctx}static/lay/layui/css/modules/layer/default/loading-2.gif"
+                                                 style="position: absolute;top: 30%">
                                         </div>
                                         <script id="serverInfoTemp" type="text/html">
                                             <li class="layui-col-xs6">
                                                 <a lay-href="app/content/comment.html" class="layadmin-backlog-body">
                                                     <h3>motd</h3>
-                                                    <p id="description" style="font-style: normal;font-size: 15px;font-weight: 300;color: #009688;width: 98%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
-                                                        {{ d.data.description }}
+                                                    <p id="description"
+                                                       style="font-style: normal;font-size: 15px;font-weight: 300;color: #009688;width: 98%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
+                                                        {{ d.description }}
                                                     </p>
                                                 </a>
                                             </li>
@@ -159,7 +162,7 @@
                                                 <a lay-href="app/content/comment.html" class="layadmin-backlog-body">
                                                     <h3>图标</h3>
                                                     <p><cite>
-                                                        <img width="30" src="{{ d.data.favicon }}">
+                                                        <img width="30" src="{{ d.favicon }}">
                                                     </cite></p>
                                                 </a>
                                             </li>
@@ -167,7 +170,7 @@
                                                 <a lay-href="app/content/comment.html" class="layadmin-backlog-body">
                                                     <h3>在线人数</h3>
                                                     <p><cite>
-                                                        {{ d.data.players.online }}
+                                                        {{ d.players.online }}
                                                     </cite></p>
                                                 </a>
                                             </li>
@@ -175,7 +178,7 @@
                                                 <a lay-href="app/content/comment.html" class="layadmin-backlog-body">
                                                     <h3>最大人数</h3>
                                                     <p><cite>
-                                                        {{ d.data.players.max }}
+                                                        {{ d.players.max }}
                                                     </cite></p>
                                                 </a>
                                             </li>
@@ -347,10 +350,10 @@
 <script>
     layui.use(['index', 'console', 'laytpl'], function () {
         var laytpl = layui.laytpl;
-        getMcServerInfo(laytpl,layer);
+        getMcServerInfo(laytpl, layer);
     });
 
-    function getMcServerInfo(laytpl,layer) {
+    function getMcServerInfo(laytpl, layer) {
         var params = {};
         $.ajax({
             url: '${ctx}api/mc/getServerInfo',
@@ -358,16 +361,18 @@
             data: params,
             dataType: 'json',
             success: function (result) {
-                laytpl(serverInfoTemp.innerHTML).render(result, function (html) {
+                laytpl(serverInfoTemp.innerHTML).render(result.data.serverData, function (html) {
                     $("#serverInfo").html(html);
                     $("#server-load").hide();
                     $("#description").mouseover(function () {
                         var _this = this;
-                        layer.tips($(this).html(), this,{tips:3,time :0,success:function (layero, index) {
+                        layer.tips($(this).html(), this, {
+                            tips: 3, time: 0, success: function (layero, index) {
                                 $(_this).mouseleave(function () {
                                     layer.close(index)
                                 })
-                            }});
+                            }
+                        });
                     })
 
                 })
