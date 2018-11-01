@@ -37,6 +37,11 @@ public class McServerServiceImpl implements McServerService {
         return mcServerDao.list(new McServer());
     }
 
+    @Override
+    public List<McServer> listPage() {
+        return null;
+    }
+
     /**
      * 根据条件查询列表
      *
@@ -104,19 +109,35 @@ public class McServerServiceImpl implements McServerService {
     }
 
     @Override
-    public McServerInfo getInfo() {
+    public List<McServer> listInfo() {
+        List<McServer> list = this.listAll();
+        list.forEach(value -> {
+            getInfo(value);
+        });
+        return list;
+    }
+
+    @Override
+    public McServer getInfo(McServer mcServer) {
         McServerInfo serverInfo = null;
         try {
-            Object data = serverCacheUtil.getData(Const.SERVER_INFO_CACHE);
+            Object data = serverCacheUtil.getData(Const.SERVER_INFO_CACHE + mcServer.getId());
             if (data != null) {
                 serverInfo = (McServerInfo) data;
             } else {
-                serverInfo = MCHelper.getServerInfo();
-                serverCacheUtil.putCache(Const.SERVER_INFO_CACHE, serverInfo, 5 * 1000 * 60);
+                serverInfo = MCHelper.getServerInfo(mcServer.getAddress(), mcServer.getPort());
+                serverCacheUtil.putCache(Const.SERVER_INFO_CACHE + mcServer.getId(), serverInfo, 5 * 1000 * 60);
+            }
+            if (serverInfo != null) {
+                mcServer.setServerData(serverInfo);
+            } else {
+                mcServer.setStatus(0);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return serverInfo;
+        return mcServer;
     }
+
+
 }

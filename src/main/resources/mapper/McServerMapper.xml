@@ -16,6 +16,7 @@
         <result column="UPDATE_TIME" property="updateTime"/>
         <result column="CREATEOR" property="createor"/>
         <result column="UPDATEOR" property="updateor"/>
+        <result column="SHOW_ORDER" property="showOrder"/>
     </resultMap>
     <select id="list" parameterType="com.nxd.ftt.entity.McServer" resultMap="BaseResultMap">
         select
@@ -34,6 +35,7 @@
             UPDATE_TIME,
             CREATEOR,
             UPDATEOR,
+            SHOW_ORDER
         </trim>
         from mc_server
         <where>
@@ -80,6 +82,7 @@
                 and UPDATEOR = #{updateor}
             </if>
         </where>
+        order by SHOW_ORDER asc
     </select>
     <select id="findById" parameterType="com.nxd.ftt.entity.McServer" resultMap="BaseResultMap">
         select
@@ -98,6 +101,7 @@
             UPDATE_TIME,
             CREATEOR,
             UPDATEOR,
+            SHOW_ORDER
         </trim>
         from mc_server
         where ID = #{id}
@@ -148,6 +152,9 @@
             <if test="updateor != null and updateor !=''">
                 UPDATEOR,
             </if>
+            <if test="showOrder != null and showOrder !=''">
+                SHOW_ORDER,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null and id !=''">
@@ -185,6 +192,9 @@
             </if>
             <if test="updateor != null and updateor !=''">
                 #{updateor},
+            </if>
+            <if test="showOrder != null and showOrder !=''">
+                #{showOrder},
             </if>
         </trim>
     </insert>
@@ -227,6 +237,9 @@
             </if>
             <if test="updateor != null and updateor !=''">
                 UPDATEOR = #{updateor},
+            </if>
+            <if test="showOrder != null and showOrder !=''">
+                SHOW_ORDER = #{showOrder},
             </if>
         </trim>
         where ID = #{id}

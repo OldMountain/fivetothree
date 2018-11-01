@@ -22,6 +22,10 @@ public class Page {
         this.pageSize = Const.PAGE_SIZE;
         this.pageNum = 1;
     }
+    public Page(int pageNum,int pageSize) {
+        this.pageSize = Const.PAGE_SIZE;
+        this.pageNum = 1;
+    }
 
     public int getPageNum() {
         return pageNum;

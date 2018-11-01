@@ -22,6 +22,12 @@ public interface McServerService {
      * @return
      */
     List<McServer> listAll();
+    /**
+     * 分页查询列表
+     *
+     * @return
+     */
+    List<McServer> listPage();
 
     /**
      * 根据条件查询列表
@@ -76,5 +82,12 @@ public interface McServerService {
      *
      * @return
      */
-    McServerInfo getInfo();
+    List<McServer> listInfo();
+
+    /**
+     * 获取我的世界服务器信息
+     *
+     * @return
+     */
+    McServer getInfo(McServer mcServer);
 }

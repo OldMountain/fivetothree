@@ -1,5 +1,7 @@
 package com.nxd.ftt.entity;
 import com.google.gson.Gson;
+import com.nxd.ftt.mchelper.entity.server.McServerInfo;
+
 import java.util.Date;
 
 /**
@@ -79,6 +81,16 @@ public class McServer {
      * 修改人
      */
     private String updateor;
+
+    /**
+     * 显示排序
+     */
+    private Integer showOrder;
+
+    /**
+     * 服务器实时数据
+     */
+    private McServerInfo serverData;
 
 
     /** ID
@@ -295,5 +307,21 @@ public class McServer {
     @Override
     public String toString() {
         return new Gson().toJson(this);
+    }
+
+    public McServerInfo getServerData() {
+        return serverData;
+    }
+
+    public void setServerData(McServerInfo serverData) {
+        this.serverData = serverData;
+    }
+
+    public Integer getShowOrder() {
+        return showOrder;
+    }
+
+    public void setShowOrder(Integer showOrder) {
+        this.showOrder = showOrder;
     }
 }
