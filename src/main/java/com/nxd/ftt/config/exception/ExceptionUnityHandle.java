@@ -1,8 +1,10 @@
 package com.nxd.ftt.config.exception;
 
+import com.nxd.ftt.entity.result.Response;
 import com.nxd.ftt.entity.result.ResultKit;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -15,11 +17,11 @@ import org.springframework.web.servlet.ModelAndView;
 public class ExceptionUnityHandle {
 
     @ExceptionHandler(Exception.class)
-//    @ResponseBody
-    public ModelAndView handleException(Exception e){
+    @ResponseBody
+    public Response handleException(Exception e) {
         e.printStackTrace();
-        ModelAndView mv = new ModelAndView("view/error");
-        mv.addObject(ResultKit.error());
-        return mv;
+//        ModelAndView mv = new ModelAndView("view/error");
+//        mv.addObject(ResultKit.error());
+        return ResultKit.error(e.getMessage());
     }
 }
