@@ -132,4 +132,9 @@ public class Const {
     public static final String EMAIL_KEY = PropertiesUtils.findPropertiesKey("email.key");
 
     public static final String SERVER_INFO_CACHE = "ServerInfoCache";
+
+    /**
+     * 菜单树 根目录名称
+     */
+    public static final String ROOT_MENU_NAME = "全部菜单";
 }

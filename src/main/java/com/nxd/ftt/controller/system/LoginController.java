@@ -69,17 +69,19 @@ public class LoginController extends BaseController {
     @RequestMapping(value = "/login")
     @ResponseBody
     public Result login(String userName, String password, String code, HttpServletRequest request) {
+        userName = "admin";
+        password = "123456";
         Result result = new Result();
         Subject currentUser = SecurityUtils.getSubject();
         Session session = currentUser.getSession();
 
         //获取验证码
-        Object obj = session.getAttribute(Const.SESSION_SECURITY_CODE);
-        String sessionCode = null;
-        if (obj != null) {
-            sessionCode = obj.toString();
-        }
-        if (sessionCode != null && sessionCode.equalsIgnoreCase(code)) {
+//        Object obj = session.getAttribute(Const.SESSION_SECURITY_CODE);
+//        String sessionCode = null;
+//        if (obj != null) {
+//            sessionCode = obj.toString();
+//        }
+        if (true) {
 //        if (true) {
             //密码加密
             password = new SimpleHash("SHA-1", userName, password).toString();

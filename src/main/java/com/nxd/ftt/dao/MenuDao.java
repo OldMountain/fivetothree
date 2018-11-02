@@ -15,6 +15,13 @@ public interface MenuDao {
     List<Menu> select(Menu menu);
 
     /**
+     * 根据ID 查询菜单
+     * @param menuId
+     * @return
+     */
+    Menu findById(Integer menuId);
+
+    /**
      * 批量删除
      * @param menuId
      * @return int
@@ -41,4 +48,11 @@ public interface MenuDao {
      * @return int
      */
     int delete(String menuId);
+
+    /**
+     * 根据父ID 查询最大排序
+     * @param parentId
+     * @return
+     */
+    int findMaxOrder(Integer parentId);
 }

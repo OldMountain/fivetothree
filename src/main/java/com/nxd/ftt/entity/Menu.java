@@ -28,7 +28,7 @@ public class Menu extends BaseEntity {
     /**
      * @mbg.generated 2017-12-04
      */
-    private String menuOrder;
+    private Integer menuOrder;
 
     /**
      * @mbg.generated 2017-12-04
@@ -115,7 +115,7 @@ public class Menu extends BaseEntity {
      * 
      * @return MENU_ORDER 
      */
-    public String getMenuOrder() {
+    public Integer getMenuOrder() {
         return menuOrder;
     }
 
@@ -123,8 +123,8 @@ public class Menu extends BaseEntity {
      * 
      * @param menuOrder 
      */
-    public void setMenuOrder(String menuOrder) {
-        this.menuOrder = menuOrder == null ? null : menuOrder.trim();
+    public void setMenuOrder(Integer menuOrder) {
+        this.menuOrder = menuOrder;
     }
 
     /**

@@ -1,15 +1,9 @@
 layui.use(['index', 'form', 'upload', 'table'], function () {
     var table = layui.table //表格
+    var zTree;
     getTree(layui.cache.root + "menu/getMenuTree", $("#treeBox"))
     $("#menu-add").click(function () {
-        layer.open({
-            title: '菜单管理',
-            type: 2,
-            area: ['700px', '450px'],
-            fixed: false, //不固定
-            maxmin: true,
-            content: layui.cache.root + 'menu/toAdd'
-        });
+        openAdd();
     });
 
     table.render({
@@ -33,16 +27,65 @@ layui.use(['index', 'form', 'upload', 'table'], function () {
         ]]
     });
 
+    table.on('toolbar(menu-table)', function (obj) {
+        var checkStatus = table.checkStatus(obj.config.id)
+            , data = checkStatus.data; //获取选中的数据
+        switch (obj.event) {
+            case 'add':
+                openAdd();
+                break;
+            case 'update':
+                if (data.length === 0) {
+                    layer.msg('请选择一行');
+                } else if (data.length > 1) {
+                    layer.msg('只能同时编辑一个');
+                } else {
+                    layer.alert('编辑 [id]：' + checkStatus.data[0].menuId);
+                }
+                break;
+            case 'delete':
+                if (data.length === 0) {
+                    layer.msg('请选择一行');
+                } else {
+                    layer.msg('删除');
+                }
+                break;
+        }
+        ;
+    })
+
 
     function onClick(event, treeId, treeNode) {
         zTree.checkNode(treeNode);
-        table.reload("menuTable",{
+        table.reload("menuTable", {
             url: layui.cache.root + 'menu/getSubMenu?menuId=' + treeNode.id
         })
     }
 
+    function openAdd() {
+        var nodes = zTree.getCheckedNodes(true);
+        var menuId = '';
+        var level;
+        if (nodes && nodes.length > 0) {
+            menuId = zTree.getCheckedNodes(true)[0].id;
+            level = zTree.getCheckedNodes(true)[0].level;
+        }
+        var title = '添加一级菜单';
+        if (level && level == 1) {
+            title = '添加二级菜单';
+        }else if (level && level == 2) {
+            title = '添加按钮权限';
+        }
+        layer.open({
+            title: title,
+            type: 2,
+            area: ['700px', '450px'],
+            fixed: false, //不固定
+            maxmin: true,
+            content: layui.cache.root + 'menu/toAdd?menuId=' + menuId
+        });
+    }
 
-    var zTree;
 
     function initTree(ele, nodes) {
         var setting = {

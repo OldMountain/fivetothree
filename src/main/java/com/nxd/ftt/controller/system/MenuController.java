@@ -8,6 +8,7 @@ import com.nxd.ftt.entity.Role;
 import com.nxd.ftt.entity.result.Response;
 import com.nxd.ftt.entity.result.ResultKit;
 import com.nxd.ftt.service.MenuService;
+import com.nxd.ftt.util.Const;
 import com.nxd.ftt.util.SystemUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -50,9 +51,15 @@ public class MenuController extends BaseController {
     }
 
     @LogAndPermission(value = "/toAdd")
-    public ModelAndView toAdd(){
+    public ModelAndView toAdd(Integer menuId){
         ModelAndView mv = new ModelAndView("system/sys_menu/menu_add");
-
+        Menu menu = menuService.findById(menuId);
+        if (menu == null) {
+            menu = new Menu();
+            menu.setMenuId(0);
+            menu.setMenuName(Const.ROOT_MENU_NAME);
+        }
+        mv.addObject("menu", menu);
         return mv;
     }
 
@@ -62,5 +69,12 @@ public class MenuController extends BaseController {
         startPage(page);
         List<Menu> subMenuList = menuService.selectSubMenuByParentId(menuId);
         return ResultKit.table(subMenuList);
+    }
+
+    @LogAndPermission(value = "/save")
+    @ResponseBody
+    public Response save(Menu menu){
+        menuService.save(menu);
+        return ResultKit.success();
     }
 }

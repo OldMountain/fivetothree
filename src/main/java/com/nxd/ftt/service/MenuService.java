@@ -13,7 +13,6 @@ import java.util.List;
  * @author OldMountain
  * @date 2017/12/4
  */
-@Repository
 public interface MenuService {
 
     /**
@@ -43,5 +42,32 @@ public interface MenuService {
      */
     List<Menu> selectSubMenuByParentId(String menuId);
 
+    /**
+     * 获取菜单树
+     * @param role
+     * @param type
+     * @return
+     */
     String listTreeMenu(Role role, int type);
+
+    /**
+     * 根据ID 查询菜单
+     * @param menuId
+     * @return
+     */
+    Menu findById(Integer menuId);
+
+    /**
+     * 保存菜单
+     * @param menu
+     * @return
+     */
+    int save(Menu menu);
+
+    /**
+     * 根据父ID 查询最大排序
+     * @param parentId
+     * @return
+     */
+    int findMaxOrder(Integer parentId);
 }

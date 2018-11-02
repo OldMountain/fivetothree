@@ -13,44 +13,42 @@
 <body>
 <div class="layui-fluid">
     <div class="layui-row">
-        <div class="layui-form">
+        <form class="layui-form">
             <div class="layui-form-item">
-                <label class="layui-form-label">父菜单</label>
+                <label class="layui-form-label">上级菜单</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" class="layui-input layui-disabled" disabled value="ss">
+                    <input type="text" class="layui-input" style="color: #FF5722;" readonly value="${menu.menuName}">
+                    <%--<label class="layui-form-label">${menu.menuName ? menu.menuName : "全部菜单"}</label>--%>
+                    <input type="hidden" name="parentId" value="${menu.menuId}">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">菜单名称</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" placeholder="请输入" autocomplete="off" class="layui-input">
+                    <input type="text" name="menuName" placeholder="请输入" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">菜单URL</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" placeholder="请输入" autocomplete="off" class="layui-input">
+                    <input type="text" name="menuUrl" placeholder="请输入" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">图标</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" placeholder="请输入" autocomplete="off" class="layui-input">
+                    <input type="text" name="menuIcon" placeholder="请输入" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button class="layui-btn layui-btn-fluid">确认</button>
+                    <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="submitBtn">确认</button>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 <jsp:include page="${jspPath}/view/foot.jsp"></jsp:include>
-<script>
-    layui.use(['index', 'form', 'upload'], function () {
-
-    });
-</script>
+<script src="${ctx}static/js/menu/menu_add.js"></script>
 </body>
 </html>

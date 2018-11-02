@@ -5,6 +5,6 @@
 
 </head>
 <body>
-<jsp:forward page="/toLogin" />
+<jsp:forward page="/login" />
 </body>
 </html>

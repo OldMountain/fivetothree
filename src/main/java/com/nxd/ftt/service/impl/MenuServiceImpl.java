@@ -86,7 +86,7 @@ public class MenuServiceImpl implements MenuService {
         Tree rootTree = new Tree();
         rootTree.setChecked(false);
         rootTree.setpId("-1");
-        rootTree.setName("全部菜单");
+        rootTree.setName(Const.ROOT_MENU_NAME);
         rootTree.setId("0");
         rootTree.setOpen(true);
         treeNodeHasSub.add(rootTree);
@@ -148,6 +148,23 @@ public class MenuServiceImpl implements MenuService {
         }
         treeNodeHasSub.addAll(treeNode);
         return new Gson().toJson(treeNodeHasSub);
+    }
+
+    @Override
+    public Menu findById(Integer menuId) {
+        return menuDao.findById(menuId);
+    }
+
+    @Override
+    public int save(Menu menu) {
+        int order = this.findMaxOrder(Integer.parseInt(menu.getParentId()));
+        menu.setMenuOrder(order+1);
+        return menuDao.insert(menu);
+    }
+
+    @Override
+    public int findMaxOrder(Integer parentId) {
+        return menuDao.findMaxOrder(parentId);
     }
 
 
