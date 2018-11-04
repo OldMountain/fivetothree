@@ -1,16 +1,14 @@
 package com.nxd.ftt.service;
 
 import com.nxd.ftt.entity.system.Permission;
-import org.springframework.stereotype.Repository;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
  * PermissionService
  *
  * @author luhangqi
- * @date 2018/10/31
+ * @date 2018/11/04
  */
 public interface PermissionService {
 

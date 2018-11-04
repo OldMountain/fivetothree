@@ -4,10 +4,12 @@ import com.nxd.ftt.config.annotation.LogAndPermission;
 import com.nxd.ftt.controller.base.BaseController;
 import com.nxd.ftt.entity.Menu;
 import com.nxd.ftt.entity.Page;
+import com.nxd.ftt.entity.system.Permission;
 import com.nxd.ftt.entity.Role;
 import com.nxd.ftt.entity.result.Response;
 import com.nxd.ftt.entity.result.ResultKit;
 import com.nxd.ftt.service.MenuService;
+import com.nxd.ftt.service.PermissionService;
 import com.nxd.ftt.util.Const;
 import com.nxd.ftt.util.SystemUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,9 @@ public class MenuController extends BaseController {
 
     @Autowired
     private MenuService menuService;
+
+    @Autowired
+    private PermissionService permissionService;
     
     @RequestMapping(value = "/list")
     public ModelAndView list() {
@@ -76,5 +81,15 @@ public class MenuController extends BaseController {
     public Response save(Menu menu){
         menuService.save(menu);
         return ResultKit.success();
+    }
+
+    @LogAndPermission(value = "/getPermissions")
+    @ResponseBody
+    public Response getPermissions(String menuId, Page page){
+        startPage(page);
+        Permission permission = new Permission();
+        permission.setMenuId(Integer.parseInt(menuId));
+        List<Permission> permissions = permissionService.list(permission);
+        return ResultKit.table(permissions);
     }
 }

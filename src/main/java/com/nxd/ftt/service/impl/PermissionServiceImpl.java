@@ -6,14 +6,13 @@ import com.nxd.ftt.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
  * PermissionServiceImpl
  *
  * @author luhangqi
- * @date 2018/10/31
+ * @date 2018/11/04
  */
 @Service
 public class PermissionServiceImpl implements PermissionService {

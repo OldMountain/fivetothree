@@ -5,7 +5,7 @@
         <result column="ID" property="id"/>
         <result column="NAME" property="name"/>
         <result column="PERMISSION" property="permission"/>
-        <result column="URL" property="url"/>
+        <result column="MENU_ID" property="menuId"/>
     </resultMap>
     <select id="list" parameterType="com.nxd.ftt.entity.system.Permission" resultMap="BaseResultMap">
         select
@@ -13,7 +13,7 @@
             ID,
             NAME,
             PERMISSION,
-            URL,
+            MENU_ID,
         </trim>
         from a_sys_permission
         <where>
@@ -26,8 +26,8 @@
             <if test="permission != null and permission !=''">
                 and PERMISSION = #{permission}
             </if>
-            <if test="url != null and url !=''">
-                and URL = #{url}
+            <if test="menuId != null and menuId !=''">
+                and MENU_ID = #{menuId}
             </if>
         </where>
     </select>
@@ -37,7 +37,7 @@
             ID,
             NAME,
             PERMISSION,
-            URL,
+            MENU_ID,
         </trim>
         from a_sys_permission
         where ID = #{id}
@@ -61,8 +61,8 @@
             <if test="permission != null and permission !=''">
                 PERMISSION,
             </if>
-            <if test="url != null and url !=''">
-                URL,
+            <if test="menuId != null and menuId !=''">
+                MENU_ID,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -75,8 +75,8 @@
             <if test="permission != null and permission !=''">
                 #{permission},
             </if>
-            <if test="url != null and url !=''">
-                #{url},
+            <if test="menuId != null and menuId !=''">
+                #{menuId},
             </if>
         </trim>
     </insert>
@@ -93,8 +93,8 @@
             <if test="permission != null and permission !=''">
                 PERMISSION = #{permission},
             </if>
-            <if test="url != null and url !=''">
-                URL = #{url},
+            <if test="menuId != null and menuId !=''">
+                MENU_ID = #{menuId},
             </if>
         </trim>
         where ID = #{id}

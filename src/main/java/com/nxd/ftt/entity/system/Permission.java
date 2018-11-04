@@ -6,7 +6,7 @@ import com.google.gson.Gson;
  * Permission
  *
  * @author luhangqi
- * @date 2018/10/31
+ * @date 2018/11/04
  */
 public class Permission {
 
@@ -26,9 +26,9 @@ public class Permission {
     private String permission;
 
     /**
-     * 权限对应的菜单URL
+     * 权限对应的菜单ID
      */
-    private String url;
+    private Integer menuId;
 
 
     /** 
@@ -55,12 +55,12 @@ public class Permission {
         return permission;
     }
 
-    /** 权限对应的菜单URL
+    /** 权限对应的菜单ID
      *
-     * @return url
+     * @return menuId
      */
-    public String getUrl() {
-        return url;
+    public Integer getMenuId() {
+        return menuId;
     }
 
 
@@ -86,10 +86,10 @@ public class Permission {
     }
 
     /**
-     * 权限对应的菜单URL
+     * 权限对应的菜单ID
      */
-    public void setUrl(String url) {
-        this.url = url;
+    public void setMenuId(Integer menuId) {
+        this.menuId = menuId;
     }
 
     @Override

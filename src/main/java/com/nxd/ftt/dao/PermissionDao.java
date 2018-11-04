@@ -1,7 +1,6 @@
 package com.nxd.ftt.dao;
 
 import com.nxd.ftt.entity.system.Permission;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -9,7 +8,7 @@ import java.util.List;
  * PermissionDao
  *
  * @author luhangqi
- * @date 2018/10/31
+ * @date 2018/11/04
  */
 public interface PermissionDao {
 

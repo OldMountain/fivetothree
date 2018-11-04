@@ -20,7 +20,7 @@ layui.use(['index', 'form', 'upload', 'table'], function () {
             , {field: 'menuId', title: 'ID', sort: true}
             , {field: 'menuName', title: '菜单名称'}
             , {field: 'menuUrl', title: '菜单URL', sort: true}
-            , {field: 'parentId', title: '上级菜单ID', sort: true}
+            , {field: 'parentName', title: '上级菜单', sort: true}
             , {field: 'menuOrder', title: '序号', sort: true}
             , {field: 'menuIcon', title: '图标'}
             , {field: 'menuType', title: '菜单类型'}
@@ -57,8 +57,13 @@ layui.use(['index', 'form', 'upload', 'table'], function () {
 
     function onClick(event, treeId, treeNode) {
         zTree.checkNode(treeNode);
+        var level = treeNode.level;
+        var url = "menu/getSubMenu";
+        if (level && level == 2) {
+            url = "menu/getPermissions";
+        }
         table.reload("menuTable", {
-            url: layui.cache.root + 'menu/getSubMenu?menuId=' + treeNode.id
+            url: layui.cache.root + url + '?menuId=' + treeNode.id
         })
     }
 
@@ -71,18 +76,26 @@ layui.use(['index', 'form', 'upload', 'table'], function () {
             level = zTree.getCheckedNodes(true)[0].level;
         }
         var title = '添加一级菜单';
+        console.info("level - > " + level)
         if (level && level == 1) {
             title = '添加二级菜单';
         }else if (level && level == 2) {
             title = '添加按钮权限';
+            open("menu/getPermissions",menuId);
+            return;
         }
+        open("menu/toAdd",menuId);
+
+    }
+
+    function open(url,menuId) {
         layer.open({
             title: title,
             type: 2,
             area: ['700px', '450px'],
             fixed: false, //不固定
             maxmin: true,
-            content: layui.cache.root + 'menu/toAdd?menuId=' + menuId
+            content: layui.cache.root + url + '?menuId=' + menuId
         });
     }
 

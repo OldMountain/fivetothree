@@ -13,36 +13,37 @@
     <select id="select" parameterType="com.nxd.ftt.entity.Menu" resultMap="BaseResultMap">
         select
         <trim suffixOverrides=",">
-            MENU_ID,
-            MENU_NAME,
-            MENU_URL,
-            PARENT_ID,
-            MENU_ORDER,
-            MENU_ICON,
-            MENU_TYPE,
+            a.MENU_ID,
+            a.MENU_NAME,
+            a.MENU_URL,
+            a.PARENT_ID,
+            a.MENU_ORDER,
+            a.MENU_ICON,
+            a.MENU_TYPE,
+            b.MENU_NAME parentName
         </trim>
-        from a_sys_menu
+        from a_sys_menu a left join a_sys_menu b on a.PARENT_ID = b.MENU_ID
         <where>
             <if test="menuId != null and menuId !=''">
-                and MENU_ID = #{menuId}
+                and a.MENU_ID = #{menuId}
             </if>
             <if test="menuName != null and menuName !=''">
-                and MENU_NAME = #{menuName}
+                and a.MENU_NAME = #{menuName}
             </if>
             <if test="menuUrl != null and menuUrl !=''">
-                and MENU_URL = #{menuUrl}
+                and a.MENU_URL = #{menuUrl}
             </if>
             <if test="parentId != null and parentId !=''">
-                and PARENT_ID = #{parentId}
+                and a.PARENT_ID = #{parentId}
             </if>
             <if test="menuOrder != null and menuOrder !=''">
-                and MENU_ORDER = #{menuOrder}
+                and a.MENU_ORDER = #{menuOrder}
             </if>
             <if test="menuIcon != null and menuIcon !=''">
-                and MENU_ICON = #{menuIcon}
+                and a.MENU_ICON = #{menuIcon}
             </if>
             <if test="menuType != null and menuType !=''">
-                and MENU_TYPE = #{menuType}
+                and a.MENU_TYPE = #{menuType}
             </if>
         </where>
         order by MENU_ORDER asc
