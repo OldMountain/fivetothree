@@ -8,7 +8,7 @@ import java.util.List;
  * PermissionDao
  *
  * @author luhangqi
- * @date 2018/11/04
+ * @date 2018/11/05
  */
 public interface PermissionDao {
 
