@@ -2,9 +2,11 @@ package com.nxd.ftt.controller.base;
 
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.nxd.ftt.entity.Page;
 import com.nxd.ftt.entity.Role;
 import com.nxd.ftt.entity.User;
+import com.nxd.ftt.entity.result.ResultPage;
 import com.nxd.ftt.service.RoleService;
 import com.nxd.ftt.util.Const;
 import com.nxd.ftt.util.PageData;
@@ -23,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class BaseController {
@@ -106,7 +109,9 @@ public class BaseController {
      * @param value
      */
     protected void setShiroSessionField(Object key, Object value) throws InvalidSessionException {
-        if (key == null) {return;}
+        if (key == null) {
+            return;
+        }
         Session shiroSession = this.getShiroSession();
         if (shiroSession != null) {
             shiroSession.setAttribute(key, value);
@@ -246,10 +251,9 @@ public class BaseController {
             }
             int endTag = startTag + showTag - 1;
             for (int i = startTag; i <= page.getPages() && i <= endTag; i++) {
-                if (page.getPageNum() == i){
+                if (page.getPageNum() == i) {
                     sb.append(" <li class=\"active disabled\"><a href=\"javascript:void(0);\">" + i + "</a></li>\n");
-                }
-                else{
+                } else {
                     sb.append(" <li><a href=\"javascript:void(0);\" onclick=\"toGoPage(" + i + "," + page.getPageSize() + ")\">" + i + "</a></li>\n");
                 }
             }
@@ -299,9 +303,6 @@ public class BaseController {
 
     protected void startPage(Page page) {
         PageHelper.startPage(page.getPageNum(), page.getPageSize());
-    }
-    protected void startPageTable(Page page) {
-        PageHelper.startPage(page.getPage(), page.getLimit());
     }
 
     protected Map<String, Object> setSuccess() {

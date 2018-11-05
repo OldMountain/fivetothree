@@ -1,4 +1,4 @@
-package com.nxd.ftt.controller.websocket;
+package com.nxd.ftt.config.websocket;
 
 import com.alibaba.fastjson.JSONObject;
 import com.nxd.ftt.entity.WebSocket;

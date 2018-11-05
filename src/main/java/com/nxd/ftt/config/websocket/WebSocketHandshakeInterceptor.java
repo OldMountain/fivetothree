@@ -1,4 +1,4 @@
-package com.nxd.ftt.controller.websocket;
+package com.nxd.ftt.config.websocket;
 
 import com.nxd.ftt.util.Const;
 import com.nxd.ftt.util.Tools;

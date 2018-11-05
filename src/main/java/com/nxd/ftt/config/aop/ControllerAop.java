@@ -1,6 +1,9 @@
 package com.nxd.ftt.config.aop;
 
+import com.google.gson.Gson;
 import com.nxd.ftt.config.annotation.LogAndPermission;
+import com.nxd.ftt.config.exception.NoPermissionException;
+import com.nxd.ftt.util.Const;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -10,8 +13,14 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 控制层AOP
@@ -28,19 +37,32 @@ public class ControllerAop {
     }
 
     @Before("pointCut()")
-    public void doBefore(JoinPoint joinPoint) {
+    public void doBefore(JoinPoint joinPoint) throws NoPermissionException {
         MethodSignature joinPointObject = (MethodSignature) joinPoint.getSignature();
         Method method = joinPointObject.getMethod();
         LogAndPermission methodAnnotation = method.getAnnotation(LogAndPermission.class);
+
         if (methodAnnotation != null) {
-            methodAnnotation.value();
-            String[] perms = methodAnnotation.permissions();
+            HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+            //记录日志
             Class<?> aClass = joinPoint.getTarget().getClass();
             if (aClass != null) {
                 RequestMapping classAnnotation = aClass.getAnnotation(RequestMapping.class);
                 classAnnotation.value();
             }
+            if (methodAnnotation.permissions() != null && methodAnnotation.permissions().length > 0) {
+                //校验权限
+                List<String> perms = Arrays.asList(methodAnnotation.permissions());
+                List<String> per = new ArrayList<>();
+                per.add("permission.save");
+                request.getSession().setAttribute(Const.USER_ALL_PERMISSION, per);
+                List<String> permissionList = (List<String>) request.getSession().getAttribute(Const.USER_ALL_PERMISSION);
+                if (permissionList == null || !permissionList.containsAll(perms)) {
+                    throw new NoPermissionException("缺少权限：" + new Gson().toJson(perms));
+                }
+            }
         }
+
         System.out.println("AOP Before Advice...");
     }
 
@@ -52,12 +74,6 @@ public class ControllerAop {
     //    @AfterReturning(pointcut = "pointCut()", returning = "returnVal")
     public void afterReturn(JoinPoint joinPoint, Object returnVal) {
         System.out.println("AOP AfterReturning Advice:" + returnVal);
-    }
-
-    @AfterThrowing(pointcut = "pointCut()", throwing = "error")
-    public void afterThrowing(JoinPoint joinPoint, Throwable error) {
-        System.out.println("AOP AfterThrowing Advice..." + error);
-        System.out.println("AfterThrowing...");
     }
 
     //    @Around("pointCut()")

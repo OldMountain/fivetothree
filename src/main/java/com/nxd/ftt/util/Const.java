@@ -137,4 +137,9 @@ public class Const {
      * 菜单树 根目录名称
      */
     public static final String ROOT_MENU_NAME = "全部菜单";
+
+    /**
+     * 用户权限
+     */
+    public static final String USER_ALL_PERMISSION = "USER_ALL_PERMISSION";
 }

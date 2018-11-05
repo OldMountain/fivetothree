@@ -4,13 +4,13 @@ layui.use(['index', 'form'], function () {
     //获取菜单ID
     form.on('submit(submitBtn)',function (data) {
         var params = data.field;
-        saveMenu(params);
+        savePermission(params);
         return false;
     })
 
-    function saveMenu(params) {
+    function savePermission(params) {
         $.ajax({
-            url: layui.cache.root + "menu/save",
+            url: layui.cache.root + "menu/savePermission",
             type: 'post',
             data: params,
             dataType: 'json',

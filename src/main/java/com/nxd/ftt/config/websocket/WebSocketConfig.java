@@ -1,4 +1,4 @@
-package com.nxd.ftt.controller.websocket;
+package com.nxd.ftt.config.websocket;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

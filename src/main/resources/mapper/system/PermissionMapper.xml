@@ -6,28 +6,30 @@
         <result column="NAME" property="name"/>
         <result column="PERMISSION" property="permission"/>
         <result column="MENU_ID" property="menuId"/>
+        <result column="MENU_NAME" property="menuName"/>
     </resultMap>
     <select id="list" parameterType="com.nxd.ftt.entity.system.Permission" resultMap="BaseResultMap">
         select
         <trim suffixOverrides=",">
-            ID,
-            NAME,
-            PERMISSION,
-            MENU_ID,
+            a.ID,
+            a.NAME,
+            a.PERMISSION,
+            a.MENU_ID,
+            b.MENU_NAME
         </trim>
-        from a_sys_permission
+        from a_sys_permission a left join a_sys_menu b on a.MENU_ID = b.MENU_ID
         <where>
             <if test="id != null and id !=''">
-                and ID = #{id}
+                and a.ID = #{id}
             </if>
             <if test="name != null and name !=''">
-                and NAME = #{name}
+                and a.NAME = #{name}
             </if>
             <if test="permission != null and permission !=''">
-                and PERMISSION = #{permission}
+                and a.PERMISSION = #{permission}
             </if>
             <if test="menuId != null and menuId !=''">
-                and MENU_ID = #{menuId}
+                and a.MENU_ID = #{menuId}
             </if>
         </where>
     </select>

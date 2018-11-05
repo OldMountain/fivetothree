@@ -4,10 +4,11 @@ import com.nxd.ftt.config.annotation.LogAndPermission;
 import com.nxd.ftt.controller.base.BaseController;
 import com.nxd.ftt.entity.Menu;
 import com.nxd.ftt.entity.Page;
-import com.nxd.ftt.entity.system.Permission;
 import com.nxd.ftt.entity.Role;
 import com.nxd.ftt.entity.result.Response;
 import com.nxd.ftt.entity.result.ResultKit;
+import com.nxd.ftt.entity.result.ResultPage;
+import com.nxd.ftt.entity.system.Permission;
 import com.nxd.ftt.service.MenuService;
 import com.nxd.ftt.service.PermissionService;
 import com.nxd.ftt.util.Const;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,7 +38,7 @@ public class MenuController extends BaseController {
 
     @Autowired
     private PermissionService permissionService;
-    
+
     @RequestMapping(value = "/list")
     public ModelAndView list() {
         ModelAndView mv = new ModelAndView("system/sys_menu/menu_list");
@@ -48,7 +51,7 @@ public class MenuController extends BaseController {
 
     @LogAndPermission(value = "/getMenuTree")
     @ResponseBody
-    public Response getMenuTree(){
+    public Response getMenuTree() {
         Role role = new Role();
         role.setRoleId(SystemUtil.getCurrentUser().getRoleId());
         String treeNode = menuService.listTreeMenu(role, 0);
@@ -56,8 +59,13 @@ public class MenuController extends BaseController {
     }
 
     @LogAndPermission(value = "/toAdd")
-    public ModelAndView toAdd(Integer menuId){
-        ModelAndView mv = new ModelAndView("system/sys_menu/menu_add");
+    public ModelAndView toAdd(Integer menuId, Integer level) {
+        ModelAndView mv = new ModelAndView();
+        if (level != null && level == 2) {
+            mv.setViewName("system/sys_menu/permission_add");
+        }else {
+            mv.setViewName("system/sys_menu/menu_add");
+        }
         Menu menu = menuService.findById(menuId);
         if (menu == null) {
             menu = new Menu();
@@ -70,26 +78,33 @@ public class MenuController extends BaseController {
 
     @LogAndPermission(value = "/getSubMenu")
     @ResponseBody
-    public Response getSubMenu(String menuId, Page page){
+    public ResultPage getSubMenu(String menuId, Page page) {
         startPage(page);
         List<Menu> subMenuList = menuService.selectSubMenuByParentId(menuId);
-        return ResultKit.table(subMenuList);
+        return ResultPage.success(subMenuList);
     }
 
-    @LogAndPermission(value = "/save")
+    @LogAndPermission(value = "/save", permissions = "menu.save")
     @ResponseBody
-    public Response save(Menu menu){
+    public Response save(Menu menu) {
         menuService.save(menu);
         return ResultKit.success();
     }
 
     @LogAndPermission(value = "/getPermissions")
     @ResponseBody
-    public Response getPermissions(String menuId, Page page){
+    public ResultPage getPermissions(String menuId, Page page) {
         startPage(page);
         Permission permission = new Permission();
         permission.setMenuId(Integer.parseInt(menuId));
         List<Permission> permissions = permissionService.list(permission);
-        return ResultKit.table(permissions);
+        return ResultPage.success(permissions);
+    }
+
+    @LogAndPermission(value = "/savePermission", permissions = "permission.save")
+    @ResponseBody
+    public Response savePermission(Permission permission) {
+        permissionService.save(permission);
+        return ResultKit.success();
     }
 }
