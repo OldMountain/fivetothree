@@ -14,7 +14,7 @@
                 <div class="layui-input-block">
                     <input type="text" class="layui-input" style="color: #FF5722;" readonly value="${menu.menuName}">
                     <%--<label class="layui-form-label">${menu.menuName ? menu.menuName : "全部菜单"}</label>--%>
-                    <input type="hidden" name="menuId" value="${menu.menuId}">
+                    <input type="hidden" id="menuId" name="menuId" value="${menu.menuId}">
                 </div>
             </div>
             <div class="layui-form-item">

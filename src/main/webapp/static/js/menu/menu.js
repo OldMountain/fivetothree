@@ -1,5 +1,6 @@
+var table;
 layui.use(['index', 'form', 'upload', 'table'], function () {
-    var table = layui.table //表格
+    table = layui.table //表格
     var zTree;
     getTree(layui.cache.root + "menu/getMenuTree", $("#treeBox"))
     $("#menu-add").click(function () {

@@ -17,6 +17,9 @@ layui.use(['index', 'form'], function () {
             success: function (result) {
                 if (result.code == 200) {
                     parent.layer.msg('保存成功');
+                    parent.table.reload("menuTable", {
+                        url: layui.cache.root + 'menu/getPermissions?menuId=' + $("#menuId").val()
+                    })
                     parent.layer.close(index);
                 }else {
                     parent.layer.alert(result.message);
