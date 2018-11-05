@@ -8,18 +8,18 @@ layui.use(['index', 'form', 'upload', 'table'], function () {
 
     var meuCols = [ //表头
         {type: 'checkbox', fixed: 'left'}
-        , {field: 'menuId', title: 'ID', sort: true, width: 80}
+        , {field: 'numbers', title: '序号', sort: true, width: 80, type: 'numbers'}
         , {field: 'menuName', title: '菜单名称'}
         , {field: 'menuUrl', title: '菜单URL', sort: true}
         , {field: 'parentName', title: '上级菜单', sort: true}
-        , {field: 'menuOrder', title: '序号', sort: true}
+        , {field: 'menuOrder', title: '排序', sort: true}
         , {field: 'menuIcon', title: '图标'}
         , {field: 'menuType', title: '菜单类型'}
     ];
 
     var permissionCols = [ //表头
         {type: 'checkbox', fixed: 'left'}
-        , {field: 'id', title: 'ID', sort: true, width: 80}
+        , {field: 'numbers', title: '序号', sort: true, width: 80, type: 'numbers'}
         , {field: 'name', title: '权限名称'}
         , {field: 'permission', title: '权限值', sort: true}
         , {field: 'menuName', title: '所属菜单', sort: true}
@@ -34,9 +34,11 @@ layui.use(['index', 'form', 'upload', 'table'], function () {
         , height: 420
         , url: layui.cache.root + 'menu/getSubMenu?menuId=0' //数据接口
         , title: '用户表'
+        , loading: true // 是否显示加载条
         , page: true //开启分页
         , toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
         , totalRow: false //开启合计行
+        , title: '系统异常，请联系管理员'
         , cols: [//表头
             meuCols
         ]

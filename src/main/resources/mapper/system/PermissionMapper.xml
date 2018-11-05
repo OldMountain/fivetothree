@@ -10,6 +10,7 @@
         <result column="UPDATE_TIME" property="updateTime"/>
         <result column="CREATEOR" property="createor"/>
         <result column="UPDATEOR" property="updateor"/>
+        <result column="MENU_NAME" property="menuName"/>
     </resultMap>
     <select id="list" parameterType="com.nxd.ftt.entity.system.Permission" resultMap="BaseResultMap">
         select
