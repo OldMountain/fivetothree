@@ -94,7 +94,7 @@ public class User {
     /**
      * 角色ID
      */
-    private String roleId;
+    private Integer roleId;
 
     /**
      * 最后登录时间
@@ -309,7 +309,7 @@ public class User {
      *
      * @return roleId
      */
-    public String getRoleId() {
+    public Integer getRoleId() {
         return roleId;
     }
 
@@ -549,7 +549,7 @@ public class User {
     /**
      * 角色ID
      */
-    public void setRoleId(String roleId) {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
 

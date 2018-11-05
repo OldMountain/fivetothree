@@ -169,6 +169,7 @@
             b.ROLE_ID,
             b.ROLE_NAME,
             b.RIGHTS,
+            b.PARENT_ID
         </trim>
         from a_sys_user_role a
         left join a_sys_role b on a.ROLE_ID = b.ROLE_ID

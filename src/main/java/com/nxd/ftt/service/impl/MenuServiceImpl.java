@@ -163,6 +163,11 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
+    public int modify(Menu menu) {
+        return menuDao.update(menu);
+    }
+
+    @Override
     public int findMaxOrder(Integer parentId) {
         return menuDao.findMaxOrder(parentId);
     }

@@ -93,6 +93,9 @@ public class LoginController extends BaseController {
                 //shiro加入身份验证
                 UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(), user.getPassword());
                 currentUser.login(token);
+                user.setRoles(roleService.findRoleByUser(user.getUserId()));
+                // TODO: 2018/11/5 权限
+                session.setAttribute(Const.USER_ALL_PERMISSION,null);
                 String path = request.getContextPath();
                 String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
                 session.setAttribute(Const.CONTEXT_PATH, basePath);

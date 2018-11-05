@@ -6,7 +6,7 @@ public class Role extends BaseEntity {
     /**
      * @mbg.generated 2017-12-04
      */
-    private String roleId;
+    private Integer roleId;
 
     /**
      * @mbg.generated 2017-12-04
@@ -21,7 +21,7 @@ public class Role extends BaseEntity {
     /**
      * @mbg.generated 2017-12-04
      */
-    private String parentId;
+    private Integer parentId;
 
     /**
      * @mbg.generated 2017-12-04
@@ -51,149 +51,131 @@ public class Role extends BaseEntity {
     public Role() {
     }
 
-    public Role(String parentId) {
+    public Role(Integer parentId) {
         this.parentId = parentId;
     }
 
     /**
-     * 
-     * @return ROLE_ID 
+     * @return ROLE_ID
      */
-    public String getRoleId() {
+    public Integer getRoleId() {
         return roleId;
     }
 
     /**
-     * 
-     * @param roleId 
+     * @param roleId
      */
-    public void setRoleId(String roleId) {
-        this.roleId = roleId == null ? null : roleId.trim();
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
     /**
-     * 
-     * @return ROLE_NAME 
+     * @return ROLE_NAME
      */
     public String getRoleName() {
         return roleName;
     }
 
     /**
-     * 
-     * @param roleName 
+     * @param roleName
      */
     public void setRoleName(String roleName) {
         this.roleName = roleName == null ? null : roleName.trim();
     }
 
     /**
-     * 
-     * @return RIGHTS 
+     * @return RIGHTS
      */
     public String getRights() {
         return rights;
     }
 
     /**
-     * 
-     * @param rights 
+     * @param rights
      */
     public void setRights(String rights) {
         this.rights = rights == null ? null : rights.trim();
     }
 
     /**
-     * 
-     * @return PARENT_ID 
+     * @return PARENT_ID
      */
-    public String getParentId() {
+    public Integer getParentId() {
         return parentId;
     }
 
     /**
-     * 
-     * @param parentId 
+     * @param parentId
      */
-    public void setParentId(String parentId) {
-        this.parentId = parentId == null ? null : parentId.trim();
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
     }
 
     /**
-     * 
-     * @return ADD_QX 
+     * @return ADD_QX
      */
     public String getAddQx() {
         return addQx;
     }
 
     /**
-     * 
-     * @param addQx 
+     * @param addQx
      */
     public void setAddQx(String addQx) {
         this.addQx = addQx == null ? null : addQx.trim();
     }
 
     /**
-     * 
-     * @return DEL_QX 
+     * @return DEL_QX
      */
     public String getDelQx() {
         return delQx;
     }
 
     /**
-     * 
-     * @param delQx 
+     * @param delQx
      */
     public void setDelQx(String delQx) {
         this.delQx = delQx == null ? null : delQx.trim();
     }
 
     /**
-     * 
-     * @return EDIT_QX 
+     * @return EDIT_QX
      */
     public String getEditQx() {
         return editQx;
     }
 
     /**
-     * 
-     * @param editQx 
+     * @param editQx
      */
     public void setEditQx(String editQx) {
         this.editQx = editQx == null ? null : editQx.trim();
     }
 
     /**
-     * 
-     * @return CHA_QX 
+     * @return CHA_QX
      */
     public String getChaQx() {
         return chaQx;
     }
 
     /**
-     * 
-     * @param chaQx 
+     * @param chaQx
      */
     public void setChaQx(String chaQx) {
         this.chaQx = chaQx == null ? null : chaQx.trim();
     }
 
     /**
-     * 
-     * @return QX_ID 
+     * @return QX_ID
      */
     public String getQxId() {
         return qxId;
     }
 
     /**
-     * 
-     * @param qxId 
+     * @param qxId
      */
     public void setQxId(String qxId) {
         this.qxId = qxId == null ? null : qxId.trim();

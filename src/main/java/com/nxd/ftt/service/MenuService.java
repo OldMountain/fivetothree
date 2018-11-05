@@ -65,6 +65,13 @@ public interface MenuService {
     int save(Menu menu);
 
     /**
+     * 保存菜单
+     * @param menu
+     * @return
+     */
+    int modify(Menu menu);
+
+    /**
      * 根据父ID 查询最大排序
      * @param parentId
      * @return

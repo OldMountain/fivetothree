@@ -3,10 +3,11 @@ package com.nxd.ftt.config.aop;
 import com.google.gson.Gson;
 import com.nxd.ftt.config.annotation.LogAndPermission;
 import com.nxd.ftt.config.exception.NoPermissionException;
+import com.nxd.ftt.entity.Role;
+import com.nxd.ftt.entity.User;
 import com.nxd.ftt.util.Const;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -18,7 +19,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -51,19 +51,26 @@ public class ControllerAop {
                 classAnnotation.value();
             }
             if (methodAnnotation.permissions() != null && methodAnnotation.permissions().length > 0) {
+                User user = (User) request.getSession().getAttribute(Const.SESSION_USER);
+                List<Role> roles = user.getRoles();
+                boolean validate = true;
+                for (int i = 0; i < roles.size(); i++) {
+                    if (roles.get(i).getParentId() == -1) {
+                        validate = false;
+                        break;
+                    }
+                }
                 //校验权限
-                List<String> perms = Arrays.asList(methodAnnotation.permissions());
-                List<String> per = new ArrayList<>();
-                per.add("permission.save");
-                request.getSession().setAttribute(Const.USER_ALL_PERMISSION, per);
-                List<String> permissionList = (List<String>) request.getSession().getAttribute(Const.USER_ALL_PERMISSION);
-                if (permissionList == null || !permissionList.containsAll(perms)) {
-                    throw new NoPermissionException("缺少权限：" + new Gson().toJson(perms));
+                if (validate) {
+                    List<String> perms = Arrays.asList(methodAnnotation.permissions());
+                    List<String> permissionList = (List<String>) request.getSession().getAttribute(Const.USER_ALL_PERMISSION);
+                    if (permissionList == null || !permissionList.containsAll(perms)) {
+                        throw new NoPermissionException("缺少权限：" + new Gson().toJson(perms));
+                    }
                 }
             }
         }
 
-        System.out.println("AOP Before Advice...");
     }
 
     //    @After("pointCut()")

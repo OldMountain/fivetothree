@@ -40,7 +40,7 @@ public interface RoleDao {
      * @param roleId
      * @return int
      */
-    int delete(String roleId);
+    int delete(Integer roleId);
 
     /**
      * 根据userId查询角色

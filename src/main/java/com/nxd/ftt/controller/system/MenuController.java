@@ -91,6 +91,13 @@ public class MenuController extends BaseController {
         return ResultKit.success();
     }
 
+    @LogAndPermission(value = "/modify", permissions = "menu.modify")
+    @ResponseBody
+    public Response modify(Menu menu) {
+        menuService.modify(menu);
+        return ResultKit.success();
+    }
+
     @LogAndPermission(value = "/getPermissions")
     @ResponseBody
     public ResultPage getPermissions(String menuId, Page page) {
@@ -105,6 +112,13 @@ public class MenuController extends BaseController {
     @ResponseBody
     public Response savePermission(Permission permission) {
         permissionService.save(permission);
+        return ResultKit.success();
+    }
+
+    @LogAndPermission(value = "/modifyPermission", permissions = "permission.modify")
+    @ResponseBody
+    public Response modifyPermission(Permission permission) {
+        permissionService.modify(permission);
         return ResultKit.success();
     }
 }

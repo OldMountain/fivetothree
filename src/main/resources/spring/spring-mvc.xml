@@ -45,12 +45,12 @@
 
 
     <!-- 访问拦截  -->
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/**/**"/>
-            <bean class="com.nxd.ftt.interceptor.LoginHandlerInterceptor"/>
-        </mvc:interceptor>
-    </mvc:interceptors>
+    <!--<mvc:interceptors>-->
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/**/**"/>-->
+            <!--<bean class="com.nxd.ftt.interceptor.LoginHandlerInterceptor"/>-->
+        <!--</mvc:interceptor>-->
+    <!--</mvc:interceptors>-->
     <!-- pjax视图拦截  -->
     <mvc:interceptors>
         <mvc:interceptor>

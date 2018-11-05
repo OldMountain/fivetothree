@@ -82,11 +82,6 @@ public class RoleController extends BaseController {
     @ResponseBody
     public Result add(Role role) {
         Result result = new Result();
-        role.setRoleId(this.get32UUID());
-        role.setAddQx("0");
-        role.setChaQx("0");
-        role.setDelQx("0");
-        role.setEditQx("0");
         try {
             roleService.save(role);
             result.setStatus("success");
@@ -211,7 +206,7 @@ public class RoleController extends BaseController {
      */
     @RequestMapping(value = "/saveName")
     @ResponseBody
-    public Result saveQX(String roleId, String roleName){
+    public Result saveQX(Integer roleId, String roleName){
         Result resultModel = new Result();
         try {
             Role role = new Role();
