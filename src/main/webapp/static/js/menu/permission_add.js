@@ -16,9 +16,10 @@ layui.use(['index', 'form'], function () {
             dataType: 'json',
             success: function (result) {
                 if (result.code == 200) {
-                    layer.msg('保存成功');
+                    parent.layer.msg('保存成功');
+                    parent.layer.close(index);
                 }else {
-                    layer.alert(result.message);
+                    parent.layer.alert(result.message);
                 }
             }
         })

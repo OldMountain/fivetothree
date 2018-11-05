@@ -31,6 +31,11 @@ public class Permission {
     private Integer menuId;
 
     /**
+     * 权限对应的菜单名称
+     */
+    private String menuName;
+
+    /**
      * 创建时间
      */
     private Date createTime;
@@ -175,5 +180,13 @@ public class Permission {
     @Override
     public String toString() {
         return new Gson().toJson(this);
+    }
+
+    public String getMenuName() {
+        return menuName;
+    }
+
+    public void setMenuName(String menuName) {
+        this.menuName = menuName;
     }
 }

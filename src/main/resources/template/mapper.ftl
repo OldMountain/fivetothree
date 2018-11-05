@@ -47,6 +47,10 @@
             <if test="${row.filedName} != null and ${row.filedName} !=''">
                 ${row.columnName},
             </if>
+                <#else>
+            <if test="${row.filedName} != null">
+                ${row.columnName},
+            </if>
                 </#if>
             </#list>
         </trim>
@@ -54,6 +58,10 @@
             <#list table as row>
                 <#if row.dataType != 'Date'>
             <if test="${row.filedName} != null and ${row.filedName} !=''">
+                ${"#{" + row.filedName + "}"},
+            </if>
+                <#else>
+            <if test="${row.filedName} != null">
                 ${"#{" + row.filedName + "}"},
             </if>
                 </#if>
@@ -67,6 +75,10 @@
             <#list table as row>
                 <#if row.dataType != 'Date'>
             <if test="${row.filedName} != null and ${row.filedName} !=''">
+                ${row.columnName} = ${"#{" + row.filedName + "}"},
+            </if>
+                <#else>
+            <if test="${row.filedName} != null">
                 ${row.columnName} = ${"#{" + row.filedName + "}"},
             </if>
                 </#if>

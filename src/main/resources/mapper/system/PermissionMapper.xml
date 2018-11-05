@@ -14,40 +14,29 @@
     <select id="list" parameterType="com.nxd.ftt.entity.system.Permission" resultMap="BaseResultMap">
         select
         <trim suffixOverrides=",">
-            ID,
-            NAME,
-            PERMISSION,
-            MENU_ID,
-            CREATE_TIME,
-            UPDATE_TIME,
-            CREATEOR,
-            UPDATEOR,
+            a.ID,
+            a.NAME,
+            a.PERMISSION,
+            a.MENU_ID,
+            b.MENU_NAME,
+            a.CREATE_TIME,
+            a.UPDATE_TIME,
+            a.CREATEOR,
+            a.UPDATEOR,
         </trim>
-        from a_sys_permission
+        from a_sys_permission a left join a_sys_menu b on a.MENU_ID = b.MENU_ID
         <where>
             <if test="id != null and id !=''">
-                and ID = #{id}
+                and a.ID = #{id}
             </if>
             <if test="name != null and name !=''">
-                and NAME = #{name}
+                and a.NAME = #{name}
             </if>
             <if test="permission != null and permission !=''">
-                and PERMISSION = #{permission}
+                and a.PERMISSION = #{permission}
             </if>
             <if test="menuId != null and menuId !=''">
-                and MENU_ID = #{menuId}
-            </if>
-            <if test="createTime != null and createTime !=''">
-                and CREATE_TIME = #{createTime}
-            </if>
-            <if test="updateTime != null and updateTime !=''">
-                and UPDATE_TIME = #{updateTime}
-            </if>
-            <if test="createor != null and createor !=''">
-                and CREATEOR = #{createor}
-            </if>
-            <if test="updateor != null and updateor !=''">
-                and UPDATEOR = #{updateor}
+                and a.MENU_ID = #{menuId}
             </if>
         </where>
     </select>
@@ -88,6 +77,12 @@
             <if test="menuId != null and menuId !=''">
                 MENU_ID,
             </if>
+            <if test="createTime != null">
+                CREATE_TIME,
+            </if>
+            <if test="updateTime != null">
+                UPDATE_TIME,
+            </if>
             <if test="createor != null and createor !=''">
                 CREATEOR,
             </if>
@@ -107,6 +102,12 @@
             </if>
             <if test="menuId != null and menuId !=''">
                 #{menuId},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime},
             </if>
             <if test="createor != null and createor !=''">
                 #{createor},
@@ -131,6 +132,12 @@
             </if>
             <if test="menuId != null and menuId !=''">
                 MENU_ID = #{menuId},
+            </if>
+            <if test="createTime != null and createTime !=''">
+                CREATE_TIME = #{createTime},
+            </if>
+            <if test="updateTime != null and updateTime !=''">
+                UPDATE_TIME = #{updateTime},
             </if>
             <if test="createor != null and createor !=''">
                 CREATEOR = #{createor},
