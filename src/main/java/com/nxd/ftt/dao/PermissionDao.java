@@ -1,5 +1,6 @@
 package com.nxd.ftt.dao;
 
+import com.nxd.ftt.entity.Tree;
 import com.nxd.ftt.entity.system.Permission;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public interface PermissionDao {
      * @param id
      * @return
      */
-    Permission findById(Integer id);
+    Permission findById(String id);
 
     /**
     * 批量删除
@@ -53,4 +54,11 @@ public interface PermissionDao {
     * @return
     */
     int delete(Integer id);
+
+    /**
+     * 树形权限
+     *
+     * @return
+     */
+    List<Tree> getPermissionTree();
 }

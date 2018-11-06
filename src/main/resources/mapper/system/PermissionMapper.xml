@@ -153,4 +153,20 @@
         delete from a_sys_permission
         where ID = #{id}
     </delete>
+
+    <select id="getPermissionTree" parameterType="com.nxd.ftt.entity.Tree">
+        select
+            a.MENU_ID id,
+            a.MENU_NAME name,
+            a.PARENT_ID pId
+        from a_sys_menu a left join a_sys_menu b on a.PARENT_ID = b.MENU_ID
+        union all
+        select
+            b.ID id,
+            b.`NAME` name,
+            a.MENU_ID pId
+        from a_sys_menu a,a_sys_permission b
+        WHERE a.MENU_ID = b.MENU_ID
+    </select>
+
 </mapper>

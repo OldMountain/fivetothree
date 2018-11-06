@@ -1,8 +1,11 @@
 package com.nxd.ftt.util;
 
+import com.nxd.ftt.entity.Role;
 import com.nxd.ftt.entity.User;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
+
+import java.util.List;
 
 /**
  * 系统工具类
@@ -26,5 +29,16 @@ public class SystemUtil {
             e.printStackTrace();
         }
         return user;
+    }
+
+    public static boolean isAdmin(){
+        User user = getCurrentUser();
+        List<Role> roles = user.getRoles();
+        for (int i = 0; i < roles.size(); i++) {
+            if (Const.ADMIN_ROLE_ID.equals(roles.get(i).getParentId())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

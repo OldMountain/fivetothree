@@ -44,11 +44,9 @@ public interface MenuService {
 
     /**
      * 获取菜单树
-     * @param role
-     * @param type
      * @return
      */
-    String listTreeMenu(Role role, int type);
+    String listTreeMenu();
 
     /**
      * 根据ID 查询菜单

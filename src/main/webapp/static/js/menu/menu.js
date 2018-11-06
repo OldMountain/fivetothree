@@ -73,23 +73,24 @@ layui.use(['index', 'form', 'upload', 'table'], function () {
 
 
     function onClick(event, treeId, treeNode) {
-        zTree.checkNode(treeNode);
+        if (treeNode.checked) {
+            return;
+        }
+        zTree.checkNode(treeNode,true);
         var level = treeNode.level;
         if (level && level == 2) {
-            console.info("level2 - > " + level)
             table.reload("menuTable", {
                 url: layui.cache.root + 'menu/getPermissions?menuId=' + treeNode.id,
                 cols: [permissionCols]
             })
             return;
         }
-        console.info("level - > " + level)
         table.reload("menuTable", {
             url: layui.cache.root + 'menu/getSubMenu?menuId=' + treeNode.id,
             cols: [meuCols]
         })
     }
-
+    
     function openAdd() {
         var nodes = zTree.getCheckedNodes(true);
         var menuId = '';
@@ -126,7 +127,7 @@ layui.use(['index', 'form', 'upload', 'table'], function () {
     function initTree(ele, nodes) {
         var setting = {
             view: {
-                dblClickExpand: false
+                dblClickExpand: true
             },
             check: {
                 enable: true,
@@ -139,7 +140,7 @@ layui.use(['index', 'form', 'upload', 'table'], function () {
                 }
             },
             callback: {
-                onClick: onClick
+                onClick: onClick,
             }
         };
         zTree = $.fn.zTree.init(ele, setting, nodes);

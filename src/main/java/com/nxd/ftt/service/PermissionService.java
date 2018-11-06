@@ -1,5 +1,6 @@
 package com.nxd.ftt.service;
 
+import com.nxd.ftt.entity.Tree;
 import com.nxd.ftt.entity.system.Permission;
 
 import java.util.List;
@@ -20,6 +21,13 @@ public interface PermissionService {
     List<Permission> listAll();
 
     /**
+     * 树形权限
+     *
+     * @return
+     */
+    List<Tree> getPermissionTree();
+
+    /**
      * 根据条件查询列表
      * @param permission
      * @return
@@ -31,7 +39,7 @@ public interface PermissionService {
      * @param id
      * @return
      */
-    Permission findById(Integer id);
+    Permission findById(String id);
 
     /**
      * 根据条件修改

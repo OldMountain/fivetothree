@@ -1,9 +1,12 @@
 package com.nxd.ftt.controller.system;
 
 import com.alibaba.fastjson.JSONObject;
+import com.nxd.ftt.config.annotation.LogAndPermission;
 import com.nxd.ftt.controller.base.BaseController;
+import com.nxd.ftt.entity.Page;
 import com.nxd.ftt.entity.Result;
 import com.nxd.ftt.entity.Role;
+import com.nxd.ftt.entity.result.ResultPage;
 import com.nxd.ftt.service.MenuService;
 import com.nxd.ftt.service.RoleService;
 import com.nxd.ftt.util.Const;
@@ -63,6 +66,14 @@ public class RoleController extends BaseController {
         return mv;
     }
 
+    @LogAndPermission(value = "/getData",permissions = "role.data")
+    @ResponseBody
+    public ResultPage getData(Page page){
+        startPage(page);
+        List<Role> roles = roleService.listAll();
+        return ResultPage.success(roles);
+    }
+
     @RequestMapping(value = "/toAdd")
     public ModelAndView toAdd(Role role) {
         ModelAndView mv = this.getModelAndView();
@@ -107,7 +118,7 @@ public class RoleController extends BaseController {
         }
         String treeNode = null;
         try {
-            treeNode = menuService.listTreeMenu(role, 0);
+            treeNode = menuService.listTreeMenu();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -120,29 +131,6 @@ public class RoleController extends BaseController {
     }
 
     /**
-     * 保存角色菜单查看权限
-     *
-     * @return
-     */
-    @RequestMapping(value = "/saveQX")
-    @ResponseBody
-    public Result saveQX(Role roleModel, String ids) {
-        Result resultModel = new Result();
-        String[] menuIds = ids.split(",");
-        String rights = RightsHelper.sumRights(menuIds).toString();
-        roleModel.setRights(rights);
-        try {
-            roleService.modify(roleModel);
-            resultModel.setStatus("success");
-            resultModel.setCode(1);
-            resultModel.setMessage("保存成功");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return resultModel;
-    }
-
-    /**
      * 给角色分配按钮权限（增删改查:1、2、3、4）
      * @return
      */
@@ -151,7 +139,7 @@ public class RoleController extends BaseController {
         ModelAndView mv = this.getModelAndView();
         String treeNode = null;
         try {
-            treeNode = menuService.listTreeMenu(role,type);
+            treeNode = menuService.listTreeMenu();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -165,40 +153,6 @@ public class RoleController extends BaseController {
         return mv;
     }
 
-    /**
-     * 保存角色按钮权限（增删改查）
-     * @return
-     */
-    @RequestMapping(value = "/saveButton")
-    @ResponseBody
-    public Result saveButton(Role roleModel, String ids, int type){
-        Result resultModel = new Result();
-        String[] menuIds = ids.split(",");
-        String rights = RightsHelper.sumRights(menuIds).toString();
-        switch (type){
-            case 1:
-                roleModel.setAddQx(rights);
-                break;
-            case 2:
-                roleModel.setDelQx(rights);
-                break;
-            case 3:
-                roleModel.setEditQx(rights);
-                break;
-            case 4:
-                roleModel.setChaQx(rights);
-                break;
-        }
-        try {
-            roleService.modify(roleModel);
-            resultModel.setStatus("success");
-            resultModel.setCode(1);
-            resultModel.setMessage("保存成功");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return resultModel;
-    }
 
     /**
      * 修改角色姓名

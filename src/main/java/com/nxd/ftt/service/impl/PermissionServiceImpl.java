@@ -1,6 +1,8 @@
 package com.nxd.ftt.service.impl;
 
+import com.nxd.ftt.common.util.UuidUtil;
 import com.nxd.ftt.dao.PermissionDao;
+import com.nxd.ftt.entity.Tree;
 import com.nxd.ftt.entity.system.Permission;
 import com.nxd.ftt.service.PermissionService;
 import com.nxd.ftt.util.SystemUtil;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * PermissionServiceImpl
@@ -32,6 +35,11 @@ public class PermissionServiceImpl implements PermissionService {
         return permissionDao.list(new Permission());
     }
 
+    @Override
+    public List<Tree> getPermissionTree() {
+        return permissionDao.getPermissionTree();
+    }
+
     /**
      * 根据条件查询列表
      *
@@ -50,7 +58,7 @@ public class PermissionServiceImpl implements PermissionService {
      * @return
      */
     @Override
-    public Permission findById(Integer id) {
+    public Permission findById(String id) {
         return permissionDao.findById(id);
     }
 
@@ -76,6 +84,7 @@ public class PermissionServiceImpl implements PermissionService {
     @Override
     public int save(Permission permission) {
         Date date = new Date();
+        permission.setId(UuidUtil.get32UUID());
         permission.setCreateTime(date);
         permission.setUpdateTime(date);
         permission.setCreateor(SystemUtil.getCurrentUser().getUserId());

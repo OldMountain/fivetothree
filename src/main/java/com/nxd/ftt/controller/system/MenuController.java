@@ -5,6 +5,7 @@ import com.nxd.ftt.controller.base.BaseController;
 import com.nxd.ftt.entity.Menu;
 import com.nxd.ftt.entity.Page;
 import com.nxd.ftt.entity.Role;
+import com.nxd.ftt.entity.Tree;
 import com.nxd.ftt.entity.result.Response;
 import com.nxd.ftt.entity.result.ResultKit;
 import com.nxd.ftt.entity.result.ResultPage;
@@ -44,7 +45,7 @@ public class MenuController extends BaseController {
         ModelAndView mv = new ModelAndView("system/sys_menu/menu_list");
         Role role = new Role();
         role.setRoleId(SystemUtil.getCurrentUser().getRoleId());
-        String treeNode = menuService.listTreeMenu(role, 0);
+        String treeNode = menuService.listTreeMenu();
         mv.addObject("treeNode", treeNode);
         return mv;
     }
@@ -54,7 +55,7 @@ public class MenuController extends BaseController {
     public Response getMenuTree() {
         Role role = new Role();
         role.setRoleId(SystemUtil.getCurrentUser().getRoleId());
-        String treeNode = menuService.listTreeMenu(role, 0);
+        String treeNode = menuService.listTreeMenu();
         return ResultKit.success(treeNode);
     }
 
@@ -96,6 +97,13 @@ public class MenuController extends BaseController {
     public Response modify(Menu menu) {
         menuService.modify(menu);
         return ResultKit.success();
+    }
+
+    @LogAndPermission(value = "/getPermissionsTree")
+    @ResponseBody
+    public Response getPermissionsTree() {
+        List<Tree> permissions = permissionService.getPermissionTree();
+        return ResultKit.success(permissions);
     }
 
     @LogAndPermission(value = "/getPermissions")

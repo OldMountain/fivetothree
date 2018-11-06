@@ -215,11 +215,6 @@ public class BaseController {
 
             Role roleModel = roleService.getRoleById(role);
 
-            map.put("adds", roleModel.getAddQx());
-            map.put("dels", roleModel.getDelQx());
-            map.put("edits", roleModel.getEditQx());
-            map.put("chas", roleModel.getChaQx());
-
             //System.out.println(map);
             //TODO 暂时不更新ip
 //			this.getRemortIP(USERNAME);

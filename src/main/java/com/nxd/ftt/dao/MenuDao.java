@@ -1,6 +1,7 @@
 package com.nxd.ftt.dao;
 
 import com.nxd.ftt.entity.Menu;
+import com.nxd.ftt.entity.Tree;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -9,13 +10,29 @@ import java.util.List;
 public interface MenuDao {
     /**
      * 查询
+     *
      * @param menu
      * @return int
      */
     List<Menu> select(Menu menu);
 
     /**
+     * 查询下级菜单
+     *
+     * @return int
+     */
+    List<Menu> getSubList(Integer parentId);
+
+    /**
+     * 树形菜单
+     *
+     * @return
+     */
+    List<Tree> getTree();
+
+    /**
      * 根据ID 查询菜单
+     *
      * @param menuId
      * @return
      */
@@ -23,6 +40,7 @@ public interface MenuDao {
 
     /**
      * 批量删除
+     *
      * @param menuId
      * @return int
      */
@@ -30,6 +48,7 @@ public interface MenuDao {
 
     /**
      * 根据menuId插入
+     *
      * @param menu
      * @return int
      */
@@ -37,6 +56,7 @@ public interface MenuDao {
 
     /**
      * 根据menuId更新
+     *
      * @param menu
      * @return int
      */
@@ -44,6 +64,7 @@ public interface MenuDao {
 
     /**
      * 根据menuId删除
+     *
      * @param menuId
      * @return int
      */
@@ -51,6 +72,7 @@ public interface MenuDao {
 
     /**
      * 根据父ID 查询最大排序
+     *
      * @param parentId
      * @return
      */

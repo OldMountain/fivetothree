@@ -156,4 +156,29 @@
         where PARENT_ID = #{parentId}
     </select>
 
+    <select id="getSubList" resultMap="BaseResultMap">
+        select
+        <trim suffixOverrides=",">
+            MENU_ID,
+            MENU_NAME,
+            MENU_URL,
+            PARENT_ID,
+            MENU_ORDER,
+            MENU_ICON,
+            MENU_TYPE
+        </trim>
+        from a_sys_menu
+        where PARENT_ID = #{parentId}
+    </select>
+    <select id="getTree" resultType="com.nxd.ftt.entity.Tree">
+        select
+        <trim suffixOverrides=",">
+            a.MENU_ID id,
+            a.MENU_NAME name,
+            a.PARENT_ID pId,
+        </trim>
+        from a_sys_menu a left join a_sys_menu b on a.PARENT_ID = b.MENU_ID
+    </select>
+
+
 </mapper>

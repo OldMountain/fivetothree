@@ -128,11 +128,10 @@ public class LoginController extends BaseController {
                 Role roleModel = new Role();
                 roleModel.setRoleId(user.getRoleId());
                 roleModel = roleService.getRoleById(roleModel);
-                String roleRights = "";
+                String roleRights = user.getRights();
                 if (roleModel != null) {
-                    roleRights = roleModel.getRights();
                     session.setAttribute(Const.SESSION_USERROL, roleModel);
-                    //将角色权限存入session
+                    // TODO: 2018/11/6   将角色权限存入session
                     session.setAttribute(Const.SESSION_ROLE_RIGHTS, roleRights);
                 }
                 //放入用户名
@@ -141,27 +140,6 @@ public class LoginController extends BaseController {
                     list = (List<Menu>) session.getAttribute(Const.SESSION_allmenuList);
                 } else {
                     list = menuService.listAllMenu();
-                    if (Tools.notEmpty(roleRights)) {
-                        for (Menu menu : list) {
-                            if (user.getUserName().equals(Const.ADMIN)) {
-                                menu.setHasMenu(true);
-                            } else {
-                                menu.setHasMenu(RightsHelper.testRights(roleRights, menu.getMenuId()));
-                            }
-                            if (menu.isHasMenu()) {
-                                List<Menu> subMenuList = menu.getSubMenu();
-                                if (subMenuList != null && subMenuList.size() > 0) {
-                                    for (Menu sub : subMenuList) {
-                                        if (user.getUserName().equals(Const.ADMIN)) {
-                                            sub.setHasMenu(true);
-                                        } else {
-                                            sub.setHasMenu(RightsHelper.testRights(roleRights, menu.getMenuId()));
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
                     session.setAttribute(Const.SESSION_allmenuList, list);
                 }
                 if (null == session.getAttribute(Const.SESSION_QX)) {

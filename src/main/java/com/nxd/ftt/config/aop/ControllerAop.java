@@ -6,6 +6,7 @@ import com.nxd.ftt.config.exception.NoPermissionException;
 import com.nxd.ftt.entity.Role;
 import com.nxd.ftt.entity.User;
 import com.nxd.ftt.util.Const;
+import com.nxd.ftt.util.SystemUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -52,16 +53,8 @@ public class ControllerAop {
             }
             if (methodAnnotation.permissions() != null && methodAnnotation.permissions().length > 0) {
                 User user = (User) request.getSession().getAttribute(Const.SESSION_USER);
-                List<Role> roles = user.getRoles();
-                boolean validate = true;
-                for (int i = 0; i < roles.size(); i++) {
-                    if (roles.get(i).getParentId() == -1) {
-                        validate = false;
-                        break;
-                    }
-                }
                 //校验权限
-                if (validate) {
+                if (!SystemUtil.isAdmin()) {
                     List<String> perms = Arrays.asList(methodAnnotation.permissions());
                     List<String> permissionList = (List<String>) request.getSession().getAttribute(Const.USER_ALL_PERMISSION);
                     if (permissionList == null || !permissionList.containsAll(perms)) {
