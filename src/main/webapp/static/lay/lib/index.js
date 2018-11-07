@@ -16,7 +16,7 @@
         i.tabChange(o, a), n.tabsBodyChange(t.index, {url: a, text: d})
     }, s = "#LAY_app_body", o = "layadmin-layout-tabs", r = layui.$;
     r(window);
-    n.screen() < 2 && n.sideFlexible(), layui.config({base: e.base + "modules/"}), layui.each(e.extend, function (a, i) {
+    n.screen() < 2 && n.sideFlexible(), layui.config({base: e.base + "lib/"}), layui.each(e.extend, function (a, i) {
         var n = {};
         n[i] = "{/}" + e.base + "lib/extend/" + i, layui.extend(n)
     }), d().autoRender(), layui.use("common"), a("index", {openTabsPage: l})
