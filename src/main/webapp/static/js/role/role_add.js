@@ -4,23 +4,27 @@ layui.use(['index', 'form'], function () {
     //获取菜单ID
     form.on('submit(submitBtn)',function (data) {
         var params = data.field;
-        savePermission(params);
+        var url = 'role/save';
+        if (params.roleId) {
+            url = 'role/modify';
+        }
+        saveRole(params,url);
         return false;
     })
 
-    function savePermission(params) {
+    function saveRole(params,url) {
         $.ajax({
-            url: ctx + "menu/savePermission",
+            url: ctx + url,
             type: 'post',
             data: params,
             dataType: 'json',
             success: function (result) {
                 if (result.code == 200) {
                     parent.layer.msg('保存成功');
-                    parent.layui.table.reload("menuTable")
+                    parent.layui.table.reload("role-table")
                     parent.layer.close(index);
                 }else {
-                    parent.layer.alert(result.message);
+                    layer.alert(result.message);
                 }
             }
         })

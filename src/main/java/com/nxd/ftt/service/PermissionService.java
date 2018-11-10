@@ -16,6 +16,7 @@ public interface PermissionService {
 
     /**
      * 查询列表
+     *
      * @return
      */
     List<Permission> listAll();
@@ -23,12 +24,14 @@ public interface PermissionService {
     /**
      * 树形权限
      *
+     * @param roleId
      * @return
      */
-    List<Tree> getPermissionTree();
+    List<Tree> getPermissionTree(Integer roleId);
 
     /**
      * 根据条件查询列表
+     *
      * @param permission
      * @return
      */
@@ -36,6 +39,7 @@ public interface PermissionService {
 
     /**
      * 根据id查询
+     *
      * @param id
      * @return
      */
@@ -43,6 +47,7 @@ public interface PermissionService {
 
     /**
      * 根据条件修改
+     *
      * @param permission
      * @return
      */
@@ -50,6 +55,7 @@ public interface PermissionService {
 
     /**
      * 保存
+     *
      * @param permission
      * @return
      */
@@ -57,6 +63,7 @@ public interface PermissionService {
 
     /**
      * 根据id删除
+     *
      * @param id
      * @return
      */
@@ -64,6 +71,7 @@ public interface PermissionService {
 
     /**
      * 批量删除
+     *
      * @param ids
      * @return
      */

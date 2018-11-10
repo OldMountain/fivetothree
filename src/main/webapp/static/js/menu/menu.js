@@ -1,10 +1,15 @@
-layui.use(['index', 'form', 'upload', 'table'], function () {
-    var table = layui.table //表格
+layui.use(['index', 'form', 'upload', 'table','element'], function () {
+    var table = layui.table; //表格
+    var element = layui.element;
     var zTree;
-    getTree(layui.cache.root + "menu/getMenuTree", $("#treeBox"))
+    getTree(ctx + "menu/getMenuTree", $("#treeBox"))
     $("#menu-add").click(function () {
         openAdd();
     });
+
+    $("#resetMenu").click(function () {
+        resetMenu();
+    })
 
     var meuCols = [ //表头
         {type: 'checkbox', fixed: 'left'}
@@ -32,7 +37,7 @@ layui.use(['index', 'form', 'upload', 'table'], function () {
         elem: '#menu-table'
         , id: 'menuTable'
         , height: 420
-        , url: layui.cache.root + 'menu/getSubMenu?menuId=0' //数据接口
+        , url: ctx + 'menu/getSubMenu?menuId=0' //数据接口
         , title: '用户表'
         , loading: true // 是否显示加载条
         , page: true //开启分页
@@ -76,21 +81,21 @@ layui.use(['index', 'form', 'upload', 'table'], function () {
         if (treeNode.checked) {
             return;
         }
-        zTree.checkNode(treeNode,true);
+        zTree.checkNode(treeNode, true);
         var level = treeNode.level;
         if (level && level == 2) {
             table.reload("menuTable", {
-                url: layui.cache.root + 'menu/getPermissions?menuId=' + treeNode.id,
+                url: ctx + 'menu/getPermissions?menuId=' + treeNode.id,
                 cols: [permissionCols]
             })
             return;
         }
         table.reload("menuTable", {
-            url: layui.cache.root + 'menu/getSubMenu?menuId=' + treeNode.id,
+            url: ctx + 'menu/getSubMenu?menuId=' + treeNode.id,
             cols: [meuCols]
         })
     }
-    
+
     function openAdd() {
         var nodes = zTree.getCheckedNodes(true);
         var menuId = '';
@@ -119,7 +124,7 @@ layui.use(['index', 'form', 'upload', 'table'], function () {
             area: ['700px', '450px'],
             fixed: false, //不固定
             maxmin: true,
-            content: layui.cache.root + url + '?menuId=' + menuId + '&level=' + level
+            content: ctx + url + '?menuId=' + menuId + '&level=' + level
         });
     }
 
@@ -154,6 +159,22 @@ layui.use(['index', 'form', 'upload', 'table'], function () {
             dataType: 'json',
             success: function (result) {
                 initTree(ele, JSON.parse(result.data))
+            }
+        })
+    }
+
+    function resetMenu() {
+        $.ajax({
+            url: ctx + 'menu/reset',
+            type: 'post',
+            data: {},
+            success: function (result) {
+                if (result.code == 200) {
+                    layer.msg('保存成功');
+                    parent.window.location.reload();
+                } else {
+                    layer.alert(result.message);
+                }
             }
         })
     }

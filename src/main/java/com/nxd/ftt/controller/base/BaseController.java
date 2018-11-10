@@ -54,6 +54,13 @@ public class BaseController {
     }
 
     /**
+     * 得到ModelAndView
+     */
+    public ModelAndView getModelAndView(String url) {
+        return new ModelAndView(url);
+    }
+
+    /**
      * 得到request对象
      */
     public HttpServletRequest getRequest() {

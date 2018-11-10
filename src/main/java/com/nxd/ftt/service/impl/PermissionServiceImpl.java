@@ -4,7 +4,10 @@ import com.nxd.ftt.common.util.UuidUtil;
 import com.nxd.ftt.dao.PermissionDao;
 import com.nxd.ftt.entity.Tree;
 import com.nxd.ftt.entity.system.Permission;
+import com.nxd.ftt.entity.system.RolePermission;
 import com.nxd.ftt.service.PermissionService;
+import com.nxd.ftt.service.RolePermissionService;
+import com.nxd.ftt.util.Const;
 import com.nxd.ftt.util.SystemUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +28,9 @@ public class PermissionServiceImpl implements PermissionService {
     @Autowired
     private PermissionDao permissionDao;
 
+    @Autowired
+    private RolePermissionService rolePermissionService;
+
     /**
      * 查询列表
      *
@@ -36,8 +42,16 @@ public class PermissionServiceImpl implements PermissionService {
     }
 
     @Override
-    public List<Tree> getPermissionTree() {
-        return permissionDao.getPermissionTree();
+    public List<Tree> getPermissionTree(Integer roleId) {
+        List<String> rolePermissionList = rolePermissionService.queryIdByRole(roleId);
+        List<Tree> trees = permissionDao.getPermissionTree();
+        trees.forEach(tree -> {
+            if ("permission".equals(tree.getType()) && rolePermissionList !=null && rolePermissionList.contains(tree.getId())) {
+                tree.setChecked(true);
+            }
+        });
+        trees.add(0, new Tree("0","-1", Const.ROOT_MENU_NAME,false,true));
+        return trees;
     }
 
     /**

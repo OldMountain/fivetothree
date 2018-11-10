@@ -13,6 +13,7 @@ public class Tree {
     private String name;
     private boolean checked;
     private boolean open;
+    private String type;
 
     public Tree() {
     }
@@ -70,5 +71,13 @@ public class Tree {
 
     public void setOpen(boolean open) {
         this.open = open;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

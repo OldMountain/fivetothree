@@ -1,7 +1,5 @@
 package com.nxd.ftt.entity;
 
-import com.nxd.ftt.controller.base.BaseEntity;
-
 import java.util.List;
 
 public class Menu extends BaseEntity {

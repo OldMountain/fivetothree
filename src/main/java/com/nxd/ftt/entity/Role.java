@@ -1,7 +1,5 @@
 package com.nxd.ftt.entity;
 
-import com.nxd.ftt.controller.base.BaseEntity;
-
 public class Role extends BaseEntity {
     /**
      * @mbg.generated 2017-12-04
@@ -19,6 +17,8 @@ public class Role extends BaseEntity {
     private Integer parentId;
 
     private String desc;
+
+    private String rights;
 
 
     public Role() {
@@ -76,5 +76,13 @@ public class Role extends BaseEntity {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public String getRights() {
+        return rights;
+    }
+
+    public void setRights(String rights) {
+        this.rights = rights;
     }
 }

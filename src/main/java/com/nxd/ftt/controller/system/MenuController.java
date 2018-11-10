@@ -20,8 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -64,7 +62,7 @@ public class MenuController extends BaseController {
         ModelAndView mv = new ModelAndView();
         if (level != null && level == 2) {
             mv.setViewName("system/sys_menu/permission_add");
-        }else {
+        } else {
             mv.setViewName("system/sys_menu/menu_add");
         }
         Menu menu = menuService.findById(menuId);
@@ -99,10 +97,17 @@ public class MenuController extends BaseController {
         return ResultKit.success();
     }
 
+    @LogAndPermission(value = "/reset", permissions = "menu.reset")
+    @ResponseBody
+    public Response reset() {
+        menuService.resetCurrentMenu();
+        return ResultKit.success();
+    }
+
     @LogAndPermission(value = "/getPermissionsTree")
     @ResponseBody
-    public Response getPermissionsTree() {
-        List<Tree> permissions = permissionService.getPermissionTree();
+    public Response getPermissionsTree(Integer roleId) {
+        List<Tree> permissions = permissionService.getPermissionTree(roleId);
         return ResultKit.success(permissions);
     }
 

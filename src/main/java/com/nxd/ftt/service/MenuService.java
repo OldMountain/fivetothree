@@ -15,6 +15,18 @@ import java.util.List;
  */
 public interface MenuService {
 
+
+    /**
+     * 获取当前用户的菜单列表
+     * @return
+     */
+    List<Menu> getCurrentMenu();
+
+    /**
+     * 重新获取当前用户菜单
+     */
+    void resetCurrentMenu();
+
     /**
      * 获取所有菜单
      * @return

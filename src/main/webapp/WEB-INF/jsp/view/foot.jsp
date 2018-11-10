@@ -2,7 +2,7 @@
 <script src="${ctx}static/lay/layui/layui.js"></script>
 <script>
     layui.cache.base = '${ctx}static/lay/';
-    layui.cache.root = '${ctx}';
+    var ctx = '${ctx}';
     layui.extend({
         index: 'lib/index' //主入口模块
     })

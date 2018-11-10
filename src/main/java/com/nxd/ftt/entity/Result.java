@@ -1,6 +1,5 @@
 package com.nxd.ftt.entity;
 
-import com.nxd.ftt.controller.base.BaseEntity;
 import com.nxd.ftt.enumtype.ResultEnum;
 import com.nxd.ftt.util.Const;
 
@@ -10,7 +9,7 @@ import com.nxd.ftt.util.Const;
  * @author OldMountain
  * @date 2017/12/5
  */
-public class Result extends BaseEntity{
+public class Result {
 
     private int code;
 
@@ -56,12 +55,12 @@ public class Result extends BaseEntity{
         this.status = status;
     }
 
-    public void setResult(ResultEnum resultEnum){
+    public void setResult(ResultEnum resultEnum) {
         this.setCode(resultEnum.getCode());
         this.setMessage(resultEnum.getDesc());
-        if(resultEnum.getCode() == 200){
+        if (resultEnum.getCode() == 200) {
             this.setStatus(Const.SUCCESS);
-        }else{
+        } else {
             this.setStatus(Const.FAIL);
         }
     }

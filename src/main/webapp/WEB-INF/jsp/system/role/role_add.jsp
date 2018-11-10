@@ -1,61 +1,44 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<script type="text/javascript">
-	//保存
-	var submitFlag = true;
-	function save() {
-	    var roleName = $("#roleName").val();
-	    if(!roleName){
-	        swal("名称不能为空","","success");
-	        return;
-		}
-	    var params = {
-            roleName: roleName
-	    };
-	    if(!submitFlag){
-            swal("请勿重复提交","","success");
-	        return;
-		}
-	    $.ajax({
-	        url: 'role/add.do',
-	        type: 'post',
-	        data: params,
-	        dataType: 'json',
-			beforeSend:function () {
-                submitFlag = false;
-            },
-	        success: function (result) {
-                submitFlag = true;
-                $.closeModal();
-	            if (result.status == 'success') {
-	                $.loadViewOrModal("role/list.view");
-	            }else {
-                    swalAlert(result.message,swalIcon.SUCCESS);
-	            }
-	        }
-	    })
-	}
-	
-	
-</script>
-
-<div>
-<input name="parentId" id="parentId" value="${parentId }" type="hidden">
-
-	<div class="form-group">
-		<label for="roleName">名称</label>
-		<input type="text" name="roleName" class="form-control" id="roleName" placeholder="名称">
+<%--
+  menu_add
+  User: luhangqi
+  Date: 2018/10/31
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Title</title>
+	<jsp:include page="${jspPath}/view/head.jsp"></jsp:include>
+</head>
+<body>
+<div class="layui-fluid">
+	<div class="layui-row">
+		<form class="layui-form">
+			<div class="layui-form-item">
+					<input type="hidden" name="parentId" value="0">
+					<input type="hidden" name="roleId" value="${role.roleId != null ? role.roleId:''}">
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">角色名称</label>
+				<div class="layui-input-block">
+					<input type="text" name="roleName" value="${role.roleName != null ? role.roleName:''}" placeholder="请输入" autocomplete="off" class="layui-input" lay-verify="required">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">描述</label>
+				<div class="layui-input-block">
+					<textarea name="desc" placeholder="请输入内容" class="layui-textarea">${role.desc != null ? role.desc:''}</textarea>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-input-block">
+					<button class="layui-btn layui-btn-fluid" lay-submit lay-filter="submitBtn">确认</button>
+				</div>
+			</div>
+		</form>
 	</div>
-<c:if test="${QX.add == 1}">
-	<a class="btn btn-primary" onclick="save();">保存</a>
-	<a class="btn btn-danger" onclick="$.closeModal();">关闭</a>
-</c:if>
-<c:if test="${QX.add == 0}">
-	<div>
-		您没有权限新增
-	</div>
-</c:if>
 </div>
-
-
+<jsp:include page="${jspPath}/view/foot.jsp"></jsp:include>
+<script src="${ctx}static/js/role/role_add.js"></script>
+</body>
+</html>

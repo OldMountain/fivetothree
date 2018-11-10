@@ -6,6 +6,7 @@
         <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName"/>
         <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId"/>
         <result column="DESC" jdbcType="VARCHAR" property="desc"/>
+        <result column="RIGHTS" jdbcType="VARCHAR" property="rights"/>
     </resultMap>
     <select id="select" parameterType="com.nxd.ftt.entity.Role" resultMap="BaseResultMap">
         select
@@ -13,7 +14,8 @@
             ROLE_ID,
             ROLE_NAME,
             PARENT_ID,
-            `DESC`
+            `DESC`,
+            RIGHTS
         </trim>
         from a_sys_role
         <where>
@@ -27,7 +29,10 @@
                 and PARENT_ID = #{parentId}
             </if>
             <if test="desc != null and desc !=''">
-                and `DESC`` = #{desc}
+                and `DESC` = #{desc}
+            </if>
+            <if test="rights != null and rights !=''">
+                and RIGHTS = #{rights}
             </if>
         </where>
     </select>
@@ -50,6 +55,9 @@
             <if test="parentId != null and parentId !=''">
                 PARENT_ID ,
             </if>
+            <if test="rights != null and rights !=''">
+                RIGHTS ,
+            </if>
             <if test="desc != null and desc !=''">
                 `DESC` ,
             </if>
@@ -63,6 +71,9 @@
             </if>
             <if test="parentId != null and parentId !=''">
                 #{parentId} ,
+            </if>
+            <if test="rights != null and rights !=''">
+                #{rights} ,
             </if>
             <if test="desc != null and desc !=''">
                 #{desc} ,
@@ -82,6 +93,9 @@
             <if test="parentId != null and parentId !=''">
                 PARENT_ID = #{parentId} ,
             </if>
+            <if test="rights != null and rights !=''">
+                RIGHTS = #{rights} ,
+            </if>
             <if test="desc != null and desc !=''">
                 `DESC` = #{desc} ,
             </if>
@@ -99,7 +113,8 @@
             b.ROLE_ID,
             b.ROLE_NAME,
             b.PARENT_ID,
-            b.`DESC`
+            b.`DESC`,
+            b.RIGHTS
         </trim>
         from a_sys_user_role a
         left join a_sys_role b on a.ROLE_ID = b.ROLE_ID

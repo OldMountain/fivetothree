@@ -28,7 +28,7 @@
         <div class="layui-col-md10">
             <div class="layui-card layui-form">
                 <div class="layui-card-header" pad15>
-                    <button class="layui-btn layui-btn-normal" id="menu-add">添加菜单</button>
+                    <button id="resetMenu" class="layui-btn layui-btn-normal">重置左侧菜单列表</button>
                 </div>
                 <div class="layui-card-body" pad15>
                     <table class="layui-table" id="menu-table" lay-filter="menu-table">

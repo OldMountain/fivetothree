@@ -113,7 +113,7 @@ public class LoginController extends BaseController {
     }
 
 
-    @RequestMapping(value = {"/toIndex", "/static/lay/admin/pro/dist/toIndex"})
+    @RequestMapping(value = {"/toIndex"})
     public ModelAndView index(PageInfo pi) {
         logBefore(logger, "进入首页");
         ModelAndView mv = this.getModelAndView();
@@ -136,12 +136,7 @@ public class LoginController extends BaseController {
                 }
                 //放入用户名
                 session.setAttribute(Const.SESSION_USERNAME, user.getUserName());
-                if (session.getAttribute(Const.SESSION_allmenuList) != null) {
-                    list = (List<Menu>) session.getAttribute(Const.SESSION_allmenuList);
-                } else {
-                    list = menuService.listAllMenu();
-                    session.setAttribute(Const.SESSION_allmenuList, list);
-                }
+                 list = menuService.getCurrentMenu();
                 if (null == session.getAttribute(Const.SESSION_QX)) {
                     //按钮权限放到session中
                     session.setAttribute(Const.SESSION_QX, this.getUQX(session));

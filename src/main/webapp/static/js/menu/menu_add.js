@@ -10,7 +10,7 @@ layui.use(['index', 'form'], function () {
 
     function saveMenu(params) {
         $.ajax({
-            url: layui.cache.root + "menu/save",
+            url: ctx + "menu/save",
             type: 'post',
             data: params,
             dataType: 'json',

@@ -12,7 +12,11 @@ import com.nxd.ftt.util.RightsHelper;
 import com.nxd.ftt.util.SystemUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +34,28 @@ public class MenuServiceImpl implements MenuService {
 
     @Autowired
     private RoleService roleService;
+
+    @Override
+    public List<Menu> getCurrentMenu() {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpSession session = request.getSession();
+        List<Menu> list;
+        if (session.getAttribute(Const.SESSION_allmenuList) != null) {
+            list = (List<Menu>) session.getAttribute(Const.SESSION_allmenuList);
+        } else {
+            list = this.listAllMenu();
+            session.setAttribute(Const.SESSION_allmenuList, list);
+        }
+        return list;
+    }
+
+    @Override
+    public void resetCurrentMenu() {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpSession session = request.getSession();
+        List<Menu> list = this.listAllMenu();
+        session.setAttribute(Const.SESSION_allmenuList, list);
+    }
 
     @Override
     public List<Menu> listAllMenu() {
@@ -80,7 +106,7 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public String listTreeMenu() {
         List<Tree> trees = new ArrayList<>();
-        trees.add(new Tree("0", "-1", Const.ROOT_MENU_NAME, true,true));
+        trees.add(new Tree("0", "-1", Const.ROOT_MENU_NAME, true, true));
         trees.addAll(menuDao.getTree());
         return new Gson().toJson(trees);
     }
