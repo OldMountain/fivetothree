@@ -1,178 +1,84 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%
-    String path = request.getContextPath();
-    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-%>
-<script type="text/javascript">
-    $(document).ready(function () {
-        if ($("#userId").val() != "") {
-            $("#userName").attr("readonly", "readonly");
-            $("#userName").css("color", "gray");
-        }
-
-
-//        /*校验*/
-        var hasSubmit = true;
-        $("#userForm").validate($.validateUtil.config({
-                roleId: {required: true}
-                , userName: {
-                    required: true,
-                    remote: {
-                        url: "user/hasUserName.do"
-                        , type: "get"
-                        , dataType: "json"
-                        , data: {userId: $("#userId").val()}//附加参数
-                    }
-                }
-//                , number: {
-//                    required: true, remote: {
-//                        url: "user/hasN.do"
-//                        , type: "get"
-//                        , dataType: "json"
-//                        , data: {userId: $("#userId").val()}//附加参数
-//                    }
-//                }
-                , password: {required: ${msg == 'edit'?false:true }}
-                , chkpwd: {required: ${msg == 'edit'?false:true }, equalTo: "#password"}
-                , userId: {required: true}
-                , name: {required: true}
-                , phone: {required: true, phone: true}
-            },
-            function (form) {
-                if (hasSubmit) {
-                    hasSubmit = false;
-                    $(form).ajaxSubmit({
-                        type: 'post', success: function (data) {
-                            hasSubmit = true;
-                            if (data) {
-                                swalAlert("保存成功");
-                                $.closeModal();
-                            } else {
-                                swalAlert("保存失败",swalIcon.WARNING);
-                            }
-                        }
-                    })
-                } else {
-                    swalAlert("请勿重复提交",swalIcon.WARNING);
-                }
-            }, {
-                chkpwd: {
-                    equalTo: "两次输入密码不一致"
-                },
-                email: {
-                    remote: "该邮箱已被使用"
-                },
-                number: {
-                    remote: "编号已经存在"
-                },
-                userName: {
-                    remote: "用户名已被占用"
-                }
-            }));
-
-    });
-
-
-</script>
-
-<form action="user/${msg }.do" name="userForm" id="userForm" method="post" role="form" class="form-horizontal"
-      style="margin: 0 20px">
-    <input type="hidden" name="userId" id="userId" value="${user.userId }"/>
-
-    <%--<c:if test="${fx != 'head'}">--%>
-    <c:if test="${roleEdit == '1'}">
-
-        <div class="form-group">
-            <label class="col-sm-3">请选择角色</label>
-            <div class="col-sm-9 ftt-select">
-                <select class="form-control" name="roleId" id="roleId" data-placeholder="请选择职位">
-                    <c:forEach items="${roleList}" var="role">
-                        <option value="${role.roleId }"
-                                <c:if test="${user != null && role.roleId == user.roleId }">selected</c:if>>${role.roleName }</option>
-                    </c:forEach>
-                </select></div>
-        </div>
-    </c:if>
-    <c:if test="${roleEdit == '0'}">
-        <input name="roleId" id="roleId" value="${user.roleId}" type="hidden"/>
-    </c:if>
-    <%--</c:if>--%>
-    <%--<c:if test="${fx == 'head'}">--%>
-    <%--<input name="roleId" id="roleId" value="${user.roleId }" type="hidden"/>--%>
-    <%--</c:if>--%>
-
-    <div class="form-group">
-        <label for="userName" class="col-sm-3">用户名</label>
-        <div class="col-sm-9">
-            <input type="text" name="userName" id="userName" value="${user.userName }" maxlength="32" placeholder="用户名"
-                   class="form-control"/></div>
+<%--
+  menu_add
+  User: luhangqi
+  Date: 2018/11/10
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<div class="layui-fluid">
+    <div class="layui-row">
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <input type="hidden" name="userId" value="${user.userId != null ? user.userId:''}">
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">角色</label>
+                <div class="layui-input-block">
+                    <input type="text" name="roleId" value="${user.roleId != null ? user.roleId:''}" placeholder="请输入" autocomplete="off" class="layui-input" lay-verify="required">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户账户</label>
+                <div class="layui-input-block">
+                    <input type="text" name="userName" value="${user.userName != null ? user.userName:''}" placeholder="请输入" autocomplete="off" class="layui-input" lay-verify="required">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">昵称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="nick" value="${user.nick != null ? user.nick:''}" placeholder="请输入" autocomplete="off" class="layui-input" lay-verify="required">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">性别</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="sex" value="男"
+                           title="男" ${ !user.sex || user.sex == 1 ? "checked":""}>
+                    <input type="radio" name="sex" value="女" title="女" ${user.sex == 2 ? "checked":""}>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">头像</label>
+                <div class="layui-input-inline">
+                    <input name="avatar" lay-verify="required" id="LAY_avatarSrc" placeholder="图片地址"
+                           value="http://cdn.layui.com/avatar/168.jpg" class="layui-input">
+                </div>
+                <div class="layui-input-inline layui-btn-container" style="width: auto;position: relative">
+                    <button type="button" class="layui-btn layui-btn-primary" id="LAY_avatarUpload">
+                        <i class="layui-icon">&#xe67c;</i>上传图片
+                    </button>
+                    <div style="position: absolute;left: 150px;bottom: 10px;">
+                        <img src="http://cdn.layui.com/avatar/168.jpg" alt="" class="layui-circle"/>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">手机</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="cellphone" value="${user.phone}" lay-verify="phone"
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">邮箱</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="email" value="${user.email}" lay-verify="email"
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">个性签名</label>
+                <div class="layui-input-block">
+                                <textarea name="remarks" placeholder="请输入内容"
+                                          class="layui-textarea">${user.sign}</textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="setmyinfo">确认修改</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
+                </div>
+            </div>
+        </form>
     </div>
-
-    <div class="form-group">
-        <label class="col-sm-3">编号</label>
-        <div class="col-sm-9">
-            <input type="text" name="number" id="number" value="${user.number }" maxlength="32" placeholder="这里输入编号"
-                   class="form-control"/>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-sm-3">密码</label>
-        <div class="col-sm-9">
-            <input type="password" name="password" id="password" maxlength="16" placeholder="密码" class="form-control"/>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-sm-3">确认密码</label>
-        <div class="col-sm-9">
-            <input type="password" name="chkpwd" id="chkpwd" maxlength="16" placeholder="确认密码" class="form-control"/>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-sm-3">姓名</label>
-        <div class="col-sm-9">
-            <input type="text" name="name" id="name" value="${user.name }" maxlength="32" placeholder="这里输入姓名"
-                   class="form-control"/></div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-sm-3">手机号</label>
-        <div class="col-sm-9">
-            <input type="tel" name="phone" id="phone" value="${user.phone }" maxlength="32" placeholder="这里输入手机号"
-                   class="form-control"/></div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-sm-3">邮箱</label>
-        <div class="col-sm-9">
-            <input type="email" name="email" id="email" value="${user.email }" maxlength="32" placeholder="这里输入邮箱"
-                   class="form-control"/></div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-sm-3">备注</label>
-        <div class="col-sm-9">
-        <textarea name="bz" id="bz" style="max-width: 100%;min-height: 100px;" placeholder="这里输入备注" maxlength="64"
-                  class="form-control">${user.bz }</textarea></div>
-        <%--<input type="text" name="bz" id="bz" value="${user.bz }" placeholder="这里输入备注" maxlength="64"--%>
-        <%--class="form-control"/>--%>
-    </div>
-
-    <%--<div style="text-align: center">--%>
-    <%--<input class="btn btn-primary" type="submit" value="保存"/>--%>
-    <%--<a class="btn btn-danger" onclick="$.closeModal();">关闭</a>--%>
-    <%--</div>--%>
-    <c:if test="${QX.add == 1}">
-        <input class="btn btn-primary" type="submit" value="保存"/>
-        <a class="btn btn-danger" onclick="$.closeModal();">关闭</a>
-    </c:if>
-    <c:if test="${QX.add == 0}">
-        <div>
-            您没有权限新增
-        </div>
-    </c:if>
-</form>
+</div>
+<script src="${ctx}static/js/user/user_add.js"></script>

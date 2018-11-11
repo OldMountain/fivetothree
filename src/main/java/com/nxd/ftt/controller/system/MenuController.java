@@ -106,8 +106,13 @@ public class MenuController extends BaseController {
 
     @LogAndPermission(value = "/getPermissionsTree")
     @ResponseBody
-    public Response getPermissionsTree(Integer roleId) {
-        List<Tree> permissions = permissionService.getPermissionTree(roleId);
+    public Response getPermissionsTree(Integer roleId,String userId) {
+        List<Tree> permissions;
+        if (userId != null && !"".equals(userId)) {
+            permissions = permissionService.getPermissionTree(roleId);
+        }else {
+            permissions = permissionService.getPermissionTree(roleId);
+        }
         return ResultKit.success(permissions);
     }
 

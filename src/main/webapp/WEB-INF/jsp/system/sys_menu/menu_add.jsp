@@ -4,16 +4,9 @@
   Date: 2018/10/31
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Title</title>
-    <jsp:include page="${jspPath}/view/head.jsp"></jsp:include>
-</head>
-<body>
 <div class="layui-fluid">
     <div class="layui-row">
-        <form class="layui-form">
+        <form class="layui-form" lay-filter="form-menu-edit">
             <div class="layui-form-item">
                 <label class="layui-form-label">上级菜单</label>
                 <div class="layui-input-block">
@@ -48,7 +41,4 @@
         </form>
     </div>
 </div>
-<jsp:include page="${jspPath}/view/foot.jsp"></jsp:include>
 <script src="${ctx}static/js/menu/menu_add.js"></script>
-</body>
-</html>

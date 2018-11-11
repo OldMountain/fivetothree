@@ -1,6 +1,5 @@
 layui.use(['index', 'form'], function () {
     var form = layui.form;
-    var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
     //获取菜单ID
     form.on('submit(submitBtn)',function (data) {
         var params = data.field;
@@ -20,9 +19,9 @@ layui.use(['index', 'form'], function () {
             dataType: 'json',
             success: function (result) {
                 if (result.code == 200) {
-                    parent.layer.msg('保存成功');
-                    parent.layui.table.reload("role-table")
-                    parent.layer.close(index);
+                    layer.msg('保存成功');
+                    layui.table.reload("role-table")
+                    layer.closeAll();
                 }else {
                     layer.alert(result.message);
                 }

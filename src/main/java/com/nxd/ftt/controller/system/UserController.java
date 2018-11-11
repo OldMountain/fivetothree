@@ -1,13 +1,15 @@
 package com.nxd.ftt.controller.system;
 
 
+import com.nxd.ftt.config.annotation.LogAndPermission;
 import com.nxd.ftt.controller.base.BaseController;
+import com.nxd.ftt.entity.Page;
 import com.nxd.ftt.entity.Result;
 import com.nxd.ftt.entity.Role;
 import com.nxd.ftt.entity.User;
+import com.nxd.ftt.entity.result.ResultPage;
 import com.nxd.ftt.service.RoleService;
 import com.nxd.ftt.service.UserService;
-import com.nxd.ftt.util.PageData;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,18 +36,17 @@ public class UserController extends BaseController {
     private RoleService roleService;
 
     @RequestMapping(value = "/list")
-    public ModelAndView list() {
-        ModelAndView mv = this.getModelAndView();
-        List<PageData> userList = null;
-        PageData pd = this.getPageData();
-        try {
-//            userList = userService.getList(pd);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        mv.addObject("userList", userList);
-        mv.setViewName("system/user/user_list");
+    public ModelAndView list(Integer flag) {
+        ModelAndView mv = this.getModelAndView("system/user/user_list");
         return mv;
+    }
+
+    @LogAndPermission(value = "/getData", permissions = "user.data")
+    @ResponseBody
+    public ResultPage getData(Page page) {
+        startPage(page);
+        List<User> userList = userService.listAll();
+        return ResultPage.success(userList);
     }
 
     /**
@@ -65,7 +66,6 @@ public class UserController extends BaseController {
         mv.addObject("roleList", roleList);
         mv.addObject("msg", "save");
         mv.addObject("roleEdit", "1");//1:新增界面可以选择角色 0:新增界面不可以选择角色
-        mv.addObject("QX", this.getHC());
         mv.setViewName("system/user/user_edit");
         return mv;
     }

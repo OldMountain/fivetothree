@@ -1,20 +1,24 @@
-layui.use(['index', 'form', 'table', 'tool','admin','view'], function () {
+layui.use(['index', 'form', 'table', 'tool','element','admin'], function () {
     var table = layui.table;
     var tool = layui.tool;
+    var element = layui.element;
     var admin = layui.admin;
-    var view = layui.view;
     var roleCols = [
         {type: 'checkbox', fixed: 'left'}
         , {field: 'numbers', title: '序号', sort: true, width: 80, type: 'numbers'}
-        , {field: 'roleId', title: '角色ID', hide: true}
-        , {field: 'roleName', title: '角色名称'}
-        , {field: 'desc', title: '职责描述'}
-        , {fixed: 'right', title: '操作', toolbar: '#bar-role', width: 250}
+        , {field: 'userId', title: '用户ID', hide: true}
+        , {field: 'userName', title: '用户名'}
+        , {field: 'phone', title: '手机'}
+        , {field: 'email', title: '邮箱'}
+        , {field: 'nick', title: '昵称'}
+        , {field: 'age', title: '年龄'}
+        , {field: 'sex', title: '性别'}
+        , {fixed: 'right', title: '操作', toolbar: '#fttBar', width: 250}
     ];
     table.render({
-        elem: '#role-table'
+        elem: '#fttTable'
         , height: 420
-        , url: ctx + 'role/getData' //数据接口
+        , url: ctx + 'user/getData' //数据接口
         , title: '用户表'
         , loading: true // 是否显示加载条
         , page: true //开启分页
@@ -27,7 +31,7 @@ layui.use(['index', 'form', 'table', 'tool','admin','view'], function () {
     });
 
     //监听行工具事件
-    table.on('tool(roleTable)', function (obj) {
+    table.on('tool(fttTable)', function (obj) {
         var data = obj.data;
         //console.log(obj)
         if (obj.event === 'option') {
@@ -49,16 +53,17 @@ layui.use(['index', 'form', 'table', 'tool','admin','view'], function () {
                 }
                 , btnAlign: 'c'
             });
-            getMenu(ctx + "menu/getPermissionsTree?roleId=" + data.roleId, $("#indexTreeBox"));
+            getMenu(ctx + "menu/getPermissionsTree?userId=" + data.userId, $("#indexTreeBox"));
         }
     });
 
-    table.on('toolbar(roleTable)', function (obj) {
+    table.on('toolbar(fttTable)', function (obj) {
         var checkStatus = table.checkStatus(obj.config.id)
             , data = checkStatus.data; //获取选中的数据
         switch (obj.event) {
             case 'add':
-                open("role/toAdd","新增角色");
+                // element.tabChange('layadmin-layout-tabs', 'console');
+                open("user/toAdd");
                 break;
             case 'update':
                 if (data.length === 0) {
@@ -66,18 +71,18 @@ layui.use(['index', 'form', 'table', 'tool','admin','view'], function () {
                 } else if (data.length > 1) {
                     layer.msg('只能同时编辑一个');
                 } else {
-                    open("role/toModify?roleId=" + data[0].roleId,"编辑角色");
+                    open("user/toModify?userId=" + data[0].userId);
                 }
                 break;
             case 'delete':
                 if (data.length === 0) {
                     layer.msg('请选择一行');
                 } else {
-                    layer.confirm('是否删除角色<span style="color: red">【' + data[0].roleName + '】</span>?', function (index) {
+                    layer.confirm('是否删除用户<span style="color: red">【' + data[0].userName + '】</span>?', function (index) {
                         $.ajax({
-                            url: ctx + 'role/remove',
+                            url: ctx + 'user/remove',
                             type: 'post',
-                            data: {roleId: data[0].roleId},
+                            data: {roleId: data[0].userId},
                             success: function (result) {
                                 if (result.code == 200) {
                                     tool.reloadTable();
@@ -94,19 +99,20 @@ layui.use(['index', 'form', 'table', 'tool','admin','view'], function () {
         ;
     })
 
-    function open(url,title) {
-        admin.popup({
-            title: title
-            ,area: ['500px', '450px']
-            ,success: function(layero, index){
-                view(this.id).render(url);
-            }
+    function open(url) {
+        layer.open({
+            title: '新增用户',
+            type: 2,
+            area: ['700px', '450px'],
+            fixed: false, //不固定
+            maxmin: true,
+            content: ctx + url
         });
     }
 
     var zTree;
 
-    function save(roleId) {
+    function save(userId) {
         var nodes = zTree.getCheckedNodes(true);
         var permissions = '';
         var menuIds = '';
@@ -121,12 +127,12 @@ layui.use(['index', 'form', 'table', 'tool','admin','view'], function () {
             }
         }
         var params = {
-            roleId: roleId,
+            userId: userId,
             permissions: permissions,
             menuIds: menuIds
         };
         $.ajax({
-            url: ctx + 'role/saveRolePermission',
+            url: ctx + 'user/saveUserPermission',
             type: 'post',
             data: params,
             dataType: 'json',

@@ -1,6 +1,9 @@
-layui.use(['index', 'form', 'upload', 'table','element'], function () {
+layui.use(['index', 'form', 'upload', 'table','element','admin'], function () {
     var table = layui.table; //表格
-    var element = layui.element;
+    var element = parent.layui.element;
+    var admin = layui.admin;
+    var view = layui.view;
+    var form = layui.form;
     var zTree;
     getTree(ctx + "menu/getMenuTree", $("#treeBox"))
     $("#menu-add").click(function () {
@@ -113,8 +116,15 @@ layui.use(['index', 'form', 'upload', 'table','element'], function () {
         } else if (level == 2) {
             title = '添加按钮权限';
         }
-        open("menu/toAdd", title, menuId, level);
-
+        // open("menu/toAdd", title, menuId, level);
+        admin.popup({
+            title: title
+            ,area: ['500px', '450px']
+            ,id: 'popup-menu'
+            ,success: function(layero, index){
+                view(this.id).render('menu/toAdd?menuId=' + menuId + '&level=' + level);
+            }
+        });
     }
 
     function open(url, title, menuId, level) {

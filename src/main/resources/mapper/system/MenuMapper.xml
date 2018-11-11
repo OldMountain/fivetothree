@@ -178,6 +178,7 @@
             a.PARENT_ID pId,
         </trim>
         from a_sys_menu a left join a_sys_menu b on a.PARENT_ID = b.MENU_ID
+        order by a.PARENT_ID asc,a.MENU_ORDER asc
     </select>
 
 

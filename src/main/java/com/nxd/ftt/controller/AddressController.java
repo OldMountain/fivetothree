@@ -30,14 +30,14 @@ public class AddressController {
     @RequestMapping(value = "/initRegionCode")
     @ResponseBody
     public Response initRegionCode() {
-        AddressUtil addressUtil = new AddressUtil() {
-            @Override
-            public void process(AddressCode addressCode) {
-                addressCodeService.save(addressCode);
-            }
-        };
-        List<AddressCode> list = addressUtil.getContent(AddressUtil.getURL(), 0, 5, "", 0);
-        System.out.println(list.size());
+//        AddressUtil addressUtil = new AddressUtil() {
+//            @Override
+//            public void process(AddressCode addressCode) {
+//                addressCodeService.save(addressCode);
+//            }
+//        };
+//        List<AddressCode> list = addressUtil.getContent(AddressUtil.getURL(), 0, 5, "", 0);
+//        System.out.println(list.size());
         return ResultKit.success();
     }
 }

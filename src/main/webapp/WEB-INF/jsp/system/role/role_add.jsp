@@ -4,13 +4,6 @@
   Date: 2018/10/31
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Title</title>
-	<jsp:include page="${jspPath}/view/head.jsp"></jsp:include>
-</head>
-<body>
 <div class="layui-fluid">
 	<div class="layui-row">
 		<form class="layui-form">
@@ -38,7 +31,4 @@
 		</form>
 	</div>
 </div>
-<jsp:include page="${jspPath}/view/foot.jsp"></jsp:include>
 <script src="${ctx}static/js/role/role_add.js"></script>
-</body>
-</html>

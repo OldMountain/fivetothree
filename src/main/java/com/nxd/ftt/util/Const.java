@@ -142,4 +142,10 @@ public class Const {
      * 用户权限
      */
     public static final String USER_ALL_PERMISSION = "USER_ALL_PERMISSION";
+
+    /**
+     * 首页
+     */
+    public static final String INDEX_URL_KEY = "indexUrl";
+    public static final String INDEX_URL = "system/console";
 }

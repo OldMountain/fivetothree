@@ -1,17 +1,12 @@
-<%--
-  menu_list
-  User: luhangqi
-  Date: 2018/10/28
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Title</title>
-    <jsp:include page="${jspPath}/view/head.jsp"></jsp:include>
-    <link type="text/css" rel="stylesheet" href="${ctx}plugins/ztree/zTreeStyle.css"/>
-</head>
-<body>
+<link type="text/css" rel="stylesheet" href="${ctx}plugins/ztree/zTreeStyle.css"/>
+<div class="layui-card layadmin-header">
+    <div class="layui-breadcrumb" lay-filter="breadcrumb">
+        <a lay-href="">主页</a>
+        <a><cite>主页一</cite></a>
+    </div>
+</div>
+
 <div class="layui-fluid">
     <div class="layui-row layui-col-space15">
         <div class="layui-col-md2">
@@ -45,8 +40,5 @@
         </div>
     </div>
 </div>
-<jsp:include page="${jspPath}/view/foot.jsp"></jsp:include>
 <script src="${ctx}plugins/ztree/jquery.ztree.all.min.js" type="application/javascript"></script>
 <script src="${ctx}static/js/menu/menu.js" type="application/javascript"></script>
-</body>
-</html>

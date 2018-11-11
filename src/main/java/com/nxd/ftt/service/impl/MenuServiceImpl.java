@@ -40,11 +40,11 @@ public class MenuServiceImpl implements MenuService {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
         List<Menu> list;
-        if (session.getAttribute(Const.SESSION_allmenuList) != null) {
-            list = (List<Menu>) session.getAttribute(Const.SESSION_allmenuList);
+        if (session.getAttribute(Const.SESSION_menuList) != null) {
+            list = (List<Menu>) session.getAttribute(Const.SESSION_menuList);
         } else {
             list = this.listAllMenu();
-            session.setAttribute(Const.SESSION_allmenuList, list);
+            session.setAttribute(Const.SESSION_menuList, list);
         }
         return list;
     }
@@ -54,7 +54,7 @@ public class MenuServiceImpl implements MenuService {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
         List<Menu> list = this.listAllMenu();
-        session.setAttribute(Const.SESSION_allmenuList, list);
+        session.setAttribute(Const.SESSION_menuList, list);
     }
 
     @Override

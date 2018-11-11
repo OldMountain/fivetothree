@@ -114,15 +114,17 @@ public class LoginController extends BaseController {
 
 
     @RequestMapping(value = {"/toIndex"})
-    public ModelAndView index(PageInfo pi) {
+    public ModelAndView toIndex() {
         logBefore(logger, "进入首页");
         ModelAndView mv = this.getModelAndView();
         List<Menu> list = null;
-        Page page = null;
         PageInfo<Menu> p = null;
         try {
             Subject subject = SecurityUtils.getSubject();
             Session session = subject.getSession();
+            if (session.getAttribute(Const.INDEX_URL_KEY) == null) {
+                session.setAttribute(Const.INDEX_URL_KEY,Const.INDEX_URL);
+            }
             User user = (User) session.getAttribute(Const.SESSION_USER);
             if (user != null) {
                 Role roleModel = new Role();
@@ -149,13 +151,6 @@ public class LoginController extends BaseController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return mv;
-    }
-
-    @RequestMapping("/index")
-    public ModelAndView index() {
-        ModelAndView mv = this.getModelAndView();
-        mv.setViewName("system/admin/main");
         return mv;
     }
 
@@ -190,5 +185,14 @@ public class LoginController extends BaseController {
         return mv;
     }
 
+    @RequestMapping("/resetIndex")
+    @ResponseBody
+    public void resetIndex(String indexUrl,HttpServletRequest request){
+        if (indexUrl != null && !"".equals(indexUrl)) {
+            request.getSession().setAttribute("indexUrl",indexUrl);
+        }else {
+            request.getSession().setAttribute("indexUrl","system/console");
+        }
+    }
 
 }
