@@ -161,4 +161,9 @@
     <div class="layadmin-body-shade" layadmin-event="shade"></div>
 
 </div>
-
+<script>
+    layui.use('tool', function(){
+        var tool = layui.tool;
+        tool.loadMenuStatus();
+    });
+</script>

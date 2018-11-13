@@ -41,18 +41,7 @@ public class RoleController extends BaseController {
 
     @RequestMapping(value = "/list")
     public ModelAndView listRoles(Role role) {
-        ModelAndView mv = this.getModelAndView();
-        if (role == null || role.getRoleId() == null) {
-            role = (Role) getShiroSession().getAttribute(Const.SESSION_USERROL);
-        }
-        List<Role> roleModels = null;
-        try {
-            roleModels = roleService.getRoleListByParentId(role);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        mv.addObject("roleList", roleModels);
-        mv.setViewName("system/role/role_list");
+        ModelAndView mv = this.getModelAndView("system/role/role_list");
         return mv;
     }
 

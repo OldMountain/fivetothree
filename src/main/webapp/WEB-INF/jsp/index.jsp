@@ -31,15 +31,7 @@
     layui.config({
         base: '${ctx}static/layadmin/dist/' //指定 layuiAdmin 项目路径
     }).use('index', function(){
-        var layer = layui.layer, admin = layui.admin;
-        // layer.ready(function(){
-        //     admin.popup({
-        //         content: '单页面专业版默认未开启“多标签”功能，实际运用时，你可以自定义是否开启'
-        //         ,area: '300px'
-        //         ,btnAlign: 'c'
-        //         ,shade: false
-        //     });
-        // });
+
     });
 </script>
 </body>

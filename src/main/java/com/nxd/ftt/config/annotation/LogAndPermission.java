@@ -1,5 +1,6 @@
 package com.nxd.ftt.config.annotation;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.core.annotation.AliasFor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,8 +17,13 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @RequestMapping
+@RequiresPermissions("")
 public @interface LogAndPermission {
 
+    @AliasFor(
+            annotation = RequiresPermissions.class,
+            attribute = "value"
+    )
     String[] permissions() default {};
 
     String operation() default "";

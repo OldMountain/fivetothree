@@ -1,7 +1,6 @@
 layui.define('table', function (exports) { //提示：模块也可以依赖其它模块，如：layui.define('layer', callback);
-    var layHref = window.location.hash;
-    layHref = layHref.split("#");
-    document.getElementsByClassName();
+    // document.getElementsByClassName("");
+    var $ = layui.$;
     var table = layui.table;
     var obj = {
         reloadTable: function (tableId) {
@@ -15,6 +14,12 @@ layui.define('table', function (exports) { //提示：模块也可以依赖其�
                 tableId = $("table.layui-table").prop('id');
             }
             parent.table.reload($("table.layui-table").prop('id'));
+        },
+        loadMenuStatus: function () {
+            var layHref = window.location.hash;
+            layHref = layHref.substring(2);
+            $("#LAY-system-side-menu").find("a[lay-href='" + layHref + "']").parent().addClass("layui-this");
+            $("#LAY-system-side-menu").find("a[lay-href='" + layHref + "']").parents("li").addClass("layui-nav-itemed");
         }
     };
 

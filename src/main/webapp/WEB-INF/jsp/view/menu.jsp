@@ -5,7 +5,7 @@
             <c:when test="${menu.subMenu.size()<=0}">
                 <li data-name="${menu.menuId}" data-jump="${menu.menuUrl}" class="layui-nav-item">
                     <c:if test="${empty menu.menuUrl}">
-                        <a href="javascript:;" lay-tips="${menu.menuName }" lay-direction="2">
+                        <a href="javascript:;" lay-href="" lay-tips="${menu.menuName }" lay-direction="2">
                             <i class="${menu.menuIcon}"></i>
                             <span>${menu.menuName }</span>
                         </a>
