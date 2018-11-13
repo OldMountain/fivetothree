@@ -1,4 +1,7 @@
 layui.define('table', function (exports) { //提示：模块也可以依赖其它模块，如：layui.define('layer', callback);
+    var layHref = window.location.hash;
+    layHref = layHref.split("#");
+    document.getElementsByClassName();
     var table = layui.table;
     var obj = {
         reloadTable: function (tableId) {

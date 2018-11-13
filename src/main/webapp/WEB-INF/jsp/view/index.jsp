@@ -124,36 +124,52 @@
                 </div>
                 <div class="layui-col-md6">
                     <div class="layui-card">
-                        <div class="layui-card-header">待办事项</div>
+                        <div class="layui-card-header">我的世界服务器</div>
                         <div class="layui-card-body">
 
                             <div class="layui-carousel layadmin-carousel layadmin-backlog">
                                 <div carousel-item>
-                                    <ul class="layui-row layui-col-space10">
-                                        <li class="layui-col-xs6">
-                                            <a lay-href="app/content/comment" class="layadmin-backlog-body">
-                                                <h3>待审评论</h3>
-                                                <p><cite>66</cite></p>
-                                            </a>
-                                        </li>
-                                        <li class="layui-col-xs6">
-                                            <a lay-href="app/forum/list" class="layadmin-backlog-body">
-                                                <h3>待审帖子</h3>
-                                                <p><cite>12</cite></p>
-                                            </a>
-                                        </li>
-                                        <li class="layui-col-xs6">
-                                            <a lay-href="template/goodslist" class="layadmin-backlog-body">
-                                                <h3>待审商品</h3>
-                                                <p><cite>99</cite></p>
-                                            </a>
-                                        </li>
-                                        <li class="layui-col-xs6">
-                                            <a href="javascript:;" onclick="layer.tips('不跳转', this, {tips: 3});" class="layadmin-backlog-body">
-                                                <h3>待发货</h3>
-                                                <p><cite>20</cite></p>
-                                            </a>
-                                        </li>
+                                    <ul id="serverInfo" class="layui-row layui-col-space10">
+                                        <div id="server-load"
+                                             style="text-align: center;position: relative;height: 100%">
+                                            <img src="${ctx}static/layadmin/layui/css/modules/layer/default/loading-2.gif"
+                                                 style="position: absolute;top: 30%">
+                                        </div>
+                                        <script id="serverInfoTemp" type="text/html">
+                                            <li class="layui-col-xs6">
+                                                <a lay-href="app/content/comment.html" class="layadmin-backlog-body">
+                                                    <h3>motd</h3>
+                                                    <p id="description"
+                                                       style="font-style: normal;font-size: 15px;font-weight: 300;color: #009688;width: 98%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
+                                                        {{ d.description }}
+                                                    </p>
+                                                </a>
+                                            </li>
+                                            <li class="layui-col-xs6">
+                                                <a lay-href="app/content/comment.html" class="layadmin-backlog-body">
+                                                    <h3>图标</h3>
+                                                    <p><cite>
+                                                        <img width="30" src="{{ d.favicon }}">
+                                                    </cite></p>
+                                                </a>
+                                            </li>
+                                            <li class="layui-col-xs6">
+                                                <a lay-href="app/content/comment.html" class="layadmin-backlog-body">
+                                                    <h3>在线人数</h3>
+                                                    <p><cite>
+                                                        {{ d.players.online }}
+                                                    </cite></p>
+                                                </a>
+                                            </li>
+                                            <li class="layui-col-xs6">
+                                                <a lay-href="app/content/comment.html" class="layadmin-backlog-body">
+                                                    <h3>最大人数</h3>
+                                                    <p><cite>
+                                                        {{ d.players.max }}
+                                                    </cite></p>
+                                                </a>
+                                            </li>
+                                        </script>
                                     </ul>
                                     <ul class="layui-row layui-col-space10">
                                         <li class="layui-col-xs6">
@@ -361,7 +377,34 @@
       这里我们采用的是方式1。其它很多视图中采用的其实都是方式2，因为更简单些，也减少了一个请求数。
 
     */
-    layui.use('console', layui.factory('console'));
+    layui.use('console', layui.factory('console')).use(['index', 'laytpl'], function () {
+        var laytpl = layui.laytpl;
+        getMcServerInfo(laytpl, layer);
+        function getMcServerInfo(laytpl, layer) {
+            var params = {};
+            $.ajax({
+                url: '${ctx}api/mc/getServerInfo',
+                type: 'post',
+                data: params,
+                dataType: 'json',
+                success: function (result) {
+                    laytpl(serverInfoTemp.innerHTML).render(result.data.serverData, function (html) {
+                        $("#serverInfo").html(html);
+                        $("#server-load").hide();
+                        $("#description").mouseover(function () {
+                            var _this = this;
+                            layer.tips($(this).html(), this, {
+                                tips: 3, time: 0, success: function (layero, index) {
+                                    $(_this).mouseleave(function () {
+                                        layer.close(index)
+                                    })
+                                }
+                            });
+                        })
+
+                    })
+                }
+            })
+        }
+    });
 </script>
-
-

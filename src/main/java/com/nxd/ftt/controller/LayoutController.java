@@ -17,7 +17,7 @@ public class LayoutController {
 
     @RequestMapping("/index")
     public ModelAndView index(HttpServletRequest request){
-        ModelAndView mv = new ModelAndView("view/layout");
+        ModelAndView mv = new ModelAndView("view/index");
         return mv;
     }
 
