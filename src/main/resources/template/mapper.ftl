@@ -6,29 +6,38 @@
         <result column="${row.columnName}" property="${row.filedName}"/>
       </#list>
     </resultMap>
-    <select id="list" parameterType="${entityPackage + "."}${entity}" resultMap="BaseResultMap">
-        select
+    <sql id="column">
         <trim suffixOverrides=",">
           <#list table as row>
-            ${row.columnName},
+              ${row.columnName},
           </#list>
         </trim>
+    </sql>
+    <select id="list" parameterType="${entityPackage + "."}${entity}" resultMap="BaseResultMap">
+        select
+           <include refid="column" />
         from ${tableName}
         <where>
             <#list table as row>
+                <#if row.dataType != 'Date' && row.dataType != 'Integer' && row.dataType != 'Integer'>
             <if test="${row.filedName} != null and ${row.filedName} !=''">
                 and ${row.columnName} = ${"#{" + row.filedName + "}"}
             </if>
+                <#elseif row.dataType == 'Date'>
+            <if test="${row.filedName} != null">
+                and ${row.columnName} = ${"#{" + row.filedName + "}"}
+            </if>
+                <#else>
+            <if test="${row.filedName} != null and (${row.filedName} != '' or ${row.filedName} == 0) ">
+                and ${row.columnName} = ${"#{" + row.filedName + "}"}
+            </if>
+                </#if>
             </#list>
         </where>
     </select>
     <select id="findById" parameterType="${entityPackage + "."}${entity}" resultMap="BaseResultMap">
         select
-        <trim suffixOverrides=",">
-          <#list table as row>
-            ${row.columnName},
-          </#list>
-        </trim>
+           <include refid="column" />
         from ${tableName}
         where ${primaryKey.columnName} = ${"#{" + primaryKey.filedName + "}"}
     </select>
@@ -43,12 +52,16 @@
         insert into ${tableName}
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <#list table as row>
-                <#if row.dataType != 'Date'>
+                <#if row.dataType != 'Date' && row.dataType != 'Integer' && row.dataType != 'Integer'>
             <if test="${row.filedName} != null and ${row.filedName} !=''">
                 ${row.columnName},
             </if>
-                <#else>
+                <#elseif row.dataType == 'Date'>
             <if test="${row.filedName} != null">
+                ${row.columnName},
+            </if>
+                <#else>
+            <if test="${row.filedName} != null and (${row.filedName} != '' or ${row.filedName} == 0) ">
                 ${row.columnName},
             </if>
                 </#if>
@@ -56,12 +69,16 @@
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <#list table as row>
-                <#if row.dataType != 'Date'>
+                <#if row.dataType != 'Date' && row.dataType != 'Integer'>
             <if test="${row.filedName} != null and ${row.filedName} !=''">
                 ${"#{" + row.filedName + "}"},
             </if>
-                <#else>
+                <#elseif row.dataType == 'Date'>
             <if test="${row.filedName} != null">
+                ${"#{" + row.filedName + "}"},
+            </if>
+                <#else>
+            <if test="${row.filedName} != null and (${row.filedName} != '' or ${row.filedName} == 0) ">
                 ${"#{" + row.filedName + "}"},
             </if>
                 </#if>
@@ -73,12 +90,16 @@
         set
         <trim suffixOverrides=",">
             <#list table as row>
-                <#if row.dataType != 'Date'>
+                <#if row.dataType != 'Date' && row.dataType != 'Integer'>
             <if test="${row.filedName} != null and ${row.filedName} !=''">
                 ${row.columnName} = ${"#{" + row.filedName + "}"},
             </if>
-                <#else>
+                <#elseif row.dataType == 'Date'>
             <if test="${row.filedName} != null">
+                ${row.columnName} = ${"#{" + row.filedName + "}"},
+            </if>
+                <#else>
+            <if test="${row.filedName} != null and (${row.filedName} != '' or ${row.filedName} == 0) ">
                 ${row.columnName} = ${"#{" + row.filedName + "}"},
             </if>
                 </#if>
